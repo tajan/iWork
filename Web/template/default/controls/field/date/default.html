@@ -1,0 +1,20 @@
+﻿<control iv-default-date="">
+    <fieldset>
+        <div ng-controller="DateController" class="form-group" max-date="$iv-max-date" min-date="$iv-min-date" model-name="$iv-name" default-date="$iv-default-date">
+            <label class="col-sm-2 control-label">$iv-label</label>
+            <div class="col-sm-4">
+                <p class="input-group">
+                    <input placeholder="$iv-label" type="text" name="$iv-name" datepicker-popup="{{format}}" ng-model="model.$iv-name" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
+                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
+                           datepicker-mode="'day'" show-weeks="true" current-text="Today" />
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="open($event)" class="btn btn-default">
+                            <em class="fa fa-calendar"></em>
+                        </button>
+                    </span>
+                </p>
+            </div>
+            
+        </div>
+    </fieldset>
+</control>

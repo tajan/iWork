@@ -1,0 +1,22 @@
+[
+    {
+        "text": "Menu Heading",
+        "heading": "true",
+        "translate": "sidebar.heading.HEADER"
+    },
+    {
+        "text": "My Board",
+        "icon": "fa fa-desktop",
+        "sref": "app.index"
+    },
+    {
+        "text": "Projects",
+        "icon": "fa fa-rocket",
+        "sref": "app.project"
+    },
+    {
+        "text": "Tasks",
+        "icon": "fa fa-tasks",
+        "sref": "app.task"
+    }
+]

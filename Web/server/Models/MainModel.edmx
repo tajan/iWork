@@ -1,0 +1,1246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="iWorkTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActionLogs">
+          <Key>
+            <PropertyRef Name="ActionLogId" />
+          </Key>
+          <Property Name="ActionLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityTypeId" Type="int" Nullable="false" />
+          <Property Name="EntityId" Type="int" Nullable="false" />
+          <Property Name="ActionTypeId" Type="tinyint" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ActionDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="ActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Size" Type="bigint" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateById" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectFiles">
+          <Key>
+            <PropertyRef Name="ProjectFileId" />
+          </Key>
+          <Property Name="ProjectFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectMembers">
+          <Key>
+            <PropertyRef Name="ProjectMemebrId" />
+          </Key>
+          <Property Name="ProjectMemebrId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MembershipType" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EstmatedHours" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="Style" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectWorkflows">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ViewOrder" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sprints">
+          <Key>
+            <PropertyRef Name="SprintId" />
+          </Key>
+          <Property Name="SprintId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskFiles">
+          <Key>
+            <PropertyRef Name="TaskFileId" />
+          </Key>
+          <Property Name="TaskFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskMembers">
+          <Key>
+            <PropertyRef Name="TaskMemberId" />
+          </Key>
+          <Property Name="TaskMemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserStoryId" Type="int" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="EstimatedDuartion" Type="int" Nullable="false" />
+          <Property Name="Priority" Type="tinyint" Nullable="false" />
+          <Property Name="Score" Type="tinyint" Nullable="false" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="RealEndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="PictureFileId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Mobile" Type="nvarchar(max)" />
+          <Property Name="Home" Type="nvarchar(max)" />
+          <Property Name="SecondaryEmail" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="RecruitmentStartDate" Type="datetime" Nullable="false" />
+          <Property Name="RecruitmentEndDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserStories">
+          <Key>
+            <PropertyRef Name="UserStoryId" />
+          </Key>
+          <Property Name="UserStoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="SprintId" Type="int" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserStoryFiles">
+          <Key>
+            <PropertyRef Name="UserStoryFileId" />
+          </Key>
+          <Property Name="UserStoryFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserStoryId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActionLogs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ActionLogs" Type="Self.ActionLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActionLogs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activities_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectFiles_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="ProjectFiles" Type="Self.ProjectFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="ProjectFiles">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectFiles_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectFiles" Type="Self.ProjectFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectFiles">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectWorkflows_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectWorkflows" Type="Self.ProjectWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectWorkflows">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprints_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Sprints">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskFiles_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Self.TaskFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskFiles_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Self.TaskFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMembers_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskMembers" Type="Self.TaskMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskMembers">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMembers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TaskMembers" Type="Self.TaskMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskMembers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_UserStories">
+          <End Role="UserStories" Type="Self.UserStories" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStories">
+              <PropertyRef Name="UserStoryId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="UserStoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PictureFileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStories_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="UserStories" Type="Self.UserStories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="UserStories">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStories_Sprints">
+          <End Role="Sprints" Type="Self.Sprints" Multiplicity="0..1" />
+          <End Role="UserStories" Type="Self.UserStories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprints">
+              <PropertyRef Name="SprintId" />
+            </Principal>
+            <Dependent Role="UserStories">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStoryFiles_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="UserStoryFiles" Type="Self.UserStoryFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="UserStoryFiles">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStoryFiles_UserStories">
+          <End Role="UserStories" Type="Self.UserStories" Multiplicity="1" />
+          <End Role="UserStoryFiles" Type="Self.UserStoryFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStories">
+              <PropertyRef Name="UserStoryId" />
+            </Principal>
+            <Dependent Role="UserStoryFiles">
+              <PropertyRef Name="UserStoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="iWorkTestModelStoreContainer">
+          <EntitySet Name="ActionLogs" EntityType="Self.ActionLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectFiles" EntityType="Self.ProjectFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMembers" EntityType="Self.ProjectMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectWorkflows" EntityType="Self.ProjectWorkflows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprints" EntityType="Self.Sprints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskFiles" EntityType="Self.TaskFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskMembers" EntityType="Self.TaskMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStories" EntityType="Self.UserStories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStoryFiles" EntityType="Self.UserStoryFiles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActionLogs_Users" Association="Self.FK_ActionLogs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ActionLogs" EntitySet="ActionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activities_Tasks" Association="Self.FK_Activities_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectFiles_Files" Association="Self.FK_ProjectFiles_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="ProjectFiles" EntitySet="ProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectFiles_Projects" Association="Self.FK_ProjectFiles_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectFiles" EntitySet="ProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Projects" Association="Self.FK_ProjectMembers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Users" Association="Self.FK_ProjectMembers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectWorkflows_Projects" Association="Self.FK_ProjectWorkflows_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectWorkflows" EntitySet="ProjectWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprints_Projects" Association="Self.FK_Sprints_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Sprints" EntitySet="Sprints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskFiles_Files" Association="Self.FK_TaskFiles_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskFiles_Tasks" Association="Self.FK_TaskFiles_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMembers_Tasks" Association="Self.FK_TaskMembers_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskMembers" EntitySet="TaskMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMembers_Users" Association="Self.FK_TaskMembers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskMembers" EntitySet="TaskMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="Self.FK_Tasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_UserStories" Association="Self.FK_Tasks_UserStories">
+            <End Role="UserStories" EntitySet="UserStories" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Files" Association="Self.FK_Users_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStories_Projects" Association="Self.FK_UserStories_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="UserStories" EntitySet="UserStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStories_Sprints" Association="Self.FK_UserStories_Sprints">
+            <End Role="Sprints" EntitySet="Sprints" />
+            <End Role="UserStories" EntitySet="UserStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStoryFiles_Files" Association="Self.FK_UserStoryFiles_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="UserStoryFiles" EntitySet="UserStoryFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStoryFiles_UserStories" Association="Self.FK_UserStoryFiles_UserStories">
+            <End Role="UserStories" EntitySet="UserStories" />
+            <End Role="UserStoryFiles" EntitySet="UserStoryFiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="iWorkTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="iWorkContext" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ActionLogs" EntityType="iWorkTestModel.ActionLog" />
+          <EntitySet Name="ProjectFiles" EntityType="iWorkTestModel.ProjectFile" />
+          <EntitySet Name="ProjectMembers" EntityType="iWorkTestModel.ProjectMember" />
+          <EntitySet Name="Projects" EntityType="iWorkTestModel.Project" />
+          <EntitySet Name="ProjectWorkflows" EntityType="iWorkTestModel.ProjectWorkflow" />
+          <EntitySet Name="Sprints" EntityType="iWorkTestModel.Sprint" />
+          <EntitySet Name="TaskMembers" EntityType="iWorkTestModel.TaskMember" />
+          <EntitySet Name="UserStories" EntityType="iWorkTestModel.UserStory" />
+          <EntitySet Name="UserStoryFiles" EntityType="iWorkTestModel.UserStoryFile" />
+          <AssociationSet Name="FK_ProjectFiles_Projects" Association="iWorkTestModel.FK_ProjectFiles_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectFile" EntitySet="ProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Projects" Association="iWorkTestModel.FK_ProjectMembers_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectMember" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectWorkflows_Projects" Association="iWorkTestModel.FK_ProjectWorkflows_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectWorkflow" EntitySet="ProjectWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprints_Projects" Association="iWorkTestModel.FK_Sprints_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Sprint" EntitySet="Sprints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStories_Projects" Association="iWorkTestModel.FK_UserStories_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="UserStory" EntitySet="UserStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStories_Sprints" Association="iWorkTestModel.FK_UserStories_Sprints">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="UserStory" EntitySet="UserStories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStoryFiles_UserStories" Association="iWorkTestModel.FK_UserStoryFiles_UserStories">
+            <End Role="UserStory" EntitySet="UserStories" />
+            <End Role="UserStoryFile" EntitySet="UserStoryFiles" />
+          </AssociationSet>
+          <EntitySet Name="Activities" EntityType="iWorkTestModel.Activity" />
+          <EntitySet Name="Files" EntityType="iWorkTestModel.File" />
+          <EntitySet Name="Users" EntityType="iWorkTestModel.User" />
+          <AssociationSet Name="FK_ActionLogs_Users" Association="iWorkTestModel.FK_ActionLogs_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActionLog" EntitySet="ActionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectFiles_Files" Association="iWorkTestModel.FK_ProjectFiles_Files">
+            <End Role="File" EntitySet="Files" />
+            <End Role="ProjectFile" EntitySet="ProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Files" Association="iWorkTestModel.FK_Users_Files">
+            <End Role="File" EntitySet="Files" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserStoryFiles_Files" Association="iWorkTestModel.FK_UserStoryFiles_Files">
+            <End Role="File" EntitySet="Files" />
+            <End Role="UserStoryFile" EntitySet="UserStoryFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMembers_Users" Association="iWorkTestModel.FK_ProjectMembers_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProjectMember" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMembers_Users" Association="iWorkTestModel.FK_TaskMembers_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskMember" EntitySet="TaskMembers" />
+          </AssociationSet>
+          <EntitySet Name="TaskFiles" EntityType="iWorkTestModel.TaskFile" />
+          <AssociationSet Name="FK_TaskFiles_Files" Association="iWorkTestModel.FK_TaskFiles_Files">
+            <End Role="File" EntitySet="Files" />
+            <End Role="TaskFile" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <EntitySet Name="Tasks" EntityType="iWorkTestModel.Task" />
+          <AssociationSet Name="FK_Activities_Tasks" Association="iWorkTestModel.FK_Activities_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="iWorkTestModel.FK_Tasks_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskFiles_Tasks" Association="iWorkTestModel.FK_TaskFiles_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskFile" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMembers_Tasks" Association="iWorkTestModel.FK_TaskMembers_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskMember" EntitySet="TaskMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_UserStories" Association="iWorkTestModel.FK_Tasks_UserStories">
+            <End Role="UserStory" EntitySet="UserStories" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="ActionLog">
+          <Key>
+            <PropertyRef Name="ActionLogId" />
+          </Key>
+          <Property Name="ActionLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntityTypeId" Type="Int32" Nullable="false" />
+          <Property Name="EntityId" Type="Int32" Nullable="false" />
+          <Property Name="ActionTypeId" Type="Byte" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="iWorkTestModel.FK_ActionLogs_Users" FromRole="ActionLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ProjectFile">
+          <Key>
+            <PropertyRef Name="ProjectFileId" />
+          </Key>
+          <Property Name="ProjectFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_ProjectFiles_Projects" FromRole="ProjectFile" ToRole="Project" />
+          <NavigationProperty Name="File" Relationship="iWorkTestModel.FK_ProjectFiles_Files" FromRole="ProjectFile" ToRole="File" />
+        </EntityType>
+        <EntityType Name="ProjectMember">
+          <Key>
+            <PropertyRef Name="ProjectMemebrId" />
+          </Key>
+          <Property Name="ProjectMemebrId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MembershipType" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_ProjectMembers_Projects" FromRole="ProjectMember" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="iWorkTestModel.FK_ProjectMembers_Users" FromRole="ProjectMember" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EstmatedHours" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="Style" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProjectFiles" Relationship="iWorkTestModel.FK_ProjectFiles_Projects" FromRole="Project" ToRole="ProjectFile" />
+          <NavigationProperty Name="ProjectMembers" Relationship="iWorkTestModel.FK_ProjectMembers_Projects" FromRole="Project" ToRole="ProjectMember" />
+          <NavigationProperty Name="ProjectWorkflows" Relationship="iWorkTestModel.FK_ProjectWorkflows_Projects" FromRole="Project" ToRole="ProjectWorkflow" />
+          <NavigationProperty Name="Sprints" Relationship="iWorkTestModel.FK_Sprints_Projects" FromRole="Project" ToRole="Sprint" />
+          <NavigationProperty Name="UserStories" Relationship="iWorkTestModel.FK_UserStories_Projects" FromRole="Project" ToRole="UserStory" />
+          <NavigationProperty Name="Tasks" Relationship="iWorkTestModel.FK_Tasks_Projects" FromRole="Project" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="ProjectWorkflow">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ViewOrder" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_ProjectWorkflows_Projects" FromRole="ProjectWorkflow" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="SprintId" />
+          </Key>
+          <Property Name="SprintId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_Sprints_Projects" FromRole="Sprint" ToRole="Project" />
+          <NavigationProperty Name="UserStories" Relationship="iWorkTestModel.FK_UserStories_Sprints" FromRole="Sprint" ToRole="UserStory" />
+        </EntityType>
+        <EntityType Name="TaskMember">
+          <Key>
+            <PropertyRef Name="TaskMemberId" />
+          </Key>
+          <Property Name="TaskMemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="iWorkTestModel.FK_TaskMembers_Users" FromRole="TaskMember" ToRole="User" />
+          <NavigationProperty Name="Task" Relationship="iWorkTestModel.FK_TaskMembers_Tasks" FromRole="TaskMember" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="UserStory">
+          <Key>
+            <PropertyRef Name="UserStoryId" />
+          </Key>
+          <Property Name="UserStoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="SprintId" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_UserStories_Projects" FromRole="UserStory" ToRole="Project" />
+          <NavigationProperty Name="Sprint" Relationship="iWorkTestModel.FK_UserStories_Sprints" FromRole="UserStory" ToRole="Sprint" />
+          <NavigationProperty Name="UserStoryFiles" Relationship="iWorkTestModel.FK_UserStoryFiles_UserStories" FromRole="UserStory" ToRole="UserStoryFile" />
+          <NavigationProperty Name="Tasks" Relationship="iWorkTestModel.FK_Tasks_UserStories" FromRole="UserStory" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="UserStoryFile">
+          <Key>
+            <PropertyRef Name="UserStoryFileId" />
+          </Key>
+          <Property Name="UserStoryFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserStoryId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserStory" Relationship="iWorkTestModel.FK_UserStoryFiles_UserStories" FromRole="UserStoryFile" ToRole="UserStory" />
+          <NavigationProperty Name="File" Relationship="iWorkTestModel.FK_UserStoryFiles_Files" FromRole="UserStoryFile" ToRole="File" />
+        </EntityType>
+        <Association Name="FK_ProjectFiles_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.ProjectFile" Role="ProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectFile">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.ProjectMember" Role="ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectWorkflows_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.ProjectWorkflow" Role="ProjectWorkflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectWorkflow">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprints_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.Sprint" Role="Sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Sprint">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStories_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.UserStory" Role="UserStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="UserStory">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStories_Sprints">
+          <End Type="iWorkTestModel.Sprint" Role="Sprint" Multiplicity="0..1" />
+          <End Type="iWorkTestModel.UserStory" Role="UserStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="SprintId" />
+            </Principal>
+            <Dependent Role="UserStory">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStoryFiles_UserStories">
+          <End Type="iWorkTestModel.UserStory" Role="UserStory" Multiplicity="1" />
+          <End Type="iWorkTestModel.UserStoryFile" Role="UserStoryFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStory">
+              <PropertyRef Name="UserStoryId" />
+            </Principal>
+            <Dependent Role="UserStoryFile">
+              <PropertyRef Name="UserStoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="ActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Task" Relationship="iWorkTestModel.FK_Activities_Tasks" FromRole="Activity" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int64" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateById" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProjectFiles" Relationship="iWorkTestModel.FK_ProjectFiles_Files" FromRole="File" ToRole="ProjectFile" />
+          <NavigationProperty Name="Users" Relationship="iWorkTestModel.FK_Users_Files" FromRole="File" ToRole="User" />
+          <NavigationProperty Name="UserStoryFiles" Relationship="iWorkTestModel.FK_UserStoryFiles_Files" FromRole="File" ToRole="UserStoryFile" />
+          <NavigationProperty Name="TaskFiles" Relationship="iWorkTestModel.FK_TaskFiles_Files" FromRole="File" ToRole="TaskFile" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PictureFileId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Home" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="RecruitmentStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecruitmentEndDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActionLogs" Relationship="iWorkTestModel.FK_ActionLogs_Users" FromRole="User" ToRole="ActionLog" />
+          <NavigationProperty Name="File" Relationship="iWorkTestModel.FK_Users_Files" FromRole="User" ToRole="File" />
+          <NavigationProperty Name="ProjectMembers" Relationship="iWorkTestModel.FK_ProjectMembers_Users" FromRole="User" ToRole="ProjectMember" />
+          <NavigationProperty Name="TaskMembers" Relationship="iWorkTestModel.FK_TaskMembers_Users" FromRole="User" ToRole="TaskMember" />
+        </EntityType>
+        <Association Name="FK_ActionLogs_Users">
+          <End Type="iWorkTestModel.User" Role="User" Multiplicity="1" />
+          <End Type="iWorkTestModel.ActionLog" Role="ActionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActionLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectFiles_Files">
+          <End Type="iWorkTestModel.File" Role="File" Multiplicity="1" />
+          <End Type="iWorkTestModel.ProjectFile" Role="ProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="ProjectFile">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Files">
+          <End Type="iWorkTestModel.File" Role="File" Multiplicity="0..1" />
+          <End Type="iWorkTestModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PictureFileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserStoryFiles_Files">
+          <End Type="iWorkTestModel.File" Role="File" Multiplicity="1" />
+          <End Type="iWorkTestModel.UserStoryFile" Role="UserStoryFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="UserStoryFile">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMembers_Users">
+          <End Type="iWorkTestModel.User" Role="User" Multiplicity="1" />
+          <End Type="iWorkTestModel.ProjectMember" Role="ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMembers_Users">
+          <End Type="iWorkTestModel.User" Role="User" Multiplicity="1" />
+          <End Type="iWorkTestModel.TaskMember" Role="TaskMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TaskFile">
+          <Key>
+            <PropertyRef Name="TaskFileId" />
+          </Key>
+          <Property Name="TaskFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="iWorkTestModel.FK_TaskFiles_Files" FromRole="TaskFile" ToRole="File" />
+          <NavigationProperty Name="Task" Relationship="iWorkTestModel.FK_TaskFiles_Tasks" FromRole="TaskFile" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_TaskFiles_Files">
+          <End Type="iWorkTestModel.File" Role="File" Multiplicity="1" />
+          <End Type="iWorkTestModel.TaskFile" Role="TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileId" />
+            </Principal>
+            <Dependent Role="TaskFile">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserStoryId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstimatedDuartion" Type="Int32" Nullable="false" />
+          <Property Name="Priority" Type="Byte" Nullable="false" />
+          <Property Name="Score" Type="Byte" Nullable="false" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="RealEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Activities" Relationship="iWorkTestModel.FK_Activities_Tasks" FromRole="Task" ToRole="Activity" />
+          <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_Tasks_Projects" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="TaskFiles" Relationship="iWorkTestModel.FK_TaskFiles_Tasks" FromRole="Task" ToRole="TaskFile" />
+          <NavigationProperty Name="TaskMembers" Relationship="iWorkTestModel.FK_TaskMembers_Tasks" FromRole="Task" ToRole="TaskMember" />
+          <NavigationProperty Name="UserStory" Relationship="iWorkTestModel.FK_Tasks_UserStories" FromRole="Task" ToRole="UserStory" />
+        </EntityType>
+        <Association Name="FK_Activities_Tasks">
+          <End Type="iWorkTestModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="iWorkTestModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Type="iWorkTestModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="iWorkTestModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskFiles_Tasks">
+          <End Type="iWorkTestModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="iWorkTestModel.TaskFile" Role="TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskFile">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMembers_Tasks">
+          <End Type="iWorkTestModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="iWorkTestModel.TaskMember" Role="TaskMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskMember">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_UserStories">
+          <End Type="iWorkTestModel.UserStory" Role="UserStory" Multiplicity="0..1" />
+          <End Type="iWorkTestModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStory">
+              <PropertyRef Name="UserStoryId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserStoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="iWorkTestModelStoreContainer" CdmEntityContainer="iWorkContext" >
+          <EntitySetMapping Name="ActionLogs">
+            <EntityTypeMapping TypeName="iWorkTestModel.ActionLog">
+              <MappingFragment StoreEntitySet="ActionLogs">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActionTypeId" ColumnName="ActionTypeId" />
+                <ScalarProperty Name="EntityId" ColumnName="EntityId" />
+                <ScalarProperty Name="EntityTypeId" ColumnName="EntityTypeId" />
+                <ScalarProperty Name="ActionLogId" ColumnName="ActionLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectFiles">
+            <EntityTypeMapping TypeName="iWorkTestModel.ProjectFile">
+              <MappingFragment StoreEntitySet="ProjectFiles">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectFileId" ColumnName="ProjectFileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectMembers">
+            <EntityTypeMapping TypeName="iWorkTestModel.ProjectMember">
+              <MappingFragment StoreEntitySet="ProjectMembers">
+                <ScalarProperty Name="MembershipType" ColumnName="MembershipType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectMemebrId" ColumnName="ProjectMemebrId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="iWorkTestModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="EstmatedHours" ColumnName="EstmatedHours" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectWorkflows">
+            <EntityTypeMapping TypeName="iWorkTestModel.ProjectWorkflow">
+              <MappingFragment StoreEntitySet="ProjectWorkflows">
+                <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprints">
+            <EntityTypeMapping TypeName="iWorkTestModel.Sprint">
+              <MappingFragment StoreEntitySet="Sprints">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskMembers">
+            <EntityTypeMapping TypeName="iWorkTestModel.TaskMember">
+              <MappingFragment StoreEntitySet="TaskMembers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TaskMemberId" ColumnName="TaskMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStories">
+            <EntityTypeMapping TypeName="iWorkTestModel.UserStory">
+              <MappingFragment StoreEntitySet="UserStories">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserStoryId" ColumnName="UserStoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStoryFiles">
+            <EntityTypeMapping TypeName="iWorkTestModel.UserStoryFile">
+              <MappingFragment StoreEntitySet="UserStoryFiles">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="UserStoryId" ColumnName="UserStoryId" />
+                <ScalarProperty Name="UserStoryFileId" ColumnName="UserStoryFileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="iWorkTestModel.Activity">
+              <MappingFragment StoreEntitySet="Activities">
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="iWorkTestModel.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="CreateById" ColumnName="CreateById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="iWorkTestModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RecruitmentEndDate" ColumnName="RecruitmentEndDate" />
+                <ScalarProperty Name="RecruitmentStartDate" ColumnName="RecruitmentStartDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SecondaryEmail" ColumnName="SecondaryEmail" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PictureFileId" ColumnName="PictureFileId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskFiles">
+            <EntityTypeMapping TypeName="iWorkTestModel.TaskFile">
+              <MappingFragment StoreEntitySet="TaskFiles">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TaskFileId" ColumnName="TaskFileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="iWorkTestModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="RealEndDate" ColumnName="RealEndDate" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="EstimatedDuartion" ColumnName="EstimatedDuartion" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserStoryId" ColumnName="UserStoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

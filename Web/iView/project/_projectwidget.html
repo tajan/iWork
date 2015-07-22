@@ -1,0 +1,58 @@
+﻿<div class="list-group">
+    <a ui-sref="app.projectview({id: project.projectId})" class="list-group-item">
+        <table class="wd-wide">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="ph">
+                            <div ng-switch="project.status" class="pull-right label" ng-class="{1:'label-info', 2:'label-success'}[project.status]">
+                                <span ng-switch-when="1">
+                                    In Progress
+                                </span>
+                                <span ng-switch-when="2">
+                                    Completed
+                                </span>
+                            </div>
+                            <h4 class="media-box-heading" ng-class="{1:'text-info', 2:'text-success'}[project.status]">
+                                {{project.codeName}} - {{project.title}}
+                            </h4>
+                            <p class="m0 hidden-xs hidden-sm">{{project.url}}</p>
+                            <small class="text-muted hidden-xs hidden-sm">{{project.description}}</small>
+                        </div>
+                    </td>
+                    <td class="wd-sm hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0">{{project.customer}}</p>
+                            <p class="m0">
+                                <small class="text-muted">{{project.startDate | date:'yyyy/MM/dd'}}</small>
+                            </p>
+                            <p class="m0">
+                                <small class="text-muted">{{project.endDate | date:'yyyy/MM/dd'}}</small>
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-users mr fa-lg"></em>{{project.membersCount}}
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-doc mr fa-lg"></em>{{project.score}}
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-sm">
+                        <div class="ph">
+                            <progressbar value="80" type="success" class="m0 progress-xs">80%</progressbar>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </a>
+    <div class="bg-{{project.style}}" style="width: 100%; height:3px; margin-top:0px; margin-bottom: 0px "></div>
+</div>

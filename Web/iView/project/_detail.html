@@ -1,0 +1,46 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            {{model.codeName}} - {{model.title}}
+            <nav iv-type="default" iv-icon="fa-pencil" iv-label="Edit" iv-state="app.projectupdate({id: model.projectId})"></nav>
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <div class="bg-{{model.style}}" style="width: 100%; height:3px; margin-top:0px; margin-bottom: 0px "></div>
+        <view iv-type="default">
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Title:">{{model.title}}</view>
+                <view iv-type="dataitem" iv-label="Status:">
+                    <div ng-switch="model.status" class="label" ng-class="{1:'label-info', 2:'label-success'}[model.status]">
+                        <span ng-switch-when="1">
+                            In Progress
+                        </span>
+                        <span ng-switch-when="2">
+                            Completed
+                        </span>
+                    </div>
+                </view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Customer:">{{model.customer}}</view>
+                <view iv-type="dataitem" iv-label="Url:">{{model.url}}</view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Estimated Hours:">{{model.estimatedHours}}</view>
+                <view iv-type="dataitem" iv-label="Score:">{{model.score}}</view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Start Date:">{{model.startDate | date:'yyyy/MM/dd'}}</view>
+                <view iv-type="dataitem" iv-label="End Date:">{{model.endDate | date:'yyyy/MM/dd'}}</view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem-users" iv-label="Managers:" iv-model-name="model.managersList" />
+                <view iv-type="dataitem-users" iv-label="Members:" iv-model-name="model.membersList" />
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem-files" iv-label="Files:" iv-model-name="model.filesList" />
+                <view iv-type="dataitem" iv-label="Description:">{{model.description}}</view>
+            </view>
+        </view>
+    </panel:content>
+</panel>

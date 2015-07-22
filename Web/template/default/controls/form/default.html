@@ -1,0 +1,18 @@
+﻿<control iv-enctype="multipart/form-data" iv-name="form">
+    <div class="panel panel-default">
+        <div class="panel-heading">$iv-title</div>
+        <div class="panel-body">
+            <form name="$iv-name" class="form-horizontal" enctype="$iv-enctype">
+                <iv-content></iv-content>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <div class="col-sm-10 text-danger">
+                            {{message}}
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</control>

@@ -1,0 +1,92 @@
+﻿body {
+    font-family: Tahoma;
+}
+
+
+/*Loading*/
+.loading-spiner-holder {
+    z-index: 10;
+    position: fixed;
+    background: rgba(255,255,255,.6);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    -webkit-animation: ngdialog-fadein .5s;
+    animation: ngdialog-fadein .5s;
+}
+
+    .loading-spiner-holder .loading-spiner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+    }
+
+/*Panel*/
+.panel.panel-default {
+    border-top-width: 0px !important;
+}
+
+/*Add Activity Button in MyBoard*/
+.btn-circle-add {
+    width: 36px;
+    height: 36px;
+    border-radius: 500px;
+    line-height: 31px;
+    font-size: 1em;
+    text-align: center;
+    padding: 0px 0px;
+    color: #999;
+    background: none;
+    border: 1px solid #999;
+    font-size: 20px;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+
+/*Style Picker*/
+.circle.selected {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.bg-lighter {
+    background-color: #fafafa;
+}
+
+.color-default {
+    color: #656565;
+}
+
+.h-spacer {
+    display: block;
+    width: 100%;
+    float: right;
+    height: 10px;
+}
+
+.progress {
+    position: relative;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0px;
+    z-index: 100;
+}
+
+.progress-bar-bg {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    opacity: 0.3;
+}

@@ -1,0 +1,48 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            {{model.taskId}} - {{model.title}}
+            <nav iv-type="default" iv-icon="fa-pencil" iv-label="Edit" iv-state="app.taskupdate({id: model.taskId})"></nav>
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 0px">
+            <div class="progress-bar-bg progress-bar-{{model.projectStyle}}"></div>
+            <div style="width:{{model.progress}}%;" role="progressbar" aria-valuenow="{{model.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{model.projectStyle}}">
+            </div>
+        </div>
+        <view iv-type="default">
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Project:">{{model.projectCodeName}} - {{model.projectTitle}}</view>
+                <view iv-type="dataitem" iv-label="User Stoery:">{{model.userStoryTitle}}</view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Estimated Duration:">{{model.estimatedDuration}} minutes</view>
+                <view iv-type="dataitem" iv-label="Due Date:">{{model.dueDate | date:'yyyy/MM/dd'}}</view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Title:">{{model.title}}</view>
+                <view iv-type="dataitem" iv-label="Status:">
+                    <div ng-switch="model.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[model.status]">
+                        <span ng-switch-when="1">
+                            Pending
+                        </span>
+                        <span ng-switch-when="2">
+                            In Progress
+                        </span>
+                        <span ng-switch-when="3">
+                            Ready For Test
+                        </span>
+                        <span ng-switch-when="4">
+                            Done
+                        </span>
+                    </div>
+                </view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem-users" iv-label="Members:" iv-model-name="model.membersList" />
+                <view iv-type="dataitem" iv-label="Description:">{{model.description}}</view>
+            </view>
+        </view>
+    </panel:content>
+</panel>

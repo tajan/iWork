@@ -1,0 +1,10 @@
+﻿<field:text iv-type="multiline" iv-name="title" iv-label="Title" iv-help="Use . as seperator to add multiple tasks." />
+<field:priority iv-type="default" iv-name="priority" iv-label="Priority" />
+<field:date iv-type="default" iv-name="dueDate" iv-label="Due Date" iv-max-date="now" iv-default-date="now" />
+<field:text iv-type="default" iv-name="estimatedDuration" iv-label="Estimated (minutes)" />
+<field:singleselection iv-type="default" iv-name="projectId" iv-label="Project" iv-list-name="projects" iv-placeholder="Select Project ..." iv-id="projectId" iv-title="title" iv-description="description" iv-on-change="onProjectChange()" />
+<field:singleselection iv-type="default" iv-name="userStoryId" iv-label="User Story" iv-list-name="userStories" iv-placeholder="Select User Story ..." iv-id="userStoryId" iv-title="title" iv-description="description" />
+<field:text iv-type="multiline" iv-name="description" iv-label="Description" />
+<field:multipleselection iv-type="default" iv-name="members" iv-label="Task Members" iv-list-name="members" iv-id="userId" iv-title="displayName" iv-description="email" />
+<field:singleselection iv-type="default" iv-name="status" iv-label="Status" iv-list-name="taskStatuses" iv-placeholder="Select Status..." />
+<field:fileupload iv-type="multiple" iv-name="files" iv-label="Files" iv-button-label="Select" />

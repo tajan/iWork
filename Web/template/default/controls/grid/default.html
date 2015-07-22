@@ -1,0 +1,8 @@
+﻿<control iv-pagesizes="10, 20, 50" iv-pagesize="10" iv-currentpage="1" iv-rowheight="36" iv-headerrowheight="38" iv-controller="controller" iv-action="action" iv-click-state="">
+    <div class="panel panel-default" ng-controller="GridController" controller-name="$iv-controller" action-name="$iv-action" current-page="$iv-currentpage" page-size="$iv-pagesize" page-sizes="$iv-pagesizes" row-height="$iv-rowheight" header-row-height="$iv-headerrowheight" sort-fields="$iv-sort-fields" sort-directions="$iv-sort-directions" click-state="$iv-click-state">
+        <div class="table-responsive">
+            <div ng-grid="gridOptions"></div>
+        </div>
+        <columns><iv-content></iv-content></columns>
+    </div>
+</control>

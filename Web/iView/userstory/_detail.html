@@ -1,0 +1,35 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            {{model.title}}
+            <nav iv-type="default" iv-icon="fa-pencil" iv-label="Edit" iv-state="app.userstoryupdate({id: model.userStoryId})"></nav>
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <view iv-type="default">
+            <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Score:">{{model.score}}</view>
+                <view iv-type="dataitem" iv-label="Status:">
+                    <div ng-switch="model.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[model.status]">
+                        <span ng-switch-when="1">
+                            Pending
+                        </span>
+                        <span ng-switch-when="2">
+                            In Progress
+                        </span>
+                        <span ng-switch-when="3">
+                            Ready For Test
+                        </span>
+                        <span ng-switch-when="4">
+                            Done
+                        </span>
+                    </div>
+                </view>
+            </view>
+            <view iv-type="row">
+                <view iv-type="dataitem-files" iv-label="Files:" iv-model-name="model.filesList" />
+                <view iv-type="dataitem" iv-label="Description:">{{model.description}}</view>
+            </view>
+        </view>
+    </panel:content>
+</panel>

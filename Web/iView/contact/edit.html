@@ -1,0 +1,9 @@
+﻿<include iv-source="~/iview/contacts/_header.html" />
+<form iv-type="default" iv-name="contactForm" iv-title="Edit Contacts" iv-controller="Contact" iv-action="GetById">
+    <include iv-source="~/iview/contacts/_formdata.html" />
+    <form:actionpanel iv-type="default">
+        <form:button iv-type="submit" iv-name="submit" iv-label="Submit" iv-action-name="update" />
+        <form:button iv-type="cancel" iv-name="cancel" iv-label="Cancel" />
+        <form:button iv-type="delete" iv-name="delete" iv-label="Delete" iv-action-name="remove" />
+    </form:actionpanel>
+</form>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="owin:appStartup" value="iViewStartup"  xdt:Transform="Remove" xdt:Locator="Match(key)" />
+  </appSettings>
+  <location path="iView" xdt:Transform="Remove" xdt:Locator="Match(path)">
+    <system.webServer>
+      <handlers>
+        <add name="iViewFileHandler" path="*" verb="*" type="System.Web.StaticFileHandler" />
+      </handlers>
+    </system.webServer>
+  </location>
+</configuration>

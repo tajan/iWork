@@ -1,0 +1,64 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            User Stories
+            <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.userstoryadd({projectId: model.projectId})"></nav>
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <scrollable height="50" class="list-group">
+            <a class="list-group-item">
+                <div class="media-box">
+                    <div class="media-box-body clearfix">
+                        <div class="row">
+                            <div class="col-xs-9">Title</div>
+                            <div class="col-xs-1">Score</div>
+                            <div class="col-xs-2">Status</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="list-group-item" ng-repeat="userstory in userStories">
+                <div class="media-box">
+                    <div class="media-box-body clearfix">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <div class="form-group">
+                                    <strong class="media-box-heading" ng-class="{1:'text-danger', 2:'text-warning', 3:'text-info', 4:'text-success'}[userstory.status]">
+                                        <span class="circle circle-lg text-left" ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[userstory.status]"></span>
+                                        <a ui-sref="app.userstoryview({id: userstory.userStoryId})">{{userstory.title}}</a>
+                                    </strong>
+                                    <p class="mb-sm">
+                                        <small>{{userstory.description}}</small>
+                                    </p>
+                                    <file-download-list ng-repeat="file in userstory.filesList"></file-download-list>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">{{userstory.score}}</div>
+                            <div class="col-xs-2">
+                                <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.taskadd({userStoryId: userstory.userStoryId, projectId: userstory.projectId})"></nav>
+                                <div ng-switch="userstory.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[userstory.status]">
+                                    <span ng-switch-when="1">
+                                        Pending
+                                    </span>
+                                    <span ng-switch-when="2">
+                                        In Progress
+                                    </span>
+                                    <span ng-switch-when="3">
+                                        Ready For Test
+                                    </span>
+                                    <span ng-switch-when="4">
+                                        Done
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </scrollable>
+    </panel:content>
+    <panel:footer iv-type="default">
+        <small>Summary will be here!</small>
+    </panel:footer>
+</panel>

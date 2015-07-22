@@ -1,0 +1,20 @@
+﻿<control iv-help="">
+    <fieldset>
+        <div class="form-group">
+            <label for="$iv-name" class="col-sm-2 control-label">$iv-label</label>
+            <div class="col-sm-10">
+                <div ng-controller="SortableController" class="container-fluid">
+                    <ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model="data" class="list-group">
+                        <li ng-repeat="item in data" class="list-group-item">
+                            <em class="fa fa-reorder fa-fw text-muted mr-lg"></em>
+                            <input type="text" ng-model="item" class="form-control" style="width: 80%; display:inline-block;" />
+                            <em ng-click="remove(item)" class="fa fa-remove fa-fw text-muted mr-lg"></em>
+                        </li>
+                    </ul>
+                    <button ng-click="add()" class="btn btn-info">Add Step</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</control>
+

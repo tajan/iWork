@@ -1,0 +1,13 @@
+﻿<include iv-source="~/iview/workinghours/_header.html" />
+<form iv-type="default" iv-name="workingHourForm" iv-title="Add Working Hour" iv-controller="WorkingHour" iv-model="WorkingHour" iv-action="GetById">
+    <field:text iv-type="default" iv-name="Title" iv-label="Title" />
+    <field:datetime iv-type="time" iv-name="EnteranceDate" iv-label="Enterance Date" />
+    <field:datetime iv-type="time" iv-name="ExitDate" iv-label="Exit Date" iv-max-date="now" iv-default-date="now" />
+    <custom iv-type="mooddropdown" iv-name="DailyMood" iv-label="Daily Mood" />
+    <field:text iv-type="multiline" iv-name="Description" iv-label="Description" />
+    <form:actionpanel iv-type="default">
+        <form:button iv-type="submit" iv-name="submit" iv-label="Submit" iv-action-name="update" />
+        <form:button iv-type="cancel" iv-name="cancel" iv-label="Cancel" />
+        <form:button iv-type="delete" iv-name="delete" iv-label="Delete" iv-action-name="remove" />
+    </form:actionpanel>
+</form>

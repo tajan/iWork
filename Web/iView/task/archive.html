@@ -1,0 +1,65 @@
+﻿<controller iv-type="default" iv-name="TaskController" iv-init="initViewForArchive();">
+    <panel iv-type="default">
+        <panel:header iv-type="default">
+            <panel:header:title iv-type="default">
+                Tasks
+            </panel:header:title>
+        </panel:header>
+        <panel:content iv-type="default">
+            <scrollable height="50" class="list-group">
+                <a class="list-group-item">
+                    <div class="media-box">
+                        <div class="media-box-body clearfix">
+                            <div class="row">
+                                <div class="col-lg-8">Title</div>
+                                <div class="col-lg-2">End Date</div>
+                                <div class="col-lg-2">Archive</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="list-group-item" ng-repeat="task in tasks">
+                    <div class="media-box">
+                        <div class="media-box-body clearfix">
+                            <div class="row">
+                                <div class="col-lg-8">
+
+                                    <div class="form-group">
+                                        <p>
+                                            <a ui-sref="app.taskview({id: task.taskId})">{{task.title}}</a>
+                                        </p>
+                                        <p class="mb-sm">
+                                            <small>{{task.description}}</small>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <p ng-controller="DateTimeController" class="input-group">
+                                        <input type="text" required="" datepicker-popup="{{format}}" ng-model="task.realEndDate" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" class="form-control" />
+                                        <span class="input-group-btn">
+                                            <button type="button" ng-click="open($event)" class="btn btn-default">
+                                                <em class="fa fa-calendar"></em>
+                                            </button>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button class="btn btn-default btn-labeled pull-right" ng-click="archive(task.taskId, task.realEndDate)">
+                                        <span class="btn-label">
+                                            <i class="fa fa-check"></i>
+                                        </span>Archive
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </scrollable>
+           
+        </panel:content>
+        <panel:footer iv-type="default">
+            <small>Summary will be here!</small>
+        </panel:footer>
+    </panel>
+</controller>

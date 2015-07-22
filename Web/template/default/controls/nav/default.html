@@ -1,0 +1,5 @@
+﻿<control iv-icon="fa-plus-circle" iv-state="app.index" iv-label="Label">
+    <button type="button" class="btn btn-default btn-sm pull-right mr-sm" ng-if="('$iv-state').length > 0 && $state.current.name != '$iv-state' " ui-sref="$iv-state">
+        <em class="fa $iv-icon fa-fw mr-sm"></em>$iv-label
+    </button>
+</control>

@@ -1,0 +1,10 @@
+﻿<controller iv-type="default" iv-name="ProjectController" iv-init="initModel();">
+    <form iv-type="default" iv-title="Add Project">
+        <include iv-source="~/iview/project/_formdata.html" />
+        <custom iv-type="workflowstepssortable" iv-name="steps" iv-label="Workflow Steps" />
+        <form:actionpanel iv-type="default">
+            <form:button iv-type="add" />
+            <form:button iv-type="cancel" />
+        </form:actionpanel>
+    </form>
+</controller>

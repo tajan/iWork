@@ -1,0 +1,72 @@
+﻿<controller iv-type="default" iv-name="TaskController" iv-init="initView();">
+    <panel iv-type="default">
+        <panel:header iv-type="default">
+            <panel:header:title iv-type="default">
+                Tasks
+                <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.taskadd()"></nav>
+                <nav iv-type="default" iv-icon="fa-archive" iv-label="Archive" iv-state="app.taskarchive()"></nav>
+            </panel:header:title>
+        </panel:header>
+        <panel:content iv-type="default">
+            <scrollable height="50" class="list-group">
+                <a class="list-group-item">
+                    <div class="media-box">
+                        <div class="media-box-body clearfix">
+                            <div class="row">
+                                <div class="col-xs-8">Title</div>
+                                <div class="col-xs-1">Members</div>
+                                <div class="col-xs-2">Status</div>
+                                <div class="col-xs-1">View</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="list-group-item" ng-repeat="task in tasks">
+                    <div class="media-box">
+                        <div class="media-box-body clearfix">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <div class="form-group">
+                                        <strong class="media-box-heading" ng-class="{1:'text-danger', 2:'text-warning', 3:'text-info', 4:'text-success'}[task.status]">
+                                            <span class="circle circle-lg text-left" ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.status]"></span>
+                                            <a ui-sref="app.userstoryview({id: task.userStoryId})">{{task.userStoryTitle}}</a><br />
+                                            <a ui-sref="app.taskview({id: task.taskId})">{{task.title}}</a>
+                                        </strong>
+                                        <p class="mb-sm">
+                                            <small>{{task.description}}</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in task.membersList">{{user.fullName}} <{{user.email}}></div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div ng-switch="task.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[task.status]">
+                                        <span ng-switch-when="1">
+                                            Pending
+                                        </span>
+                                        <span ng-switch-when="2">
+                                            In Progress
+                                        </span>
+                                        <span ng-switch-when="3">
+                                            Ready For Test
+                                        </span>
+                                        <span ng-switch-when="4">
+                                            Done
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <nav iv-type="default" iv-icon="icon-magnifier" iv-label="" iv-state="app.taskview({id: task.taskId})"></nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </scrollable>
+        </panel:content>
+        <panel:footer iv-type="default">
+            <small>Summary will be here!</small>
+        </panel:footer>
+    </panel>
+</controller>

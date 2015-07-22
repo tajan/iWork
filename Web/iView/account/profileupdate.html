@@ -1,0 +1,25 @@
+<div class="unwrap" ng-controller="UserController" ng-init="initModel()">
+    <div style="background-image: url(app/img/profile-bg.jpg)" class="bg-cover">
+        <div class="p-xl text-center text-white">
+            <img http-src="{{model.picture.guid}}" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <h3 class="m0">{{ model.displayName }}</h3>
+            <p>{{ model.email }}</p>
+            <p>{{ model.description }}</p>
+        </div>
+    </div>
+    <form iv-type="default" iv-title="Update Profile">
+        <field:text iv-type="default" iv-name="username" iv-label="Username" />
+        <field:text iv-type="default" iv-name="email" iv-label="Email" />
+        <field:text iv-type="default" iv-name="secondaryEmail" iv-label="Secondary Email" />
+        <field:text iv-type="default" iv-name="displayName" iv-label="Display Name" />
+        <field:text iv-type="default" iv-name="fullname" iv-label="Fullname" />
+        <field:text iv-type="default" iv-name="home" iv-label="Home" />
+        <field:text iv-type="default" iv-name="mobile" iv-label="Mobile" />
+        <field:text iv-type="default" iv-name="phone" iv-label="Office" />
+        <field:fileupload iv-type="default" iv-name="pictureFileId" iv-label="Profile Picture" iv-button-label="Select" />
+        <form:actionpanel iv-type="default">
+            <form:button iv-type="update" />
+            <form:button iv-type="cancel" />
+        </form:actionpanel>
+    </form>
+</div>

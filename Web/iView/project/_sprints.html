@@ -1,0 +1,39 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            Sprints
+            <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.sprintadd({projectId: model.projectId})"></nav>
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <scrollable height="50" class="list-group">
+            <a class="list-group-item" ng-repeat="sprint in sprints" ui-sref="app.sprintupdate({id: sprint.sprintId})">
+                <div class="media-box">
+                    <div class="media-box-body clearfix">
+                        <div ng-switch="sprint.status" class="pull-right label" ng-class="{1:'label-warning', 2:'label-success', 3:'label-info'}[sprint.status]">
+                            <span ng-switch-when="1">
+                                Pending
+                            </span>
+                            <span ng-switch-when="2">
+                                Current
+                            </span>
+                            <span ng-switch-when="3">
+                                Closed
+                            </span>
+                        </div>
+                        <strong class="media-box-heading" ng-class="{1:'text-warning', 2:'text-success', 3:'text-info'}[sprint.status]">
+                            <span class="circle circle-lg text-left" ng-class="{1:'circle-warning', 2:'circle-success', 3:'circle-info'}[sprint.status]"></span>
+                            {{sprint.title}}
+                        </strong>
+                        <p class="mb-sm">
+                            <small format="date">{{sprint.startDate | date:'yyyy/MM/dd' }} - {{sprint.endDate | date:'yyyy/MM/dd' }}</small>
+                        </p>
+                        <p class="mb-sm">
+                            <small>{{sprint.description}}</small>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </scrollable>
+    </panel:content>
+</panel>

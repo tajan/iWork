@@ -1,0 +1,14 @@
+﻿<control iv-help="" iv-placeholder="Select..." iv-name="modelName" iv-list-name="objects" iv-title="title" iv-description="description" iv-id="id">
+    <field iv-type="labeledfield">
+        <ui-select multiple="" ng-model="model.$iv-name" theme="bootstrap" ng-disabled="disabled">
+            <ui-select-match placeholder="$iv-placeholder">{{$item.$iv-title}} &lt;{{$item.$iv-description}}&gt;</ui-select-match>
+            <ui-select-choices repeat="item.$iv-id as item in members | propsFilter: {$iv-title: $select.search, $iv-description: $select.search}">
+                <div ng-bind-html="item.$iv-title | highlight: $select.search"></div>
+                <small>
+                    {{item.$iv-title}}
+                    <span ng-bind-html="''+item.$iv-description | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+    </field>
+</control>

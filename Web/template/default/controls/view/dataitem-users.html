@@ -1,0 +1,10 @@
+﻿<control iv-label="label" iv-model-name="userList">
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-sm-4">$iv-label</div>
+            <div class="col-sm-8">
+                <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in $iv-model-name">{{user.displayName}} <{{user.email}}></div>
+            </div>
+        </div>
+    </div>
+</control>

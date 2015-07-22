@@ -1,0 +1,75 @@
+﻿<control iv-help="">
+    <fieldset>
+        <div class="form-group">
+            <label for="$iv-namefileuploader" class="col-sm-2 control-label">
+                $iv-label
+            </label>
+            <div class="col-sm-10" multiple-file-uploader nv-file-drop="" uploader="uploader" filters="queueLimit, singleFileFilter">
+                <input filestyle="" type="file" data-button-text="Multiple" data-class-button="btn btn-default" data-class-input="form-control inline" nv-file-select="" uploader="uploader" multiple="" class="form-control" />
+                <input type="text" ng-hide="true" id="$iv-name" name="$iv-name" ng-model="model.$iv-name" multiple-file-id />
+                <div>
+                    <div style="" class="progress progress-xs">
+                        <div role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" class="progress-bar"></div>
+                    </div>
+                </div>
+                <p ng-if="uploader.queue.length" class="pull-right label label-info">Queue length: {{ uploader.queue.length }}</p>
+                <h4 class="page-header mt0">Upload queue</h4>
+                <p ng-if="!uploader.queue.length" class="lead text-center">No files in queue. Start adding some..</p>
+                <div ng-if="uploader.queue.length">
+                    <table ng-if="uploader.queue.length" class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap="">{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div style="margin-bottom: 0;" class="progress progress-xs">
+                                        <div role="progressbar" ng-style="{ 'width': item.progress + '%' }" class="progress-bar"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess">
+                                        <em class="fa fa-check fa-fw"></em>
+                                    </span>
+                                    <span ng-show="item.isCancel">
+                                        <em class="fa fa-ban-circle fa-fw"></em>
+                                    </span>
+                                    <span ng-show="item.isError">
+                                        <em class="fa fa-times fa-fw"></em>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="file in model.filesList" id="fileRow{{$index}}">
+                            <td>
+                                <div class="btn btn-default btn-xs" ng-click="downloadFile(file)">{{file.name}}</div>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn btn-xs" ng-click="deleteFile($index)"><em class="fa fa-times fa-fw"></em></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+</control>

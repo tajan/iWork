@@ -1,0 +1,59 @@
+﻿<panel iv-type="default">
+    <panel:header iv-type="default">
+        <panel:header:title iv-type="default">
+            Tasks
+        </panel:header:title>
+    </panel:header>
+    <panel:content iv-type="default">
+        <scrollable height="50" class="list-group">
+            <div ng-repeat="item in tasks">
+                <div class="row list-group-item">
+                    <div class="col-sm-12">
+                        <div class="mb-sm mr text-primary">
+                            <a ui-sref="app.taskview({id: item.taskId})">
+                                {{item.title}}
+                            </a>
+                        </div>
+                        <div ng-switch="item.status" class="label pull-right" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[item.status]">
+                            <span ng-switch-when="1">
+                                Pending
+                            </span>
+                            <span ng-switch-when="2">
+                                In Progress
+                            </span>
+                            <span ng-switch-when="3">
+                                Ready For Test
+                            </span>
+                            <span ng-switch-when="4">
+                                Done
+                            </span>
+                        </div>
+                        <p class="text-sm">
+                            Estimated:{{item.estimatedDuration}} minutes
+                        </p>
+                        <p class="text-sm">
+                            Activity:{{item.activityDuration}} minutes
+                        </p>
+                        <p class="text-sm">
+                            Activity:{{item.activityCount}}
+                        </p>
+                        <p class="text-sm">
+                            Due Date:{{item.dueDate | date:'yyyy/MM/dd'}}
+                        </p>
+                        <p class="text-sm">
+                            Description:  {{item.description}}
+                        </p>
+                        <p class="text-sm">
+                            <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in item.membersList">{{user.displayName}} <{{user.email}}></div>
+                        </p>
+                    </div>
+                </div>
+                <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 0px">
+                    <div class="progress-bar-bg progress-bar-{{item.projectStyle}}"></div>
+                    <div style="width:{{item.progress}}%;" role="progressbar" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{item.projectStyle}}">
+                    </div>
+                </div>
+            </div>
+        </scrollable>
+    </panel:content>
+</panel>

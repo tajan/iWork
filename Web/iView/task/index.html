@@ -9,14 +9,14 @@
         </panel:header>
         <panel:content iv-type="default">
             <scrollable height="50" class="list-group">
-                <a class="list-group-item">
+                <a class="list-group-item  hidden-xs">
                     <div class="media-box">
                         <div class="media-box-body clearfix">
                             <div class="row hidden-sm row-table row-flush">
-                                <div class="col-xs-6">Title</div>
+                                <div class="col-xs-5">Title</div>
                                 <div class="col-xs-2">Members</div>
                                 <div class="col-xs-1">Status</div>
-                                <div class="col-xs-2 text-center">Activity</div>
+                                <div class="col-xs-3 text-center">Statistic</div>
                                 <div class="col-xs-1 text-right">View</div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="media-box">
                         <div class="media-box-body clearfix">
                             <div class="row row-flush row-table">
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12 col-sm-5">
                                     <div class="row row-flush row-table">
                                         <div class="">
                                             <h5 class="media-box-heading">
@@ -61,14 +61,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" col-md-2">
+                                <div class=" col-sm-2">
                                     <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in task.membersList">
                                         <a class="text-muted text-dark" ui-sref="app.userprofileview({id: user.userId})">
                                             {{user.displayName}}
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-sm-1">
                                     <div ng-switch="task.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[task.status]">
                                         <span ng-switch-when="1">
                                             Pending
@@ -84,15 +84,19 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class=" col-md-2">
+                                <div class=" col-sm-3">
 
 
                                     <div class="row row-table">
-                                        <div class="col-md-6 text-center">
+                                        <div class="col-sm-4 text-center">
+                                            <h4 class="mt0">{{task.score}}</h4>
+                                            <span class="mb0 text-muted text-muted text-sm">Score</span>
+                                        </div>
+                                        <div class="col-sm-4 text-center">
                                             <h4 class="mt0">{{task.activityCount}}</h4>
                                             <span class="mb0 text-muted text-muted text-sm">Activity Count</span>
                                         </div>
-                                        <div class="col-md-6 text-center">
+                                        <div class="col-sm-4 text-center">
                                             <h4 class=" mt0">
                                                 {{task.activityDuration}}   <strong class="text-gray">m</strong>
                                             </h4>
@@ -100,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 text-right">
+                                <div class="col-sm-1 text-right">
                                     <a ui-sref="app.taskview({id: task.taskId})" class="fa fa-info-circle fa-2x text-gray-dark"></a>
                                 </div>
                             </div>

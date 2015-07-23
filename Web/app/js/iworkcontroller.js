@@ -309,12 +309,12 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
             // Keeps a consistent size in all portlet lists
             function saveListSize() {
-                var $this = $(this);
-                $this.css('min-height', $this.height());
+                //var $this = $(this);
+                //$this.css('min-height', $this.height());
             };
 
             function resetListSize() {
-                $(this).css('min-height', "");
+              //  $(this).css('min-height', "");
             };
 
         };
@@ -410,6 +410,10 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
 
 iWork.controller('UserController', ['$rootScope', '$scope', 'dataFactory', '$state', 'authFactory', '$config', function ($rootScope, $scope, dataFactory, $state, authFactory, $config) {
 
+    $scope.user = {};
+    $scope.model = {};
+    $scope.userId = $state.params['id'];
+
     /*=========================================================
     * Login user
     =========================================================*/
@@ -498,6 +502,12 @@ iWork.controller('UserController', ['$rootScope', '$scope', 'dataFactory', '$sta
 
     $scope.initModel = function () {
         $scope.model = $rootScope.app.user;
+    };
+
+    $scope.initView = function () {
+        if ($scope.userId) {
+            $scope.user = dataFactory.user.getById($scope.userId);
+        };
     };
 
 }]);

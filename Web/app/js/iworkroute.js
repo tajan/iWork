@@ -53,6 +53,11 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
             title: "User Profile",
             templateUrl: getViewUrl('account/userprofile.html')
         })
+        .state('app.userprofileview', {
+            url: '/UserProfileView/:id',
+            title: "User Profile",
+            templateUrl: getViewUrl('account/userprofileview.html')
+        })
         .state('app.profileupdate', {
             url: '/UserProfile/update',
             title: "Update Profile",
@@ -65,8 +70,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.project', {
             url: '/project',
             templateUrl: getViewUrl('project/index.html'),
-            title: 'Projects',
-            resolve: helper.resolveFor('ngGrid')
+            title: 'Projects'
         })
         .state('app.projectadd', {
             url: '/project/add',

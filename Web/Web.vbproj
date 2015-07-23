@@ -180,6 +180,7 @@
     <Content Include="iView\account\recover.html" />
     <Content Include="iView\account\register.html" />
     <Content Include="iView\account\profileupdate.html" />
+    <Content Include="iView\account\userprofileview.html" />
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
     <Content Include="iView\app.html" />

@@ -257,6 +257,7 @@ Public Class DtoTask
     Public Property TaskId As Integer
     Public Property UserStoryId As Integer?
     Public Property UserStoryTitle As String
+    Public Property UserStoryStatus As Integer
     Public Property ProjectId As Integer
     Public Property ProjectTitle As String
     Public Property ProjectCodeName As String
@@ -285,7 +286,6 @@ Public Class DtoTask
             .TaskId = task.TaskId
             .Title = task.Title
             .Description = task.Description
-            .UserStoryId = task.UserStoryId
             .Status = task.Status
             .ProjectTitle = task.Project.Title
             .ProjectId = task.Project.ProjectId
@@ -293,7 +293,6 @@ Public Class DtoTask
             .Members = task.TaskMembers.Select(Function(x) x.UserId).ToList
             .ProjectStyle = task.Project.Style
             .ProjectCodeName = task.Project.CodeName
-            .UserStoryTitle = IIf(task.UserStory Is Nothing, Nothing, task.UserStory.Title)
             .ActivityCount = task.Activities.Count
             .ActivityDuration = task.Activities.Sum(Function(x) x.Duration)
             .EstimatedDuration = task.EstimatedDuartion
@@ -307,6 +306,14 @@ Public Class DtoTask
             task.TaskFiles.ToList.ForEach(Sub(x)
                                               out.FilesList.Add(DtoFile.CreateInstance(x.File, EntityTypes.Task))
                                           End Sub)
+
+
+            If task.UserStory IsNot Nothing Then
+                .UserStoryId = task.UserStoryId
+                .UserStoryStatus = task.UserStory.Status
+                .UserStoryTitle = task.UserStory.Title
+            End If
+
 
         End With
 

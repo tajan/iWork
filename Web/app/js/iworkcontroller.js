@@ -237,9 +237,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             angular.element(document).ready(function () {
 
                 var Selector = '[portlet]';
-
-                $timeout(function () {
-
                     $(Selector).sortable({
                         connectWith: Selector,
                         items: 'div.panel',
@@ -260,7 +257,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                     // optionally disables mouse selection
                     //.disableSelection()
                     ;
-                }, 0);
 
             });
 
@@ -325,6 +321,19 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
         dataFactory.task.getAll().success(function (response) {
             $scope.tasks = response.data;
+            $scope.tasks.pending = response.data.filter(function (el) {
+                return el.status == 1;
+            });
+            $scope.tasks.inProgress = response.data.filter(function (el) {
+                return el.status == 2;
+            });
+            $scope.tasks.redayForTest = response.data.filter(function (el) {
+                return el.status == 3;
+            });
+            $scope.tasks.done = response.data.filter(function (el) {
+                return el.status == 4;
+            });
+
         });
 
     };

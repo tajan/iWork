@@ -1,15 +1,15 @@
 ﻿<controller iv-type="default" iv-name="ProjectController" iv-init="initProjectView();">
-    <row iv-type="default">
-        <column iv-type="default" iv-size="12">
+    <div class="row">
+        <div class="col-xs-12">
             <include iv-source="~/iview/project/_detail.html" />
-        </column>
-    </row>
-    <row iv-type="default">
-        <column iv-type="default" iv-size="9">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-sm-12">
             <include iv-source="~/iview/project/_userstories.html" />
-        </column>
-        <column iv-type="default" iv-size="3">
+        </div>
+        <div class="col-md-3 col-sm-12">
             <include iv-source="~/iview/project/_sprints.html" />
-        </column>
-    </row>
+        </div>
+    </div>
 </controller>

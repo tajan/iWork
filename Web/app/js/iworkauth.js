@@ -86,7 +86,7 @@ iWork.factory('authFactory', ['$config', '$rootScope', function ($config, $rootS
 /**=========================================================
  * Authentication interception
  =========================================================*/
-iWork.factory('authInterceptor', ['$q', 'authFactory', function ($q, authFactory) {
+iWork.factory('authInterceptor', ['$q', 'authFactory', '$rootScope', '$config', function ($q, authFactory, $rootScope, $config) {
 
     return {
         request: function (config) {
@@ -105,7 +105,7 @@ iWork.factory('authInterceptor', ['$q', 'authFactory', function ($q, authFactory
         },
         responseError: function (response) {
             if (response && response.status === 401) {
-                //$rootScope.$state.transitionTo($config.LOGIN_STATE);
+                $rootScope.$state.transitionTo($config.LOGIN_STATE);
             }
 
             if (response && response.status === 404) {

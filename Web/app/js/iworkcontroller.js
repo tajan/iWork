@@ -136,7 +136,7 @@ iWork.controller('SprintController', ['$scope', 'dataFactory', '$state', functio
 
 }]);
 
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', function ($scope, dataFactory, $state, $timeout) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', function ($scope, dataFactory, $state, $timeout, $rootScope) {
 
     $scope.members = [];
     $scope.projects = [];
@@ -225,7 +225,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     };
 
     $scope.initBoard = function () {
-
         dataFactory.task.getMyBoard().success(function (response) {
             $scope.tasks = response.data;
             initElement();
@@ -239,26 +238,26 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             angular.element(document).ready(function () {
 
                 var Selector = '[portlet]';
-                    $(Selector).sortable({
-                        connectWith: Selector,
-                        items: 'div.panel',
-                        handle: '.portlet-handler',
-                        opacity: 0.7,
-                        placeholder: 'portlet box-placeholder',
-                        cancel: '.portlet-cancel',
-                        forcePlaceholderSize: true,
-                        iframeFix: false,
-                        tolerance: 'pointer',
-                        helper: 'original',
-                        revert: 200,
-                        forceHelperSize: true,
-                        start: saveListSize,
-                        update: savePortletOrder,
-                        create: loadPortletOrder
-                    })
-                    // optionally disables mouse selection
-                    //.disableSelection()
-                    ;
+                $(Selector).sortable({
+                    connectWith: Selector,
+                    items: 'div.panel',
+                    handle: '.portlet-handler',
+                    opacity: 0.7,
+                    placeholder: 'portlet box-placeholder',
+                    cancel: '.portlet-cancel',
+                    forcePlaceholderSize: true,
+                    iframeFix: false,
+                    tolerance: 'pointer',
+                    helper: 'original',
+                    revert: 200,
+                    forceHelperSize: true,
+                    start: saveListSize,
+                    update: savePortletOrder,
+                    create: loadPortletOrder
+                })
+                // optionally disables mouse selection
+                //.disableSelection()
+                ;
 
             });
 
@@ -269,14 +268,17 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                 var status = parseInt(portletId.replace('portlet', ''));
                 var panelIds = $(self).sortable('toArray');
                 var taskIds = [];
-
                 angular.forEach(panelIds, function (panelId) {
                     taskIds.push(parseInt(panelId.replace('panel', '')));
                 });
-
-
                 dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
+                //save portlet size to avoid jumps
+                //saveListSize.apply(self);
+            };
 
+            $scope.upodatePortletOrder = function (taskIds, status) {
+                var taskIds = [taskIds];
+                dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
                 //save portlet size to avoid jumps
                 //saveListSize.apply(self);
             };
@@ -312,7 +314,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             };
 
             function resetListSize() {
-              //  $(this).css('min-height', "");
+                //  $(this).css('min-height', "");
             };
 
         };

@@ -144,6 +144,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.tasks = [];
     $scope.taskStatuses = dataFactory.taskStatus.getAll();
 
+
     $scope.model = {
         taskId: $state.params["id"],
         projectId: $state.params["projectId"],
@@ -238,9 +239,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             angular.element(document).ready(function () {
 
                 var Selector = '[portlet]';
-
-                $timeout(function () {
-
                     $(Selector).sortable({
                         connectWith: Selector,
                         items: 'div.panel',
@@ -261,7 +259,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                     // optionally disables mouse selection
                     //.disableSelection()
                     ;
-                }, 0);
 
             });
 
@@ -315,7 +312,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             };
 
             function resetListSize() {
-                //  $(this).css('min-height', "");
+              //  $(this).css('min-height', "");
             };
 
         };
@@ -326,6 +323,19 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
         dataFactory.task.getAll().success(function (response) {
             $scope.tasks = response.data;
+            $scope.tasks.pending = response.data.filter(function (el) {
+                return el.status == 1;
+            });
+            $scope.tasks.inProgress = response.data.filter(function (el) {
+                return el.status == 2;
+            });
+            $scope.tasks.redayForTest = response.data.filter(function (el) {
+                return el.status == 3;
+            });
+            $scope.tasks.done = response.data.filter(function (el) {
+                return el.status == 4;
+            });
+
         });
 
     };

@@ -1,15 +1,11 @@
-﻿<controller iv-type="default" iv-name="ProjectController" iv-init="initProjectsView();">
-    <panel iv-type="default">
-        <panel:header iv-type="default">
-            <panel:header:title iv-type="default">
-                Projects
-                <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.projectadd"></nav>
-            </panel:header:title>
-        </panel:header>
-        <panel:content iv-type="default">
-            <repeater iv-type="default" iv-item="project" iv-list="projects">
-                <include iv-source="~/iview/project/_projectwidget.html" />
-            </repeater>
-        </panel:content>
-    </panel>
+﻿<h3>
+    Projects
+    <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.projectadd"></nav>
+</h3>
+<controller iv-type="default" iv-name="ProjectController" iv-init="initProjectsView();">
+    <div class="row">
+        <repeater iv-type="default" iv-item="project" iv-list="projects">
+            <include iv-source="~/iview/project/_projectwidget.html" />
+        </repeater>
+    </div>
 </controller>

@@ -237,23 +237,19 @@ iWork.directive('paneltool', ["$compile", "$timeout", function ($compile, $timeo
             var currentState = loadPanelState(panelId);
 
             if (typeof currentState !== 'undefined') {
-                $timeout(function () {
-                    $scope[panelId] = currentState;
-                },
-                  10);
+                $scope[panelId] = currentState;
             }
             else {
-                $timeout(function () {
-                    $scope[panelId] = $elem.attr('isCollapsed');
-                },
-                10);
+                $scope[panelId] = $elem.attr('isCollapsed');
+            }
+            if ($scope[panelId] == false) {
+                parent.find('.panel-wrapper').removeClass("hidden");
             }
 
             // bind events to switch icons
             $element.bind('click', function () {
-
+                parent.find('.panel-wrapper').removeClass("hidden");
                 savePanelState(panelId, !$scope[panelId]);
-
             });
         }]
     };
@@ -336,7 +332,7 @@ iWork.directive('scoreRadioButtonGroup', function () {
         },
         require: '^ngModel',
         link: function (scope, element, attr) {
-            
+
             scope.scoreOptions = scope.customizedScoreOptions || defaultScoreOptions;
 
             scope.$watch('ngModel', function (newVal) {

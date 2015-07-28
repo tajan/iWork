@@ -1,140 +1,132 @@
+<h3>
+    My Board
+    <include iv-source="~/iview/task/_addtaskmenu.html" />
+    <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="User Story" iv-state="app.userstoryadd"></nav>
+</h3>
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
-        <panel iv-type="default">
-            <panel:header iv-type="default">
-                <panel:header:title iv-type="default">
-                    My Board
-                    <include iv-source="~/iview/task/_addtaskmenu.html" />
-                    <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="User Story" iv-state="app.userstoryadd"></nav>
-                </panel:header:title>
-            </panel:header>
-            <panel:content iv-type="default">
-                <div id="portlet{{status.id}}" ng-repeat="status in taskStatuses | orderBy:'viewOrder'" portlet="portlet" class="col-lg-3 br">
-                    <div>{{status.title}}</div>
-                    <hr style="margin-bottom: 10px; margin-top: 3px">
-                    <div ng-repeat="task in tasks | filter: {status: status.id } | orderBy:'viewOrder'">
-                        <div id="panel{{task.taskId}}" class="panel panel-default">
-                            <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 3px">
-                                <div class="progress-bar-bg progress-bar-{{task.projectStyle}}"></div>
-                                <div style="width:{{task.progress}}%;" role="progressbar" aria-valuenow="{{task.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{task.projectStyle}}">
-                                </div>
-                            </div>
-                            <div ng-class="{'panel-heading-collapsed':true}" class="panel-heading portlet-handler">
-                                <div dropdown="dropdown" class="btn-group">
-                                    <button type="button" ng-disabled="disabled" dropdown-toggle="" class="btn dropdown-toggle btn-link btn-xs color-default">
-                                        <em class="fa fa-bars"></em>
-                                    </button>
-                                    <include iv-source="~/iview/task/_menu.html" />
-                                </div>
-                                <div class="label text text-sm color-default">{{(task.projectCodeName + '-' + task.title) | truncate:true:25:' ...'}}</div>
-                                <paneltool tool-collapse="tool-collapse" is-collapsed="true"></paneltool>
-                            </div>
-                            <div class="bg-gray-lighter" style="width: 100%; height:1px; margin-top:0px; margin-bottom: 0px "></div>
-                            <div collapse="panel{{task.taskId}}" class="panel-wrapper">
-                                <div class="panel-footer">
-                                    <row iv-type="default">
-                                        <column iv-type="default" iv-size="3">
-                                            <div class="text-center text-warning">
-                                                <div>
-                                                    <em class="icon-users" title="Member's Count"> {{task.membersCount}}</em>
-                                                </div>
-                                            </div>
-                                        </column>
-                                        <column iv-type="default" iv-size="3">
-                                            <div class="text-center text-success">
-                                                <p>
-                                                    <em class="icon-hourglass" title="Estimated Duration"> {{task.estimatedDuration}}</em>
-                                                </p>
-                                            </div>
-                                        </column>
-                                        <column iv-type="default" iv-size="3">
-                                            <div class="text-center text-info">
-                                                <p>
-                                                    <em class="fa fa-clock-o" title="Actual Duration"> {{task.activityDuration}}</em>
-                                                </p>
-                                            </div>
-                                        </column>
-                                        <column iv-type="default" iv-size="3">
-                                            <div class="text-center text-primary">
-                                                <p>
-                                                    <em class="fa fa-flash" title="Activities Count"> {{task.activityCount}}</em>
-                                                </p>
-                                            </div>
-                                        </column>
-                                    </row>
-                                </div>
-                                <div class="panel-body">
-                                    <row iv-type="default">
-                                        <column iv-type="default" iv-size="12">
-                                            <div class="text-sm">
-                                                {{task.dueDate | date:'MMM dd yyyy'}}
-                                            </div>
-                                            <div class="text-sm">
-                                                {{task.description}}
-                                            </div>
-                                        </column>
-                                    </row>
-                                    <!--Begin Add Activity -->
-                                    <div ng-controller="ActivityController" ng-init="showActivityPanel= false">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="h-spacer"></div>
-                                                <div class="center-block text-center">
-                                                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel">
-                                                        <span>{{showActivityPanel ? '-': '+'}}</span>
-                                                    </a>
-                                                </div>
-                                                <div class="h-spacer"></div>
-                                            </div>
+        <div id="portlet{{status.id}}" ng-repeat="status in taskStatuses | orderBy:'viewOrder'" portlet="portlet" class="col-lg-3 br">
+            <div>{{status.title}}</div>
+            <hr style="margin-bottom: 10px; margin-top: 3px">
+            <div ng-repeat="task in tasks | filter: {status: status.id } | orderBy:'viewOrder'">
+                <div id="panel{{task.taskId}}" class="panel panel-default">
+                    <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 3px">
+                        <div class="progress-bar-bg progress-bar-{{task.projectStyle}}"></div>
+                        <div style="width:{{task.progress}}%;" role="progressbar" aria-valuenow="{{task.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{task.projectStyle}}">
+                        </div>
+                    </div>
+                    <div ng-class="{'panel-heading-collapsed':true}" class="panel-heading portlet-handler">
+                        <div dropdown="dropdown" class="btn-group">
+                            <button type="button" ng-disabled="disabled" dropdown-toggle="" class="btn dropdown-toggle btn-link btn-xs color-default">
+                                <em class="fa fa-bars"></em>
+                            </button>
+                            <include iv-source="~/iview/task/_menu.html" />
+                        </div>
+                        <div class="label text text-sm color-default">{{(task.projectCodeName + '-' + task.title) | truncate:true:25:' ...'}}</div>
+                        <paneltool tool-collapse="tool-collapse" is-collapsed="true"></paneltool>
+                    </div>
+                    <div class="bg-gray-lighter" style="width: 100%; height:1px; margin-top:0px; margin-bottom: 0px "></div>
+                    <div collapse="panel{{task.taskId}}" class="panel-wrapper hidden">
+                        <div class="panel-footer">
+                            <row iv-type="default">
+                                <column iv-type="default" iv-size="3">
+                                    <div class="text-center text-warning">
+                                        <div>
+                                            <em class="icon-users" tooltip="Member's Count">{{task.membersCount}}</em>
                                         </div>
-                                        <!--Begin Add Activity Panel-->
-                                        <div ng-show="showActivityPanel">
-                                            <row iv-type="default">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
-                                                    <div class="h-spacer"></div>
-                                                </div>
-                                            </row>
-                                            <row iv-type="default">
-                                                <div class="col-sm-12">
-                                                    <div class="input-group" ng-controller="DateController">
-                                                        <input placeholder="Date" type="text" name="createDate" datepicker-popup="{{format}}" ng-model="activity.activityDateTime" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
-                                                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
-                                                               datepicker-mode="'day'" show-weeks="true" current-text="Today" />
-                                                        <span class="input-group-btn">
-                                                            <button type="button" ng-click="open($event)" class="btn btn-default">
-                                                                <em class="fa fa-calendar"></em>
-                                                            </button>
-                                                        </span>
-                                                    </div>
-                                                    <div class="h-spacer"></div>
-                                                </div>
-                                            </row>
-                                            <row iv-type="default">
-                                                <div class="col-sm-12">
-                                                    <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="activity.duration" />
-                                                    <div class="h-spacer"></div>
-                                                </div>
-                                            </row>
-                                            <row iv-type="default">
-                                                <div class="col-sm-12">
-                                                    <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="addActivityInMyBoard(task.taskId); ">
-                                                        Add
-                                                    </button>
-                                                </div>
-                                            </row>
-                                        </div>
-                                        <!--End Add Activity Panel-->
                                     </div>
-                                    <!--End Add Activity-->
+                                </column>
+                                <column iv-type="default" iv-size="3">
+                                    <div class="text-center text-success">
+                                        <p>
+                                            <em class="icon-hourglass" tooltip="Estimated Duration"> {{task.estimatedDuration}}</em>
+                                        </p>
+                                    </div>
+                                </column>
+                                <column iv-type="default" iv-size="3">
+                                    <div class="text-center text-info">
+                                        <p>
+                                            <em class="fa fa-clock-o" tooltip="Actual Duration"> {{task.activityDuration}}</em>
+                                        </p>
+                                    </div>
+                                </column>
+                                <column iv-type="default" iv-size="3">
+                                    <div class="text-center text-primary">
+                                        <p>
+                                            <em class="fa fa-flash" tooltip="Activities Count"> {{task.activityCount}}</em>
+                                        </p>
+                                    </div>
+                                </column>
+                            </row>
+                        </div>
+                        <div class="panel-body">
+                            <row iv-type="default">
+                                <column iv-type="default" iv-size="12">
+                                    <div class="text-sm">
+                                        {{task.dueDate | date:'MMM dd yyyy'}}
+                                    </div>
+                                    <div class="text-sm">
+                                        {{task.description}}
+                                    </div>
+                                </column>
+                            </row>
+                            <!--Begin Add Activity -->
+                            <div ng-controller="ActivityController" ng-init="showActivityPanel= false">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="h-spacer"></div>
+                                        <div class="center-block text-center">
+                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel">
+                                                <span>{{showActivityPanel ? '-': '+'}}</span>
+                                            </a>
+                                        </div>
+                                        <div class="h-spacer"></div>
+                                    </div>
                                 </div>
+                                <!--Begin Add Activity Panel-->
+                                <div ng-show="showActivityPanel">
+                                    <row iv-type="default">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
+                                            <div class="h-spacer"></div>
+                                        </div>
+                                    </row>
+                                    <row iv-type="default">
+                                        <div class="col-sm-12">
+                                            <div class="input-group" ng-controller="DateController">
+                                                <input placeholder="Date" type="text" name="createDate" datepicker-popup="{{format}}" ng-model="activity.activityDateTime" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
+                                                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
+                                                       datepicker-mode="'day'" show-weeks="true" current-text="Today" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" ng-click="open($event)" class="btn btn-default">
+                                                        <em class="fa fa-calendar"></em>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div class="h-spacer"></div>
+                                        </div>
+                                    </row>
+                                    <row iv-type="default">
+                                        <div class="col-sm-12">
+                                            <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="activity.duration" />
+                                            <div class="h-spacer"></div>
+                                        </div>
+                                    </row>
+                                    <row iv-type="default">
+                                        <div class="col-sm-12">
+                                            <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="addActivityInMyBoard(task.taskId); ">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </row>
+                                </div>
+                                <!--End Add Activity Panel-->
                             </div>
+                            <!--End Add Activity-->
                         </div>
                     </div>
                 </div>
-            </panel:content>
-        </panel>
-
-        
+            </div>
+        </div>
     </row>
 </controller>

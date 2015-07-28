@@ -203,12 +203,14 @@
     <Content Include="iView\sprint\add.html" />
     <Content Include="iView\sprint\update.html" />
     <Content Include="iView\sprint\_formdata.html" />
+    <Content Include="iView\task\addsupport.html" />
     <Content Include="iView\task\archive.html" />
     <Content Include="iView\task\update.html" />
     <Content Include="iView\task\add.html" />
     <Content Include="iView\task\index.html" />
     <Content Include="iView\task\view.html" />
     <Content Include="iView\task\_activities.html" />
+    <Content Include="iView\task\_addtaskmenu.html" />
     <Content Include="iView\task\_detail.html" />
     <Content Include="iView\task\_formdata.html" />
     <Content Include="iView\task\_menu.html" />

@@ -144,13 +144,14 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.tasks = [];
     $scope.taskStatuses = dataFactory.taskStatus.getAll();
 
-
     $scope.model = {
         taskId: $state.params["id"],
         projectId: $state.params["projectId"],
         userStoryId: $state.params["userStoryId"],
         status: 1,
-        priority: 2
+        priority: 2,
+        dueDate: moment().format('YYYY-MM-DD'),
+        estimatedDuration: 5
     };
 
     $scope.onProjectChange = function (item) {
@@ -314,7 +315,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             };
 
             function resetListSize() {
-              //  $(this).css('min-height', "");
+                //  $(this).css('min-height', "");
             };
 
         };

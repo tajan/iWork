@@ -1,27 +1,10 @@
-<!--<h3>
-    <div class="pull-right">
-        <div dropdown="" is-open="language.listIsOpen" class="btn-group">
-            <button type="button" dropdown-toggle="" class="btn btn-default">
-                {{language.selected}}
-                <span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
-                <li ng-repeat="(localeId, langName) in language.available">
-                    <a ng-click="language.set(localeId, $event)">{{langName}}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    Single View
-    <small>{{ 'dashboard.WELCOME' | translate:{ appName: app.name } }} !</small>
-</h3>-->
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
         <panel iv-type="default">
             <panel:header iv-type="default">
                 <panel:header:title iv-type="default">
                     My Board
-                    <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Task" iv-state="app.taskadd"></nav>
+                    <include iv-source="~/iview/task/_addtaskmenu.html" />
                     <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="User Story" iv-state="app.userstoryadd"></nav>
                 </panel:header:title>
             </panel:header>

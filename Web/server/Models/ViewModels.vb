@@ -413,7 +413,9 @@ Public Class DtoProject
     Public Property Workflows As List(Of String)
 
     Public Property MembersCount As Integer
-
+    Public Property TasksCount As Integer
+    Public Property ActivitiesCount As Integer
+    Public Property UserStoriesCount As Integer
 
     Public Sub FillProject(project As Project)
 
@@ -497,6 +499,9 @@ Public Class DtoProject
             out.Style = .Style
             out.Workflows = .ProjectWorkflows.Where(Function(x) x.ProjectId = project.ProjectId).Select(Function(x) x.Title).ToList
             out.MembersCount = .ProjectMembers.Count
+            out.UserStoriesCount = .UserStories.Count
+            out.TasksCount = .Tasks.Count
+            out.ActivitiesCount = .Tasks.SelectMany(Function(x) x.Activities).Count
 
         End With
 

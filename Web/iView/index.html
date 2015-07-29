@@ -71,33 +71,10 @@
                                 </column>
                             </row>
                         </div>
-
-                        <!--Begin Add Activity -->
                         <div ng-controller="ActivityController" ng-init="showActivityPanel= false">
-                            <div class="panel-body p0 bt" ng-show="{{status.id == 4}}">
-                                <div class="row ">
-                                    <div class="col-sm-6 br">
-                                        <div class="h-spacer"></div>
-                                        <div class="center-block text-center">
-                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel">
-                                                <span>{{showActivityPanel ? '-': '+'}}</span>
-                                            </a>
-                                        </div>
-                                        <div class="h-spacer"></div>
-                                    </div>
-                                    <div class="col-sm-6 br">
-                                        <div class="h-spacer"></div>
-                                        <div class="center-block text-center">
-                                            <a href="#" class="" style="color:#999;">
-                                                <i class="fa fa-archive fa-fw fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <div class="h-spacer"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--Begin Add Activity -->
                             <div class="panel-body p0">
-                                <div class="row " ng-show="{{status.id != 4}}">
+                                <div class="row">
                                     <div class="col-sm-12">
                                         <div class="h-spacer"></div>
                                         <div class="center-block text-center">
@@ -109,41 +86,8 @@
                                     </div>
                                 </div>
                                 <!--Begin Add Activity Panel-->
-                                <div ng-show="showActivityPanel" class="m-lg">
-                                    <row iv-type="default">
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
-                                            <div class="h-spacer"></div>
-                                        </div>
-                                    </row>
-                                    <row iv-type="default">
-                                        <div class="col-sm-12">
-                                            <div class="input-group" ng-controller="DateController">
-                                                <input placeholder="Date" type="text" name="createDate" datepicker-popup="{{format}}" ng-model="activity.activityDateTime" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
-                                                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
-                                                       datepicker-mode="'day'" show-weeks="true" current-text="Today" />
-                                                <span class="input-group-btn">
-                                                    <button type="button" ng-click="open($event)" class="btn btn-default">
-                                                        <em class="fa fa-calendar"></em>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                            <div class="h-spacer"></div>
-                                        </div>
-                                    </row>
-                                    <row iv-type="default">
-                                        <div class="col-sm-12">
-                                            <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="activity.duration" />
-                                            <div class="h-spacer"></div>
-                                        </div>
-                                    </row>
-                                    <row iv-type="default">
-                                        <div class="col-sm-12">
-                                            <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="addActivityInMyBoard(task.taskId); ">
-                                                Add
-                                            </button>
-                                        </div>
-                                    </row>
+                                <div ng-show="showActivityPanel" class="m-lg" ng-if="showActivityPanel">
+                                    <div ng-include src="'/iview/activity/_addwidget.html'"></div>
                                 </div>
                                 <!--End Add Activity Panel-->
                             </div>

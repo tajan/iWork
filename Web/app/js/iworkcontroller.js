@@ -136,7 +136,7 @@ iWork.controller('SprintController', ['$scope', 'dataFactory', '$state', functio
 
 }]);
 
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', function ($scope, dataFactory, $state, $timeout, $rootScope) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', function ($scope, dataFactory, $state, $timeout) {
 
     $scope.members = [];
     $scope.projects = [];
@@ -231,12 +231,8 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
         });
 
         var initElement = function () {
-
             // Component is optional
             if (!$.fn.sortable) return;
-
-            angular.element(document).ready(function () {
-
                 var Selector = '[portlet]';
                 $(Selector).sortable({
                     connectWith: Selector,
@@ -259,8 +255,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                 //.disableSelection()
                 ;
 
-            });
-
             function savePortletOrder(event, ui) {
 
                 var self = event.target;
@@ -277,10 +271,14 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             };
 
             $scope.upodatePortletOrder = function (taskIds, status) {
+
+
+                console.log(taskIds)
+                console.log(status)
+
                 var taskIds = [taskIds];
                 dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
-                //save portlet size to avoid jumps
-                //saveListSize.apply(self);
+                $state.reload();
             };
 
             function loadPortletOrder(event) {

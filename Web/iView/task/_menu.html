@@ -10,16 +10,7 @@
         <a ui-sref="app.taskupdate({id: task.taskId})">Edit</a>
     </li>
     <li class="divider"></li>
-    <li>
-        <a ng-click="upodatePortletOrder(task.taskId,1)" ng-hide="{{status.id == 1}}">Move To pending</a>
-    </li>
-    <li>
-        <a ng-click="upodatePortletOrder(task.taskId,2)" ng-hide="{{status.id == 2}}">Move To In Progress</a>
-    </li>
-    <li>
-        <a ng-click="upodatePortletOrder(task.taskId,3)" ng-hide="{{status.id == 3}}">Move To Ready For Test</a>
-    <li>
-        <a ng-click="upodatePortletOrder(task.taskId,4)" ng-hide="{{status.id == 4}}">Move To Done</a>
-    </li>
+    <li ng-repeat="statusItem in taskStatuses | orderBy:'viewOrder'">
+        <a ng-click="upodatePortletOrder(task.taskId,statusItem.id)" ng-hide="{{status.id == statusItem.id}}">Move To {{statusItem.title}}</a>
     </li>
 </ul>

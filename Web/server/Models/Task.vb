@@ -23,6 +23,7 @@ Partial Public Class Task
     Public Property Score As Byte
     Public Property Archived As Boolean
     Public Property RealEndDate As Nullable(Of Date)
+    Public Property Type As Byte
 
     Public Overridable Property Activities As ICollection(Of Activity) = New HashSet(Of Activity)
     Public Overridable Property Project As Project

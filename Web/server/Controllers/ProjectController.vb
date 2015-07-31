@@ -52,6 +52,23 @@ Namespace Controllers
 
         End Function
 
+        Private Function GetSearchCriteria(searchModel As SearchRequestModel) As Expression(Of Func(Of Project, Boolean))
+
+            Dim criteria As Expression(Of Func(Of Project, Boolean))
+
+            If String.IsNullOrEmpty(searchModel.SearchTerm) Then
+                criteria = Function(x) True
+            Else
+                criteria = Function(x) x.Title.Contains(searchModel.SearchTerm) OrElse
+               x.Description.Contains(searchModel.SearchTerm) OrElse
+               x.Url.Contains(searchModel.SearchTerm) OrElse
+               x.CodeName.Contains(searchModel.SearchTerm)
+            End If
+
+            Return criteria
+
+        End Function
+
 #End Region
 
 #Region " CRUD "
@@ -108,53 +125,32 @@ Namespace Controllers
 
         Public Function GetById(id As Integer) As ResponseModel
 
-            Dim criteria As Expression(Of Func(Of Project, Boolean)) = Function(x) x.ProjectId = id
-            Dim data As DtoProject = (From p In GetAvailableDto(criteria)).SingleOrDefault
+            Dim data = (From p In GetAvailableQuery() Where p.ProjectId = id).SingleOrDefault
 
             If data Is Nothing Then
                 Return ResponseModel.Create(HttpStatusCode.NotFound)
             End If
 
-            Return ResponseModel.Create(HttpStatusCode.OK, data)
+            Dim out = DtoProject.CreateInstance(data)
+            Return ResponseModel.Create(HttpStatusCode.OK, out)
 
         End Function
 
-        Public Function Search(searchModel As SearchRequestModel) As SearchResponseModel
+        Public Function GetAll(searchTerm As String) As SearchResponseModel
 
+            Dim query = From p In GetAvailableQuery() Order By p.CodeName
+            Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
 
-            Dim criteria As Expression(Of Func(Of Project, Boolean))
-
-            criteria = Function(x) x.ProjectMembers.Any(Function(m) m.UserId = CurrentUserId) AndAlso
-                           (x.Title.Contains(searchModel.SearchTerm) OrElse
-                           x.Description.Contains(searchModel.SearchTerm) OrElse
-                           x.Url.Contains(searchModel.SearchTerm) OrElse
-                           x.CodeName.Contains(searchModel.SearchTerm))
-
-
-
+            Dim criteria = GetSearchCriteria(searchModel)
             Dim totalItems As Integer = 0
-            Dim result = Me.ProjectRepository.Search(criteria, searchModel.SortFields, searchModel.SortDirections, searchModel.PageSize, searchModel.PageNumber, totalItems)
 
+            Dim data = Me.ProjectRepository.Search(query, criteria, searchModel.SortFields,
+                                                searchModel.SortDirections, searchModel.PageSize,
+                                                searchModel.PageNumber, totalItems).ToList
 
-            Dim data = (From p In result Where p.ProjectMembers.Any(Function(x) x.UserId = CurrentUserId)
-                  Select New With {.ProjectId = p.ProjectId,
-                                                     .Title = p.Title,
-                                                     .Description = p.Description,
-                                                     .MembersCount = p.ProjectMembers.Count,
-                                                     .Status = p.Status,
-                                                     .Url = p.Url,
-                                                     .Customer = p.Customer,
-                                                     .CodeName = p.CodeName,
-                                                     .StartDate = p.StartDate,
-                                                     .EndDate = p.EndDate}).ToList
+            Dim out = New DtoProjects(data)
 
-            Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, data)
-
-        End Function
-
-        Public Function GetAll() As ResponseModel
-
-            Return ResponseModel.Create(HttpStatusCode.OK, GetAvailableDto)
+            Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)
 
         End Function
 

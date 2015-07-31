@@ -1,198 +1,198 @@
-﻿iWork.controller('myBoardController', ['$config', '$scope', '$http', '$attrs', '$state', '$stateParams', '$timeout', '$window', function ($config, $scope, $http, $attrs, $state, $stateParams, $timeout, $window) {
-    'use strict';
+﻿//iWork.controller('myBoardController', ['$config', '$scope', '$http', '$attrs', '$state', '$stateParams', '$timeout', '$window', function ($config, $scope, $http, $attrs, $state, $stateParams, $timeout, $window) {
+//    'use strict';
 
 
-    // Component is optional
-    if (!$.fn.sortable) return;
+//    // Component is optional
+//    if (!$.fn.sortable) return;
 
-    angular.element(document).ready(function () {
+//    angular.element(document).ready(function () {
 
-        var Selector = '[portlet]';
+//        var Selector = '[portlet]';
 
-        $timeout(function () {
+//        $timeout(function () {
 
-            $(Selector).sortable({
-                connectWith: Selector,
-                items: 'div.panel',
-                handle: '.portlet-handler',
-                opacity: 0.7,
-                placeholder: 'portlet box-placeholder',
-                cancel: '.portlet-cancel',
-                forcePlaceholderSize: true,
-                iframeFix: false,
-                tolerance: 'pointer',
-                helper: 'original',
-                revert: 200,
-                forceHelperSize: true,
-                start: saveListSize,
-                update: savePortletOrder,
-                create: loadPortletOrder
-            })
-            // optionally disables mouse selection
-            //.disableSelection()
-            ;
-        }, 0);
+//            $(Selector).sortable({
+//                connectWith: Selector,
+//                items: 'div.panel',
+//                handle: '.portlet-handler',
+//                opacity: 0.7,
+//                placeholder: 'portlet box-placeholder',
+//                cancel: '.portlet-cancel',
+//                forcePlaceholderSize: true,
+//                iframeFix: false,
+//                tolerance: 'pointer',
+//                helper: 'original',
+//                revert: 200,
+//                forceHelperSize: true,
+//                start: saveListSize,
+//                update: savePortletOrder,
+//                create: loadPortletOrder
+//            })
+//            // optionally disables mouse selection
+//            //.disableSelection()
+//            ;
+//        }, 0);
 
-    });
+//    });
 
-    function initBoard() {
+//    function initBoard() {
 
-        var apiStatusUrl = $config.API_URL + '/task/GetAllStatuses';
-        var apiTaskUrl = $config.API_URL + '/task/getall';
+//        var apiStatusUrl = $config.API_URL + '/task/GetAllStatuses';
+//        var apiTaskUrl = $config.API_URL + '/task/getall';
 
-        $scope.taskStatuses = [];
-        $scope.tasks = [];
+//        $scope.taskStatuses = [];
+//        $scope.tasks = [];
 
-        $http.get(apiStatusUrl).success(function (result, status, headers, config) {
-            $scope.taskStatuses = result;
-        }).error(function (data, status, headers, config) {
-            //alert(JSON.stringify(data));
-        });
+//        $http.get(apiStatusUrl).success(function (result, status, headers, config) {
+//            $scope.taskStatuses = result;
+//        }).error(function (data, status, headers, config) {
+//            //alert(JSON.stringify(data));
+//        });
 
-        $http.get(apiTaskUrl).success(function (result, status, headers, config) {
-            $scope.tasks = result;
-        }).error(function (data, status, headers, config) {
-            //alert(JSON.stringify(data));
-        });
+//        $http.get(apiTaskUrl).success(function (result, status, headers, config) {
+//            $scope.tasks = result;
+//        }).error(function (data, status, headers, config) {
+//            //alert(JSON.stringify(data));
+//        });
 
-    };
+//    };
 
-    function savePortletOrder(event, ui) {
+//    function savePortletOrder(event, ui) {
 
-        var apiUpdateUrl = $config.API_URL + '/task/UpdateStatuses';
+//        var apiUpdateUrl = $config.API_URL + '/task/UpdateStatuses';
 
-        var self = event.target;
-        var portletId = self.id;
-        var taskStatusId = parseInt(portletId.replace('portlet', ''));
-        var panelIds = $(self).sortable('toArray');
-        var taskIds = [];
+//        var self = event.target;
+//        var portletId = self.id;
+//        var taskStatusId = parseInt(portletId.replace('portlet', ''));
+//        var panelIds = $(self).sortable('toArray');
+//        var taskIds = [];
 
-        angular.forEach(panelIds, function (panelId) {
-            taskIds.push(parseInt(panelId.replace('panel', '')));
-        });
+//        angular.forEach(panelIds, function (panelId) {
+//            taskIds.push(parseInt(panelId.replace('panel', '')));
+//        });
 
-        var model = {
-            taskStatusId: taskStatusId,
-            taskIds: taskIds
-        };
+//        var model = {
+//            taskStatusId: taskStatusId,
+//            taskIds: taskIds
+//        };
 
-        $http.post(apiUpdateUrl, model).success(function (result, status, headers, config) {
+//        $http.post(apiUpdateUrl, model).success(function (result, status, headers, config) {
             
-        }).error(function (data, status, headers, config) {
-            //alert(JSON.stringify(data));
-        });
+//        }).error(function (data, status, headers, config) {
+//            //alert(JSON.stringify(data));
+//        });
 
-        //save portlet size to avoid jumps
-        saveListSize.apply(self);
-    }
+//        //save portlet size to avoid jumps
+//        saveListSize.apply(self);
+//    }
 
-    function loadPortletOrder(event) {
+//    function loadPortletOrder(event) {
 
-        var self = event.target;
-        //var data = angular.fromJson($scope.$storage[storageKeyName]);
+//        var self = event.target;
+//        //var data = angular.fromJson($scope.$storage[storageKeyName]);
 
-        //if (data) {
+//        //if (data) {
 
-        //    var porletId = self.id,
-        //        panels = data[porletId];
+//        //    var porletId = self.id,
+//        //        panels = data[porletId];
 
-        //    if (panels) {
-        //        var portlet = $('#' + porletId);
+//        //    if (panels) {
+//        //        var portlet = $('#' + porletId);
 
-        //        $.each(panels, function (index, value) {
-        //            $('#' + value).appendTo(portlet);
-        //        });
-        //    }
+//        //        $.each(panels, function (index, value) {
+//        //            $('#' + value).appendTo(portlet);
+//        //        });
+//        //    }
 
-        //}
+//        //}
 
-        // save portlet size to avoid jumps
-        saveListSize.apply(self);
-    }
+//        // save portlet size to avoid jumps
+//        saveListSize.apply(self);
+//    }
 
-    // Keeps a consistent size in all portlet lists
-    function saveListSize() {
-        var $this = $(this);
-        $this.css('min-height', $this.height());
-    }
+//    // Keeps a consistent size in all portlet lists
+//    function saveListSize() {
+//        var $this = $(this);
+//        $this.css('min-height', $this.height());
+//    }
 
-    function resetListSize() {
-      $(this).css('min-height', "");
-    }
+//    function resetListSize() {
+//      $(this).css('min-height', "");
+//    }
 
 
-    initBoard()
-    resetListSize()
+//    initBoard()
+//    resetListSize()
 
-}]);
+//}]);
 
 /**=========================================================
  * Module: general form controller, add, update, remove
  =========================================================*/
-iWork.controller('FormController', ['$config', '$scope', '$http', '$attrs', '$state', '$stateParams', function ($config, $scope, $http, $attrs, $state, $stateParams) {
+//iWork.controller('FormController', ['$config', '$scope', '$http', '$attrs', '$state', '$stateParams', function ($config, $scope, $http, $attrs, $state, $stateParams) {
 
-    $scope.model = {};
+//    $scope.model = {};
 
-    //submit section
-    $scope.submitform = function (actionName, $event) {
+//    //submit section
+//    $scope.submitform = function (actionName, $event) {
 
-        var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + actionName;
+//        var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + actionName;
 
-        switch (actionName) {
+//        switch (actionName) {
 
-            case 'cancel':
-                ////cancel button will redirect to parent page
-                //if ($state.current.parentUI) {
-                //    $state.transitionTo($state.current.parentUI);
-                //    return false;
-                //}
-                //else {
-                //    $scope.message = 'There is no parent state!';
-                //};
+//            case 'cancel':
+//                ////cancel button will redirect to parent page
+//                //if ($state.current.parentUI) {
+//                //    $state.transitionTo($state.current.parentUI);
+//                //    return false;
+//                //}
+//                //else {
+//                //    $scope.message = 'There is no parent state!';
+//                //};
 
-            default:
-                $http.post(apiUrl, $scope.model).
-                    success(function (response, status, headers, config) {
+//            default:
+//                $http.post(apiUrl, $scope.model).
+//                    success(function (response, status, headers, config) {
 
-                        $scope.message = response.message;
-                        $state.transitionTo($state.current.parentUI);
-                        //if (response.hasError == 'False') {
-                        //    if ($state.current.parentUI) {
-                        //        $state.transitionTo($state.current.parentUI);
-                        //    };
-                        //};
+//                        $scope.message = response.message;
+//                        $state.transitionTo($state.current.parentUI);
+//                        //if (response.hasError == 'False') {
+//                        //    if ($state.current.parentUI) {
+//                        //        $state.transitionTo($state.current.parentUI);
+//                        //    };
+//                        //};
 
-                    }).
-                error(function (response, status, headers, config) {
-                    $scope.message = 'No action was defined for this action!';
-                });
-        };
+//                    }).
+//                error(function (response, status, headers, config) {
+//                    $scope.message = 'No action was defined for this action!';
+//                });
+//        };
 
-    };
+//    };
 
-    $scope.init = function () {
+//    $scope.init = function () {
 
-        var key = $state.params["id"];
-        if (key) {
+//        var key = $state.params["id"];
+//        if (key) {
 
-            var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/getbyid/' + key;
+//            var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/getbyid/' + key;
 
-            $http.get(apiUrl).
-                success(function (response, status, headers, config) {
-                    $scope.model = response.data;
-                }).
-            error(function (response, status, headers, config) {
-                $scope.message = response;
-            });
-        }
-        else {
-            $scope.model = {};
-        };
-    };
+//            $http.get(apiUrl).
+//                success(function (response, status, headers, config) {
+//                    $scope.model = response.data;
+//                }).
+//            error(function (response, status, headers, config) {
+//                $scope.message = response;
+//            });
+//        }
+//        else {
+//            $scope.model = {};
+//        };
+//    };
 
 
 
-}]);
+//}]);
 
 
 /**=========================================================
@@ -391,22 +391,6 @@ iWork.controller('GridController', ['$config', '$scope', '$http', '$attrs', '$el
             .removeAttr('sort-directions');
 
 }]);
-iWork.factory('PublicSearchDataService', function () {
-    return { term: '' };
-});
-iWork.controller('PublicSearchController', ['$scope', '$http', '$attrs', '$element', '$timeout', 'PublicSearchDataService', function ($scope, $http, $attrs, $element, $timeout, PublicSearchDataService) {
-
-    $scope.PublicSearchDataService = PublicSearchDataService;
-
-    $scope.submitForm = function () {
-        $scope.PublicSearchDataService.term = $scope.term;
-    };
-
-}]);
-
-
-
-
 
 /**=========================================================
  * Module: general date picker controller
@@ -605,69 +589,69 @@ iWork.controller('RepeaterController', ['$config', '$http', '$scope', '$attrs', 
 
 }]);
 
-/**=========================================================
- * Module: general Multiple Selection controller
- =========================================================*/
-iWork.controller('MultipleSelectionController', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
+///**=========================================================
+// * Module: general Multiple Selection controller
+// =========================================================*/
+//iWork.controller('MultipleSelectionController', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
 
-    $scope.items = [];
+//    $scope.items = [];
 
-    //setting webapi url
-    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
-    $http.get(apiUrl).success(function (result, status, headers, config) {
-        $scope.items = result;
-    }).error(function (data, status, headers, config) {
-        //alert(JSON.stringify(data));
-    });
+//    //setting webapi url
+//    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
+//    $http.get(apiUrl).success(function (result, status, headers, config) {
+//        $scope.items = result;
+//    }).error(function (data, status, headers, config) {
+//        //alert(JSON.stringify(data));
+//    });
 
-    //$scope.model = {};
-    //$scope.selectedItems = [1, 2];
+//    //$scope.model = {};
+//    //$scope.selectedItems = [1, 2];
 
-}]);
+//}]);
 
-/**=========================================================
- * Module: general Multiple Selection controller
- =========================================================*/
-iWork.controller('SingleSelectionController', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
+///**=========================================================
+// * Module: general Multiple Selection controller
+// =========================================================*/
+//iWork.controller('SingleSelectionController', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
 
-    $scope.items = [];
+//    $scope.items = [];
 
-    //setting webapi url
-    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
+//    //setting webapi url
+//    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
 
-    $http.get(apiUrl).success(function (result, status, headers, config) {
-        $scope.items = result.data;
-    });
+//    $http.get(apiUrl).success(function (result, status, headers, config) {
+//        $scope.items = result.data;
+//    });
 
-}]);
-
-
-/**=========================================================
- * Module: general Multiple Selection controller
- =========================================================*/
-iWork.controller('SingleSelectionController1', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
-
-    $scope.items = [];
-
-    //setting webapi url
-    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
-
-    $http.get(apiUrl).success(function (result, status, headers, config) {
-        $scope.items = result;
-    });
-
-    $scope.xxx = function (aaa) {
-        //log($scope.$parent.item = )
-    };
-
-}]);
+//}]);
 
 
-iWork.controller('test', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
+///**=========================================================
+// * Module: general Multiple Selection controller
+// =========================================================*/
+//iWork.controller('SingleSelectionController1', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
 
-    $scope.primaryItem = {};
-    $scope.item = {};
+//    $scope.items = [];
 
-}]);
+//    //setting webapi url
+//    var apiUrl = $config.API_URL + '/' + $attrs.controllerName + '/' + $attrs.actionName;
+
+//    $http.get(apiUrl).success(function (result, status, headers, config) {
+//        $scope.items = result;
+//    });
+
+//    $scope.xxx = function (aaa) {
+//        //log($scope.$parent.item = )
+//    };
+
+//}]);
+
+
+//iWork.controller('test', ['$config', '$scope', '$http', '$attrs', function ($config, $scope, $http, $attrs) {
+
+//    $scope.primaryItem = {};
+//    $scope.item = {};
+
+//}]);
 
 

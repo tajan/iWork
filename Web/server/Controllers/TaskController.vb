@@ -27,9 +27,68 @@ Namespace Controllers
 
         End Function
 
+        Private Function GetSearchCriteria(searchModel As SearchRequestModel) As Expression(Of Func(Of Task, Boolean))
+
+            Dim criteria As Expression(Of Func(Of Task, Boolean))
+
+            If String.IsNullOrEmpty(searchModel.SearchTerm) Then
+                criteria = Function(x) True
+            Else
+                criteria = Function(x) x.Project.ProjectMembers.Any(Function(y) y.UserId = CurrentUserId) AndAlso
+                           (x.Title.Contains(searchModel.SearchTerm) OrElse
+                           x.Project.Description.Contains(searchModel.SearchTerm) OrElse
+                           x.UserStory.Title.Contains(searchModel.SearchTerm) OrElse
+                           x.UserStory.Description.Contains(searchModel.SearchTerm) OrElse
+                           x.Project.Title.Contains(searchModel.SearchTerm) OrElse
+                           x.Project.Url.Contains(searchModel.SearchTerm) OrElse
+                           x.Project.CodeName.Contains(searchModel.SearchTerm) OrElse
+                           x.Project.Description.Contains(searchModel.SearchTerm))
+            End If
+
+            Return criteria
+
+        End Function
+
 #End Region
 
 #Region " CRUD "
+
+        Public Function AddSupport(data As DtoTask) As ResponseModel
+
+            'Id should be zero
+            If data.TaskId <> 0 Then
+                ResponseModel.Create(HttpStatusCode.BadRequest)
+            End If
+
+            If data.Members Is Nothing OrElse data.Members.Count = 0 OrElse Not data.Members.Contains(CurrentUserId) Then
+                data.Members = New List(Of Integer)({CurrentUserId})
+            End If
+
+            data.Score = TaskScores.Good
+
+            Dim task As New Task
+            data.FillTask(task)
+            task.Archived = True
+            task.Status = TaskStatuses.Done
+            task.RealEndDate = data.DueDate
+            task.Description = String.Empty
+
+
+            Dim activity As New Activity
+            activity.ActivityDate = data.DueDate
+            activity.Description = data.Title
+            activity.Duration = data.EstimatedDuration
+            task.Activities.Add(activity)
+
+            Me.TaskRepository.Add(task)
+            Me.TaskRepository.Commit()
+
+            Me.Logger.Log(task, TaskActions.Add)
+            Me.Logger.Log(activity, ActivityActions.Add)
+
+            Return ResponseModel.Create(HttpStatusCode.Created)
+
+        End Function
 
         Public Function Add(data As DtoTask) As ResponseModel
 
@@ -138,26 +197,15 @@ Namespace Controllers
 
 #Region " Report "
 
-        Public Function Search(searchModel As SearchRequestModel) As SearchResponseModel
+        Public Function GetMyBoard(searchTerm As String) As SearchResponseModel
 
-            Dim criteria As Expression(Of Func(Of Task, Boolean))
+            Dim query = From p In GetAvailableQuery() Where p.Archived = False Order By p.Priority Descending, p.DueDate Descending
 
-            If String.IsNullOrEmpty(searchModel.SearchTerm) Then
-                criteria = Function(x) x.Project.ProjectMembers.Any(Function(y) y.UserId = CurrentUserId)
-            Else
-                criteria = Function(x) x.Project.ProjectMembers.Any(Function(y) y.UserId = CurrentUserId) AndAlso
-                           (x.Title.Contains(searchModel.SearchTerm) OrElse
-                           x.Project.Description.Contains(searchModel.SearchTerm) OrElse
-                           x.UserStory.Title.Contains(searchModel.SearchTerm) OrElse
-                           x.UserStory.Description.Contains(searchModel.SearchTerm) OrElse
-                           x.Project.Title.Contains(searchModel.SearchTerm) OrElse
-                           x.Project.Url.Contains(searchModel.SearchTerm) OrElse
-                           x.Project.CodeName.Contains(searchModel.SearchTerm) OrElse
-                           x.Project.Description.Contains(searchModel.SearchTerm))
-            End If
-
+            Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
+            Dim criteria = GetSearchCriteria(searchModel)
             Dim totalItems As Integer = 0
-            Dim data = Me.TaskRepository.Search(GetAvailableQuery, criteria, searchModel.SortFields,
+
+            Dim data = Me.TaskRepository.Search(query, criteria, searchModel.SortFields,
                                                 searchModel.SortDirections, searchModel.PageSize,
                                                 searchModel.PageNumber, totalItems).ToList
 
@@ -167,21 +215,21 @@ Namespace Controllers
 
         End Function
 
-        Public Function GetAll() As ResponseModel
+        Public Function GetAll(searchTerm As String) As ResponseModel
 
-            Dim data = GetAvailableQuery.ToList
+            Dim query = From p In GetAvailableQuery() Order By p.Priority Descending, p.DueDate Descending
+
+            Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
+            Dim criteria = GetSearchCriteria(searchModel)
+            Dim totalItems As Integer = 0
+
+            Dim data = Me.TaskRepository.Search(query, criteria, searchModel.SortFields,
+                                                searchModel.SortDirections, searchModel.PageSize,
+                                                searchModel.PageNumber, totalItems).ToList
 
             Dim out = New DtoTasks(data)
-            Return ResponseModel.Create(HttpStatusCode.OK, out)
 
-        End Function
-
-        Public Function GetMyBoard() As ResponseModel
-
-            Dim data = GetAvailableQuery.Where(Function(x) x.Archived = False).ToList
-
-            Dim out = New DtoTasks(data)
-            Return ResponseModel.Create(HttpStatusCode.OK, out)
+            Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)
 
         End Function
 

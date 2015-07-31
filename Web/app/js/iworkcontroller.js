@@ -1,4 +1,15 @@
-﻿iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', function ($scope, dataFactory, $state) {
+﻿iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
+
+    $scope.term = '';
+
+    $scope.search = function () {
+        publicSearchDataService.term = $scope.term;
+        $state.reload();
+    };
+    
+}]);
+
+iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', function ($scope, dataFactory, $state) {
 
     var projectId = $state.params["id"];
 
@@ -138,21 +149,25 @@ iWork.controller('SprintController', ['$scope', 'dataFactory', '$state', functio
 
 iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', function ($scope, dataFactory, $state, $timeout) {
 
+    var now = moment().format('YYYY-MM-DD');
+
     $scope.members = [];
     $scope.projects = [];
     $scope.userStories = [];
     $scope.tasks = [];
     $scope.taskStatuses = dataFactory.taskStatus.getAll();
-
-
+    $scope.taskTypes = dataFactory.taskTypes.getAll();
+    $scope.taskSupportTypes = dataFactory.taskTypes.getSupport();
+    
     $scope.model = {
-        taskId: $state.params["id"],
-        projectId: $state.params["projectId"],
-        userStoryId: $state.params["userStoryId"],
+        taskId: $state.params['id'],
+        projectId: $state.params['projectId'],
+        userStoryId: $state.params['userStoryId'],
         status: 1,
         priority: 2,
         dueDate: moment().format('YYYY-MM-DD'),
-        estimatedDuration: 5
+        estimatedDuration: 5,
+        type: 2
     };
 
     $scope.onProjectChange = function (item) {
@@ -225,8 +240,15 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     };
 
     $scope.initBoard = function () {
+
         dataFactory.task.getMyBoard().success(function (response) {
+
             $scope.tasks = response.data;
+
+            angular.forEach($scope.tasks, function (task) {
+                task.realEndDate = now;
+            });
+
             initElement();
         });
 
@@ -323,27 +345,12 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
         dataFactory.task.getAll().success(function (response) {
             $scope.tasks = response.data;
-            $scope.tasks.pending = response.data.filter(function (el) {
-                return el.status == 1;
-            });
-            $scope.tasks.inProgress = response.data.filter(function (el) {
-                return el.status == 2;
-            });
-            $scope.tasks.redayForTest = response.data.filter(function (el) {
-                return el.status == 3;
-            });
-            $scope.tasks.done = response.data.filter(function (el) {
-                return el.status == 4;
-            });
-
         });
 
     };
 
     $scope.initViewForArchive = function () {
-
-        var now = moment().format('YYYY-MM-DD');
-
+        
         dataFactory.task.getForArchive().success(function (response) {
             $scope.tasks = response.data;
 
@@ -358,7 +365,8 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.archive = function (taskId, realEndDate) {
 
         dataFactory.task.archive(taskId, realEndDate).success(function () {
-            $scope.initViewForArchive();
+            //$scope.initViewForArchive();
+            $scope.initBoard();
         });
 
     };
@@ -370,6 +378,9 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 }]);
 
 iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', function ($scope, dataFactory, $state) {
+
+    $scope.showActivityPanel = false;
+    $scope.showArchivePanel = false;
 
     $scope.taskId = $state.params["id"];
     $scope.activities = [];

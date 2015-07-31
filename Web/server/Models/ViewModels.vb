@@ -278,6 +278,7 @@ Public Class DtoTask
     Public Property Files As String
     Public Property FilesList As List(Of DtoFile)
     Public Property RealEndDate As Date?
+    Public Property Type As TaskTypes = TaskTypes.Generic
 
     Public Shared Function CreateInstance(task As Task) As DtoTask
 
@@ -301,6 +302,7 @@ Public Class DtoTask
             .Score = task.Score
             .Priority = task.Priority
             .RealEndDate = task.RealEndDate
+            .Type = task.Type
 
             .FilesList = New List(Of DtoFile)
             task.TaskFiles.ToList.ForEach(Sub(x)
@@ -347,6 +349,7 @@ Public Class DtoTask
             .Score = Score
             .Priority = Priority
             .RealEndDate = RealEndDate
+            .Type = Type
 
             Members.ForEach(Sub(userid)
                                 .TaskMembers.Add(New TaskMember With {.TaskId = TaskId,

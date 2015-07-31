@@ -1,0 +1,38 @@
+﻿<row iv-type="default">
+    <div class="col-sm-12">
+        <div class="input-group" ng-controller="DateController">
+
+            <input placeholder="Date"
+                   type="text"
+                   name="realEndDate"
+                   datepicker-popup="{{format}}"
+                   ng-model="task.realEndDate"
+                   is-open="opened"
+                   min-date="{{minDate}}"
+                   max-date="{{maxDate}}"
+                   datepicker-options="dateOptions"
+                   date-disabled="disabled(date, mode)"
+                   close-text="Close"
+                   clear-text="Clear"
+                   datepicker-append-to-body="true"
+                   class="form-control"
+                   datepicker-mode="'day'"
+                   show-weeks="true"
+                   current-text="Today" />
+
+            <span class="input-group-btn">
+                <button type="button" ng-click="open($event)" class="btn btn-default">
+                    <em class="fa fa-calendar"></em>
+                </button>
+            </span>
+        </div>
+        <div class="h-spacer"></div>
+    </div>
+</row>
+<row iv-type="default">
+    <div class="col-sm-12">
+        <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="archive(task.taskId, task.realEndDate); ">
+            Archive
+        </button>
+    </div>
+</row>

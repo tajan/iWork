@@ -71,15 +71,18 @@
                                 </column>
                             </row>
                         </div>
-                        <div ng-controller="ActivityController" ng-init="showActivityPanel= false">
+                        <div ng-controller="ActivityController">
                             <!--Begin Add Activity -->
                             <div class="panel-body p0">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="h-spacer"></div>
                                         <div class="center-block text-center">
-                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel">
+                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel; showArchivePanel = false;" title="Add Activity">
                                                 <span>{{showActivityPanel ? '-': '+'}}</span>
+                                            </a>
+                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-archive" ng-show="task.status==4" ng-click="showArchivePanel = !showArchivePanel; showActivityPanel= false;" title="Archive">
+                                                <em class="fa fa-archive" style="font-size: 0.9em;"></em>
                                             </a>
                                         </div>
                                         <div class="h-spacer"></div>
@@ -87,7 +90,12 @@
                                 </div>
                                 <!--Begin Add Activity Panel-->
                                 <div ng-show="showActivityPanel" class="m-lg" ng-if="showActivityPanel">
-                                    <div ng-include src="'/iview/activity/_addwidget.html'"></div>
+                                    <div ng-include src="'/iview/task/_addactivitypanel.html'"></div>
+                                </div>
+                                <!--End Add Activity Panel-->
+                                <!--Begin Add Archive Panel-->
+                                <div ng-show="showArchivePanel" class="m-lg" ng-if="showArchivePanel">
+                                    <div ng-include src="'/iview/task/_archivepanel.html'"></div>
                                 </div>
                                 <!--End Add Activity Panel-->
                             </div>

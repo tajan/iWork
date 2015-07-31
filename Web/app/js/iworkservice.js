@@ -1,4 +1,8 @@
-﻿iWork.factory('dataFactory', ['$window', '$http', function ($window, $http) {
+﻿iWork.factory('publicSearchDataService', function () {
+    return { term: '' };
+});
+
+iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', function ($window, $http, publicSearchDataService) {
 
     var dataFactory = {
         baseUrl: '/api'
@@ -37,6 +41,21 @@
             log(response)
         });
     };
+    dataFactory.getWithSearch = function (url) {
+
+        var apiUrl = dataFactory.baseUrl + url;
+
+        var searchParams = {
+            searchTerm: publicSearchDataService.term
+        };
+
+        return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
+            success(function (response, status, headers, config) {
+            }).
+        error(function (response, status, headers, config) {
+            log(response)
+        });
+    };
 
     //Project
     dataFactory.project = {
@@ -44,7 +63,7 @@
             return dataFactory.get('/project/GetById/' + projectId);
         },
         getAll: function () {
-            return dataFactory.get('/project/GetAll');
+            return dataFactory.getWithSearch('/project/GetAll');
         },
         postAction: function (actionName, project) {
             return dataFactory.post('/project/' + actionName, project);
@@ -121,10 +140,10 @@
             return dataFactory.get('/task/GetForArchive');
         },
         getMyBoard: function () {
-            return dataFactory.get('/task/GetMyBoard');
+            return dataFactory.getWithSearch('/task/GetMyBoard');
         },
         getAll: function () {
-            return dataFactory.get('/task/GetAll');
+            return dataFactory.getWithSearch('/task/GetAll');
         },
         getById: function (taskId) {
             return dataFactory.get('/task/GetById/' + taskId);
@@ -152,6 +171,28 @@
                 { id: 2, title: 'In Progress', viewOrder: 2 },
                 { id: 3, title: 'Ready For Test', viewOrder: 3 },
                 { id: 4, title: 'Done', viewOrder: 4 }
+            ];
+            return data;
+        }
+    };
+
+    //Task Types
+    dataFactory.taskTypes = {
+        getAll: function () {
+            var data = [
+                { id: 1, title: 'Generic', viewOrder: 1 },
+                { id: 2, title: 'Support - Phone', viewOrder: 2 },
+                { id: 3, title: 'Support - Meeting', viewOrder: 3 },
+                { id: 4, title: 'Support - Email', viewOrder: 4 }
+            ];
+            return data;
+        },
+        getSupport: function () {
+            var data = [
+                //{ id: 1, title: 'Generic', viewOrder: 1 },
+                { id: 2, title: 'Support - Phone', viewOrder: 2 },
+                { id: 3, title: 'Support - Meeting', viewOrder: 3 },
+                { id: 4, title: 'Support - Email', viewOrder: 4 }
             ];
             return data;
         }

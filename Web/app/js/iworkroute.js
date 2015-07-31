@@ -153,7 +153,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
             title: 'Update Tasks'
         })
         .state('app.taskaddsupport', {
-            url: '/task/add/:projectId/:userStoryId',
+            url: '/task/addsupport/:projectId/:userStoryId',
             templateUrl: getViewUrl('task/addsupport.html'),
             resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle', 'htmlSortable'),
             title: 'Add Support Task'

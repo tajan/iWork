@@ -32,7 +32,7 @@
         <AssociationConnector Association="iWorkTestModel.FK_TaskMembers_Users" />
         <EntityTypeShape EntityType="iWorkTestModel.TaskFile" Width="1.5" PointX="9.75" PointY="11.375" />
         <AssociationConnector Association="iWorkTestModel.FK_TaskFiles_Files" />
-        <EntityTypeShape EntityType="iWorkTestModel.Task" Width="1.5" PointX="7.5" PointY="10.25" />
+        <EntityTypeShape EntityType="iWorkTestModel.Task" Width="1.5" PointX="7.5" PointY="9.125" />
         <AssociationConnector Association="iWorkTestModel.FK_Activities_Tasks" />
         <AssociationConnector Association="iWorkTestModel.FK_Tasks_Projects" />
         <AssociationConnector Association="iWorkTestModel.FK_TaskFiles_Tasks" />

@@ -10,6 +10,13 @@ Public Enum TaskStatuses
     Done = 4
 End Enum
 
+Public Enum TaskTypes
+    Generic = 1
+    Support_Phone = 2
+    Support_Meeting = 3
+    Support_Email = 4
+End Enum
+
 Public Enum TaskScores
     Bad = 1
     NotBad = 2

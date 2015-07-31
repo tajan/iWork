@@ -4,9 +4,10 @@
         <field:date iv-type="default" iv-name="dueDate" iv-label="Date" iv-max-date="now" iv-default-date="now" />
         <field:text iv-type="default" iv-name="estimatedDuration" iv-label="Duration (minutes)" />
         <field:singleselection iv-type="default" iv-name="projectId" iv-label="Project" iv-list-name="projects" iv-placeholder="Select Project ..." iv-id="projectId" iv-title="title" iv-description="description" iv-on-change="" />
+        <field:singleselection iv-type="default" iv-name="type" iv-label="Type" iv-list-name="taskSupportTypes" iv-placeholder="Select Support Type..." />
         <field:fileupload iv-type="multiple" iv-name="files" iv-label="Files" iv-button-label="Select" />
         <form:actionpanel iv-type="default">
-            <form:button iv-type="add" />
+            <form:button iv-type="add" iv-action-name="addSupport" />
             <form:button iv-type="cancel" />
         </form:actionpanel>
     </form>

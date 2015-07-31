@@ -183,7 +183,8 @@
     <Content Include="iView\account\userprofileview.html" />
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
-    <Content Include="iView\activity\_addwidget.html" />
+    <Content Include="iView\task\_archivepanel.html" />
+    <Content Include="iView\task\_addactivitypanel.html" />
     <Content Include="iView\app.html" />
     <Content Include="iView\page.html" />
     <Content Include="iView\partials\footer.html" />

@@ -125,6 +125,7 @@
           <Property Name="Score" Type="tinyint" Nullable="false" />
           <Property Name="Archived" Type="bit" Nullable="false" />
           <Property Name="RealEndDate" Type="datetime" />
+          <Property Name="Type" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -963,6 +964,7 @@
           <Property Name="Score" Type="Byte" Nullable="false" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
           <Property Name="RealEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Activities" Relationship="iWorkTestModel.FK_Activities_Tasks" FromRole="Task" ToRole="Activity" />
           <NavigationProperty Name="Project" Relationship="iWorkTestModel.FK_Tasks_Projects" FromRole="Task" ToRole="Project" />
           <NavigationProperty Name="TaskFiles" Relationship="iWorkTestModel.FK_TaskFiles_Tasks" FromRole="Task" ToRole="TaskFile" />
@@ -1205,6 +1207,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="iWorkTestModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="RealEndDate" ColumnName="RealEndDate" />
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="Score" ColumnName="Score" />

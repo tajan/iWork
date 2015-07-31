@@ -3,7 +3,8 @@
         <field:text iv-type="multiline" iv-name="title" iv-label="Title" />
         <field:date iv-type="default" iv-name="dueDate" iv-label="Date" iv-max-date="now" iv-default-date="now" />
         <field:text iv-type="default" iv-name="estimatedDuration" iv-label="Duration (minutes)" />
-        <field:singleselection iv-type="default" iv-name="projectId" iv-label="Project" iv-list-name="projects" iv-placeholder="Select Project ..." iv-id="projectId" iv-title="title" iv-description="description" iv-on-change="" />
+        <field:singleselection iv-type="default" iv-name="projectId" iv-label="Project" iv-list-name="projects" iv-placeholder="Select Project ..." iv-id="projectId" iv-title="title" iv-description="description" iv-on-change="onProjectChange()" />
+        <field:singleselection iv-type="default" iv-name="userStoryId" iv-label="User Story" iv-list-name="userStories" iv-placeholder="Select User Story ..." iv-id="userStoryId" iv-title="title" iv-description="description" />
         <field:singleselection iv-type="default" iv-name="type" iv-label="Type" iv-list-name="taskSupportTypes" iv-placeholder="Select Support Type..." />
         <field:fileupload iv-type="multiple" iv-name="files" iv-label="Files" iv-button-label="Select" />
         <form:actionpanel iv-type="default">

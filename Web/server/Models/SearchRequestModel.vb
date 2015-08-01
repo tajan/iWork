@@ -2,7 +2,7 @@
 
     Public Class SearchRequestModel
 
-        Public Property PageSize As Integer = 20
+        Public Property PageSize As Integer = 1000
         Public Property PageNumber As Integer = 1
         Public Property SortFields() As New List(Of String)
         Public Property SortDirections() As New List(Of String)

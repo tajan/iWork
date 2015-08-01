@@ -1,12 +1,9 @@
 ﻿iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
-
-    $scope.term = '';
-
+    $scope.term = publicSearchDataService.term;
     $scope.search = function () {
         publicSearchDataService.term = $scope.term;
         $state.reload();
     };
-    
 }]);
 
 iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', function ($scope, dataFactory, $state) {
@@ -255,27 +252,27 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
         var initElement = function () {
             // Component is optional
             if (!$.fn.sortable) return;
-                var Selector = '[portlet]';
-                $(Selector).sortable({
-                    connectWith: Selector,
-                    items: 'div.panel',
-                    handle: '.portlet-handler',
-                    opacity: 0.7,
-                    placeholder: 'portlet box-placeholder',
-                    cancel: '.portlet-cancel',
-                    forcePlaceholderSize: true,
-                    iframeFix: false,
-                    tolerance: 'pointer',
-                    helper: 'original',
-                    revert: 200,
-                    forceHelperSize: true,
-                    start: saveListSize,
-                    update: savePortletOrder,
-                    create: loadPortletOrder
-                })
-                // optionally disables mouse selection
-                //.disableSelection()
-                ;
+            var Selector = '[portlet]';
+            $(Selector).sortable({
+                connectWith: Selector,
+                items: 'div.panel',
+                handle: '.portlet-handler',
+                opacity: 0.7,
+                placeholder: 'portlet box-placeholder',
+                cancel: '.portlet-cancel',
+                forcePlaceholderSize: true,
+                iframeFix: false,
+                tolerance: 'pointer',
+                helper: 'original',
+                revert: 200,
+                forceHelperSize: true,
+                start: saveListSize,
+                update: savePortletOrder,
+                create: loadPortletOrder
+            })
+            // optionally disables mouse selection
+            //.disableSelection()
+            ;
 
             function savePortletOrder(event, ui) {
 
@@ -290,17 +287,6 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                 dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
                 //save portlet size to avoid jumps
                 //saveListSize.apply(self);
-            };
-
-            $scope.upodatePortletOrder = function (taskIds, status) {
-
-
-                console.log(taskIds)
-                console.log(status)
-
-                var taskIds = [taskIds];
-                dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
-                $state.reload();
             };
 
             function loadPortletOrder(event) {
@@ -339,6 +325,13 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
         };
 
+    };
+
+    $scope.upodatePortletOrder = function (taskIds, status) {
+        var taskIds = [taskIds];
+        dataFactory.task.updateStatuses({ status: status, taskIds: taskIds }).success(function () {
+            $scope.initBoard();
+        });
     };
 
     $scope.initView = function () {

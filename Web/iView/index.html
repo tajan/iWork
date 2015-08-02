@@ -18,11 +18,16 @@
                     <div ng-class="{'panel-heading-collapsed':true}" class="panel-heading portlet-handler">
                         <div dropdown="dropdown" class="btn-group">
                             <button type="button" ng-disabled="disabled" dropdown-toggle="" class="btn dropdown-toggle btn-link btn-xs color-default">
-                                <em class="fa fa-bars"></em>
+                                <div class="pull-left" ng-switch="task.type">
+                                    <em ng-switch-when="1" class="fa fa-bars"></em>
+                                    <em ng-switch-when="2" class="fa fa-phone"></em>
+                                    <em ng-switch-when="3" class="fa fa-group"></em>
+                                    <em ng-switch-when="4" class="fa fa-envelope-o"></em>
+                                </div>
                             </button>
                             <include iv-source="~/iview/task/_menu.html" />
                         </div>
-                        <div class="label text text-sm color-default">{{(task.projectCodeName + '-' + task.title) | truncate:true:25:' ...'}}</div>
+                        <div class="label text text-sm color-default" title="{{ task.projectCodeName + '-' + task.projectTitle + ': ' + task.title }}">{{(task.projectCodeName + '-' + task.title) | truncate:true:25:' ...'}}</div>
                         <paneltool tool-collapse="tool-collapse" is-collapsed="true"></paneltool>
                     </div>
                     <div class="bg-gray-lighter" style="width: 100%; height:1px; margin-top:0px; margin-bottom: 0px "></div>
@@ -62,8 +67,11 @@
                         <div class="panel-body">
                             <row iv-type="default">
                                 <column iv-type="default" iv-size="12">
-                                    <div>
-                                        <div ng-switch="task.status" class="label pull-right" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info'}[task.status]">
+                                    <div class="container-fluid">
+                                        <div class="label label-default text text-normal text-gray-dark pull-right">
+                                            {{task.dueDate | date:'yyyy/MM/dd'}}
+                                        </div>
+                                        <div ng-switch="task.priority" class="label pull-left" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info'}[task.priority]">
                                             <span ng-switch-when="1">
                                                 High
                                             </span>
@@ -74,27 +82,11 @@
                                                 Low
                                             </span>
                                         </div>
-                                        <div class="pull-left mr" ng-switch="task.type">
-                                            <em ng-switch-when="1" class="fa fa-circle-thin"></em>
-                                            <em ng-switch-when="2" class="fa fa-phone"></em>
-                                            <em ng-switch-when="3" class="fa fa-group"></em>
-                                            <em ng-switch-when="4" class="fa fa-envelope-o"></em>
-                                        </div>
-                                        <div class="text color-default">{{task.title}}</div>
                                     </div>
-                                    <div class="text-sm">
-                                        Due Date: {{task.dueDate | date:'MMM dd yyyy'}}
+                                    <div class="container-fluid text-sm mt">
+                                        {{(task.title == task.description || 5 > task.description.length) ? task.title : (task.title + ': ' + task.description) }}
                                     </div>
-                                    <div class="text-sm">
-                                        {{task.description}}
-                                    </div>
-                                    <p class="text-sm">
-                                        Project: {{ task.projectCodeName + ' - ' + task.title }}
-                                    </p>
-                                    <p class="text-sm">
-                                        UserStory: {{task.userStoryTitle}} Score: {{task.score}}
-                                    </p>
-                                    <div class="container-fluid mb mt">
+                                    <div class="container-fluid mt">
                                         <div class="timeline-badge primary pull-left mr" ng-repeat="user in task.membersList">
                                             <img http-src="{{user.picture.guid}}" alt="user.displayName" class="media-box-object img-circle thumb32 center-block" title="{{user.displayName}}" />
                                         </div>

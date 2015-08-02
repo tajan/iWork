@@ -164,7 +164,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
         priority: 2,
         dueDate: moment().format('YYYY-MM-DD'),
         estimatedDuration: 5,
-        type: 2
+        type: 1
     };
 
     $scope.onProjectChange = function (item) {
@@ -179,6 +179,13 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
         dataFactory.user.getByProject($scope.model.projectId).success(function (response) {
             $scope.members = response.data;
         });
+
+    };
+
+    $scope.initSupportModel= function () {
+
+        $scope.initModel();
+        $scope.model.type = 2;
 
     };
 

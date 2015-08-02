@@ -381,6 +381,8 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
 
     $scope.showActivityPanel = false;
     $scope.showArchivePanel = false;
+    $scope.showDetailPanel = false;
+    $scope.showFilePanel = false;
 
     $scope.taskId = $state.params["id"];
     $scope.activities = [];
@@ -390,7 +392,11 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
         activityDateTime: moment().format('YYYY-MM-DD')
     };
 
-    $scope.initView = function () {
+    $scope.initView = function (taskId) {
+        log(taskId)
+        if (taskId) {
+            $scope.taskId = taskId;
+        };
 
         if ($scope.taskId) {
 

@@ -1,0 +1,46 @@
+﻿<div ng-controller="ActivityController">
+    <!--Begin Add Activity -->
+    <div class="panel-footer p0">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="h-spacer"></div>
+                <div class="center-block text-center">
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.filesList.length" ng-click="showFilePanel = !showFilePanel;" title="Files">
+                        <em class="fa fa-file-text-o"></em>
+                    </a>
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.activityCount"  ng-click="showDetailPanel = !showDetailPanel;" title="Detail">
+                        <em class="fa fa-info"></em>
+                    </a>
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-click="showActivityPanel = !showActivityPanel; " title="Add Activity">
+                        <span>{{showActivityPanel ? '-': '+'}}</span>
+                    </a>
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.status==4" ng-click="showArchivePanel = !showArchivePanel;" title="Archive">
+                        <em class="fa fa-archive"></em>
+                    </a>
+                </div>
+                <div class="h-spacer"></div>
+            </div>
+        </div>
+        <!--Begin Files Panel-->
+        <div ng-show="showFilePanel" class="p-lg">
+            <file-download-list ng-repeat="file in task.filesList"></file-download-list>
+        </div>
+        <!--End Files Panel-->
+        <!--Begin Task Detail Panel-->
+        <div ng-show="showDetailPanel" ng-if="showDetailPanel" class="p-lg">
+            <div ng-include src="'/iview/task/_detailpanel.html'"></div>
+        </div>
+        <!--End Task Detail Panel-->
+        <!--Begin Add Activity Panel-->
+        <div ng-show="showActivityPanel" ng-if="showActivityPanel" class="p-lg">
+            <div ng-include src="'/iview/task/_addactivitypanel.html'"></div>
+        </div>
+        <!--End Add Activity Panel-->
+        <!--Begin Add Archive Panel-->
+        <div ng-show="showArchivePanel" ng-if="showArchivePanel" class="p-lg">
+            <div ng-include src="'/iview/task/_archivepanel.html'"></div>
+        </div>
+        <!--End Add Activity Panel-->
+    </div>
+    <!--End Add Activity-->
+</div>

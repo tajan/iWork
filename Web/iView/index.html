@@ -62,45 +62,47 @@
                         <div class="panel-body">
                             <row iv-type="default">
                                 <column iv-type="default" iv-size="12">
+                                    <div>
+                                        <div ng-switch="task.status" class="label pull-right" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info'}[task.status]">
+                                            <span ng-switch-when="1">
+                                                High
+                                            </span>
+                                            <span ng-switch-when="2">
+                                                Normal
+                                            </span>
+                                            <span ng-switch-when="3">
+                                                Low
+                                            </span>
+                                        </div>
+                                        <div class="pull-left mr" ng-switch="task.type">
+                                            <em ng-switch-when="1" class="fa fa-circle-thin"></em>
+                                            <em ng-switch-when="2" class="fa fa-phone"></em>
+                                            <em ng-switch-when="3" class="fa fa-group"></em>
+                                            <em ng-switch-when="4" class="fa fa-envelope-o"></em>
+                                        </div>
+                                        <div class="text color-default">{{task.title}}</div>
+                                    </div>
                                     <div class="text-sm">
-                                        {{task.dueDate | date:'MMM dd yyyy'}}
+                                        Due Date: {{task.dueDate | date:'MMM dd yyyy'}}
                                     </div>
                                     <div class="text-sm">
                                         {{task.description}}
                                     </div>
+                                    <p class="text-sm">
+                                        Project: {{ task.projectCodeName + ' - ' + task.title }}
+                                    </p>
+                                    <p class="text-sm">
+                                        UserStory: {{task.userStoryTitle}} Score: {{task.score}}
+                                    </p>
+                                    <div class="container-fluid mb mt">
+                                        <div class="timeline-badge primary pull-left mr" ng-repeat="user in task.membersList">
+                                            <img http-src="{{user.picture.guid}}" alt="user.displayName" class="media-box-object img-circle thumb32 center-block" title="{{user.displayName}}" />
+                                        </div>
+                                    </div>
                                 </column>
                             </row>
                         </div>
-                        <div ng-controller="ActivityController">
-                            <!--Begin Add Activity -->
-                            <div class="panel-body p0">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="h-spacer"></div>
-                                        <div class="center-block text-center">
-                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-circle-add" ng-click="showActivityPanel = !showActivityPanel; showArchivePanel = false;" title="Add Activity">
-                                                <span>{{showActivityPanel ? '-': '+'}}</span>
-                                            </a>
-                                            <a href="#" class="btn btn-{{task.projectStyle}} btn-archive" ng-show="task.status==4" ng-click="showArchivePanel = !showArchivePanel; showActivityPanel= false;" title="Archive">
-                                                <em class="fa fa-archive" style="font-size: 0.9em;"></em>
-                                            </a>
-                                        </div>
-                                        <div class="h-spacer"></div>
-                                    </div>
-                                </div>
-                                <!--Begin Add Activity Panel-->
-                                <div ng-show="showActivityPanel" class="m-lg" ng-if="showActivityPanel">
-                                    <div ng-include src="'/iview/task/_addactivitypanel.html'"></div>
-                                </div>
-                                <!--End Add Activity Panel-->
-                                <!--Begin Add Archive Panel-->
-                                <div ng-show="showArchivePanel" class="m-lg" ng-if="showArchivePanel">
-                                    <div ng-include src="'/iview/task/_archivepanel.html'"></div>
-                                </div>
-                                <!--End Add Activity Panel-->
-                            </div>
-                            <!--End Add Activity-->
-                        </div>
+                        <include iv-source="~/iview/task/_activityactions.html" />
                     </div>
                 </div>
             </div>

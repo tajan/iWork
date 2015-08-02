@@ -183,6 +183,7 @@
     <Content Include="iView\account\userprofileview.html" />
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
+    <Content Include="iView\task\_activityactions.html" />
     <Content Include="iView\task\_archivepanel.html" />
     <Content Include="iView\task\_addactivitypanel.html" />
     <Content Include="iView\app.html" />
@@ -213,6 +214,7 @@
     <Content Include="iView\task\view.html" />
     <Content Include="iView\task\_activities.html" />
     <Content Include="iView\task\_addtaskmenu.html" />
+    <Content Include="iView\task\_detailpanel.html" />
     <Content Include="iView\task\_detail.html" />
     <Content Include="iView\task\_formdata.html" />
     <Content Include="iView\task\_menu.html" />

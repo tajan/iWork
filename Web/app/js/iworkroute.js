@@ -161,7 +161,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
 
     $stateProvider
         .state('app.activity', {
-            url: '/activity/:taskId',
+            url: '/activity',
             templateUrl: getViewUrl('activity/index.html'),
             title: 'Activities'
         });

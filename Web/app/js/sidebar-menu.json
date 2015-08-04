@@ -18,5 +18,10 @@
         "text": "Tasks",
         "icon": "fa fa-tasks",
         "sref": "app.task"
+    },
+    {
+        "text": "Activities",
+        "icon": "fa fa-book",
+        "sref": "app.activity"
     }
 ]

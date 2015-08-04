@@ -167,6 +167,11 @@ Public Class DtoActivity
     Public Property ActivityDate As Date
     Public Property User As DtoUser
     Public Property CreateDate As DateTime
+    Public Property TaskTitle As String
+    Public Property ProjectTitle As String
+    Public Property ProjectCodeName As String
+    Public Property ProjectId As Integer
+
 
     Public Sub New()
 
@@ -183,6 +188,10 @@ Public Class DtoActivity
             .CreateDate = actionlog.ActionDate
             .ActivityDateTime = activity.ActivityDate
             .ActivityDate = activity.ActivityDate.Date
+            .TaskTitle = activity.Task.Title
+            .ProjectCodeName = activity.Task.Project.CodeName
+            .ProjectTitle = activity.Task.Project.Title
+            .ProjectId = activity.Task.ProjectId
         End With
 
     End Sub
@@ -197,6 +206,10 @@ Public Class DtoActivity
             .Duration = activity.Duration
             .ActivityDateTime = activity.ActivityDate
             .ActivityDate = activity.ActivityDate.Date
+            .TaskTitle = activity.Task.Title
+            .ProjectCodeName = activity.Task.Project.CodeName
+            .ProjectTitle = activity.Task.Project.Title
+            .ProjectId = activity.Task.ProjectId
         End With
 
         Return out
@@ -226,6 +239,13 @@ Partial Public Class Activity
     Public Sub New(actionlog As ActionLog)
         Me.ActionLog = actionlog
     End Sub
+
+End Class
+
+Public Class DtoActivitySearch
+
+    Public Property FromDate As DateTime?
+    Public Property ToDate As DateTime?
 
 End Class
 

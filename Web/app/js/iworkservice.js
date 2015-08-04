@@ -204,6 +204,9 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
         getByTask: function (taskId) {
             return dataFactory.get('/activity/getByTask/' + taskId);
         },
+        search: function (activity) {
+            return dataFactory.postWithoutRedirect('/activity/search', activity);
+        },
         postAction: function (actionName, activity) {
             return dataFactory.post('/activity/' + actionName, activity);
         },

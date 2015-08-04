@@ -35,7 +35,7 @@ Namespace Controllers
 
         Private Function GetAvailableQuery() As IQueryable(Of Activity)
 
-            Dim out = (From p In Me.ActivityRepository.GetAll
+            Dim out = (From p In Me.ActivityRepository.GetAll.Include(Function(x) x.Task)
                        Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User) On p.ActivityId Equals q.EntityId
                        Where q.EntityTypeId = EntityTypes.Activity
                        Order By p.ActivityDate Descending
@@ -183,6 +183,19 @@ Namespace Controllers
 
             Dim criteria As Expression(Of Func(Of Activity, Boolean)) = Function(x) x.ActivityId = id
             Return ResponseModel.Create(HttpStatusCode.OK, GetAvailableViewList(criteria))
+
+        End Function
+
+        Public Function Search(data As DtoActivitySearch) As ResponseModel
+
+            If data.ToDate.HasValue Then
+                data.ToDate = data.ToDate.Value.AddDays(1)
+            End If
+
+            Dim criteria As Expression(Of Func(Of Activity, Boolean)) = Function(x) (Not data.FromDate.HasValue OrElse x.ActivityDate >= data.FromDate.Value) AndAlso
+                                                                            (Not data.ToDate.HasValue OrElse x.ActivityDate <= data.ToDate.Value)
+
+            Return ResponseModel.Create(HttpStatusCode.OK, GetAvailableViewList(criteria).Where(Function(x) x.User.UserId = CurrentUserId))
 
         End Function
 

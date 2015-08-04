@@ -1,4 +1,58 @@
-﻿<controller iv-type="default" iv-name="ActivityController" iv-init="initView();">
-   test
-    <pre>{{taskId}}</pre>
+﻿<h3>
+    Activities
+</h3>
+<controller iv-type="default" iv-name="ActivityController" iv-init="initSearch();">
+    <form iv-type="default" iv-name="form" iv-title="Search">
+        <field:date iv-type="default" iv-name="fromDate" iv-label="From Date" iv-max-date="now" iv-default-date="now" />
+        <field:date iv-type="default" iv-name="toDate" iv-label="To Date" iv-max-date="now" iv-default-date="now" />
+        <form:actionpanel iv-type="default">
+            <button id="search" name="search" class="btn btn-primary btn-labeled mr btn-lg" ng-click="search()">
+                <span class=" btn-label">
+                    <i class="fa fa-check"></i>
+                </span>
+                Search
+            </button>
+        </form:actionpanel>
+    </form>
+    <row iv-type="default">
+        <div class="col-xs-12">
+            <panel iv-type="default">
+                <panel:header iv-type="default">
+                    <panel:header:title iv-type="default">
+                        Activities
+                    </panel:header:title>
+                </panel:header>
+                <panel:content iv-type="default">
+                    <scrollable height="50" class="list-group">
+                        <a class="row list-group-item" ng-repeat="item in activities">
+                            <div class="col-sm-11">
+                                <div class="pull-left mr">
+                                    <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                </div>
+                                <p class="mb-sm text-primary">
+                                    {{item.projectCodeName}} - {{item.projectTitle}} 
+                                </p>
+                                <p class="mb-sm text-primary">
+                                    {{item.taskTitle}}
+                                </p>
+                                <p class="mb-sm text">
+                                    {{item.description}}
+                                </p>
+                                <p class="text-sm">
+                                    <small>On {{item.activityDate | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                                </p>
+                            </div>
+                            <div class="col-sm-1">
+                                <small class="pull-right">{{item.duration}} m</small>
+                            </div>
+                        </a>
+                    </scrollable>
+                </panel:content>
+                <panel:footer iv-type="default">
+                    Total Count: {{searchResult.totalCount}}, Total Minutes: {{searchResult.totalMinutes}}
+                </panel:footer>
+            </panel>
+        </div>
+        
+    </row>
 </controller>

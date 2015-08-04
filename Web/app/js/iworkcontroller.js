@@ -393,7 +393,7 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
     };
 
     $scope.initView = function (taskId) {
-        log(taskId)
+        
         if (taskId) {
             $scope.taskId = taskId;
         };
@@ -404,6 +404,37 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
                 $scope.activities = response.data;
             });
         };
+    };
+
+    $scope.initSearch = function () {
+
+        var fromDate = moment().subtract(7, 'day').format('YYYY-MM-DD');
+        var toDate = moment().format('YYYY-MM-DD');
+
+        $scope.model = {
+            fromDate: fromDate,
+            toDate: toDate
+        };
+    
+    };
+
+    $scope.search = function () {
+        
+        $scope.searchResult = {
+            totalMinutes: 0,
+            totalCount: 0
+        };
+
+        dataFactory.activity.search($scope.model).success(function (response) {
+            $scope.activities = response.data;
+
+            angular.forEach($scope.activities, function (activity) {
+                $scope.searchResult.totalCount += 1;
+                $scope.searchResult.totalMinutes += activity.duration;
+            });
+
+        });
+
     };
 
     $scope.addActivity = function () {

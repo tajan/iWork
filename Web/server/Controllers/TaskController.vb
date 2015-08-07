@@ -247,7 +247,8 @@ Namespace Controllers
             Dim data = (From p In GetAvailableQuery()
                         Where p.ProjectId = id).ToList
 
-            Dim out = New DtoTasks(data)
+            Dim out = (From p In (New DtoTasks(data)) Order By p.StartDate).ToList
+
             Return ResponseModel.Create(HttpStatusCode.OK, out)
 
         End Function

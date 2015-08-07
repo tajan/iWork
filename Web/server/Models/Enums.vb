@@ -3,6 +3,13 @@
     Member = 2
 End Enum
 
+Public Enum UserStoryStatuses
+    Pending = 1
+    InProgress = 2
+    ReadyForTest = 3
+    Done = 4
+End Enum
+
 Public Enum TaskStatuses
     Pending = 1
     InProgress = 2
@@ -30,3 +37,26 @@ Public Enum TaskPriorities
     Normal = 2
     High = 3
 End Enum
+
+Public Class EnumHelper
+
+    Public Class UserStoryStatus
+
+        Public Shared Function GetName(status As UserStoryStatuses) As String
+
+            Select Case status
+                Case UserStoryStatuses.Pending
+                    Return "Pending"
+                Case UserStoryStatuses.InProgress
+                    Return "In Progress"
+                Case UserStoryStatuses.ReadyForTest
+                    Return "Ready For Test"
+                Case UserStoryStatuses.Done
+                    Return "Done"
+            End Select
+
+        End Function
+
+    End Class
+
+End Class

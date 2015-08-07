@@ -1,5 +1,103 @@
-﻿<controller iv-type="default" iv-name="ProjectController" iv-init="initProjectView();">
+﻿<h3>
+    {{model.codeName}} - {{model.title}}
+    <nav iv-type="default" iv-icon="fa-pencil" iv-label="Edit" iv-state="app.projectupdate({id: model.projectId})"></nav>
+</h3>
+<controller iv-type="default" iv-name="ProjectController" iv-init="initProjectView();">
     <div class="row">
+        <div class="col-lg-9">
+            <include iv-source="~/iview/project/_gantt.html" />
+        </div>
+        <div class="col-lg-3">
+
+            <!--Project detail panel Start-->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h4 class="mt0">{{model.codeName}} - {{model.title}}</h4>
+                        <p>{{model.description}}</p>
+                        <div class="bg-{{model.style}}" style="width: 100%; height:2px; margin-top:0px; margin-bottom: 10px "></div>
+                    </div>
+                    <ul class="list-unstyled ph-lg">
+                        <li>
+                            <div ng-switch="model.status" class="label pull-right" ng-class="{1:'label-info', 2:'label-success'}[model.status]">
+                                <span ng-switch-when="1">
+                                    In Progress
+                                </span>
+                                <span ng-switch-when="2">
+                                    Completed
+                                </span>
+                            </div>
+
+                        </li>
+                        <li>
+                            <em class="fa fa-external-link mr-lg"></em><a href="{{model.url}}">{{model.url}}</a>
+                        </li>
+                        <li>
+                            <em class="fa fa-home mr-lg"></em>{{model.customer}}
+                        </li>
+                        <li>
+                            <em class="fa fa-calendar mr-lg"></em>{{model.startDate | date:'yyyy/MM/dd'}} - {{model.endDate | date:'yyyy/MM/dd'}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Project detail panel End-->
+
+            <!--Project Members panel Start-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Members
+                    <div class="bg-{{model.style}}" style="width: 100%; height:2px; margin-top:10px; margin-bottom: 0px "></div>
+                </div>
+                <ul class="list-unstyled ph-lg">
+                    <li ng-repeat="user in model.managersList">
+                        <div class="pull-left mr">
+                            <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                        </div>
+                        <div>
+                            <div>{{user.displayName}}</div>
+                            <div class="text-muted">{{user.email}}</div>
+                        </div>
+                        <hr />
+                    </li>
+                    <li ng-repeat="user in model.membersList">
+                        <div class="pull-left mr">
+                            <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                        </div>
+                        <div>
+                            <div>{{user.displayName}}</div>
+                            <div class="text-muted">{{user.email}}</div>
+                        </div>
+                        <hr />
+                    </li>
+                </ul>
+            </div>
+            <!--Project Members panel End-->
+
+            <!--Project Files panel Start-->
+            <div class="panel panel-default" ng-show="model.filesList.length">
+                <div class="panel-heading">
+                    Files
+                    <div class="bg-{{model.style}}" style="width: 100%; height:2px; margin-top:10px; margin-bottom: 0px "></div>
+                </div>
+                <div class="m">
+                    <file-download-list ng-repeat="file in model.filesList"></file-download-list>
+                </div>
+            </div>
+            <!--Project Files panel End-->
+
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-9 col-sm-12">
+            <include iv-source="~/iview/project/_userstories.html" />
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <include iv-source="~/iview/project/_sprints.html" />
+        </div>
+    </div>
+    <!--<div class="row">
         <div class="col-xs-12">
             <include iv-source="~/iview/project/_detail.html" />
         </div>
@@ -11,5 +109,5 @@
         <div class="col-md-3 col-sm-12">
             <include iv-source="~/iview/project/_sprints.html" />
         </div>
-    </div>
+    </div>-->
 </controller>

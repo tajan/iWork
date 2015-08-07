@@ -183,6 +183,7 @@
     <Content Include="iView\account\userprofileview.html" />
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
+    <Content Include="iView\project\_gantt.html" />
     <Content Include="iView\task\_activityactions.html" />
     <Content Include="iView\task\_archivepanel.html" />
     <Content Include="iView\task\_addactivitypanel.html" />
@@ -238,6 +239,8 @@
     <Content Include="iView\workinghour\index.html" />
     <Content Include="iView\workinghour\workinghours.js" />
     <Content Include="iView\workinghour\_header.html" />
+    <Content Include="app\lib\gantt\dhtmlxgantt.css" />
+    <Content Include="app\lib\gantt\dhtmlxgantt.js" />
     <Content Include="template\default\controls\calendar\default.html" />
     <Content Include="template\default\controls\column\default.html" />
     <Content Include="iView\project\_sprints.html" />

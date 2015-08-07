@@ -81,7 +81,8 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.projectview', {
             url: '/project/view/:id',
             templateUrl: getViewUrl('project/view.html'),
-            title: 'View Project'
+            title: 'View Project',
+            resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins')
         })
         .state('app.projectupdate', {
             url: '/project/update/:id',
@@ -165,4 +166,5 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
             templateUrl: getViewUrl('activity/index.html'),
             title: 'Activities'
         });
+
 }]);

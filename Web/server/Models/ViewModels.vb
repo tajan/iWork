@@ -299,6 +299,7 @@ Public Class DtoTask
     Public Property FilesList As List(Of DtoFile)
     Public Property RealEndDate As Date?
     Public Property Type As TaskTypes = TaskTypes.Generic
+    Public Property StartDate As DateTime?
 
     Public Shared Function CreateInstance(task As Task) As DtoTask
 
@@ -329,6 +330,13 @@ Public Class DtoTask
                                               out.FilesList.Add(DtoFile.CreateInstance(x.File, EntityTypes.Task))
                                           End Sub)
 
+
+            Dim firstActivity = (From p In task.Activities Order By p.ActivityDate).FirstOrDefault
+            If firstActivity Is Nothing Then
+                .StartDate = task.DueDate.AddDays(-1 * CInt(task.EstimatedDuartion / 6) - 1)
+            Else
+                .StartDate = firstActivity.ActivityDate
+            End If
 
             If task.UserStory IsNot Nothing Then
                 .UserStoryId = task.UserStoryId
@@ -434,11 +442,13 @@ Public Class DtoProject
     Public Property Status As Integer
     Public Property Style As String
     Public Property Workflows As List(Of String)
-
     Public Property MembersCount As Integer
     Public Property TaskCount As Integer
     Public Property ActivityCount As Integer
     Public Property UserStoryCount As Integer
+    'Public Property TasksByStatus As List(Of DtoLabelValue)
+    Public Property UserStoriesByStatus As List(Of DtoLabelValue)
+
 
     Public Sub FillProject(project As Project)
 
@@ -523,8 +533,20 @@ Public Class DtoProject
             out.Workflows = .ProjectWorkflows.Where(Function(x) x.ProjectId = project.ProjectId).Select(Function(x) x.Title).ToList
             out.MembersCount = .ProjectMembers.Count
             out.UserStoryCount = .UserStories.Count
+
             out.TaskCount = .Tasks.Count
             out.ActivityCount = .Tasks.SelectMany(Function(x) x.Activities).Count
+
+
+            out.UserStoriesByStatus = New List(Of DtoLabelValue)
+
+            Dim _userStoriesByStatus = (From p In .UserStories Group By p.Status Into Value = Count() Select Value, Status).ToList
+
+            _userStoriesByStatus.ForEach(Sub(x)
+                                             Dim status As New DtoLabelValue(x.Status, EnumHelper.UserStoryStatus.GetName(x.Status), x.Value)
+                                             out.UserStoriesByStatus.Add(status)
+                                         End Sub)
+
 
         End With
 
@@ -672,3 +694,16 @@ Public Class DtoUserStory
 End Class
 
 #End Region
+
+Public Class DtoLabelValue
+    Public Property Id As Integer
+    Public Property Label As String
+    Public Property Value As Decimal
+
+    Public Sub New(_id As Integer, _label As String, _value As Decimal)
+        Me.Id = _id
+        Me.Label = _label
+        Me.Value = _value
+    End Sub
+
+End Class

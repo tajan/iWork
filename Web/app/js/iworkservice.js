@@ -148,6 +148,9 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
         getById: function (taskId) {
             return dataFactory.get('/task/GetById/' + taskId);
         },
+        getByProject: function (projectId) {
+            return dataFactory.get('/task/GetByProject/' + projectId);
+        },
         getByUserStory: function (userStoryId) {
             return dataFactory.get('/task/GetByUserStory/' + userStoryId);
         },

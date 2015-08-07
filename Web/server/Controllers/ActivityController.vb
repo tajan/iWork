@@ -193,7 +193,7 @@ Namespace Controllers
             End If
 
             Dim criteria As Expression(Of Func(Of Activity, Boolean)) = Function(x) (Not data.FromDate.HasValue OrElse x.ActivityDate >= data.FromDate.Value) AndAlso
-                                                                            (Not data.ToDate.HasValue OrElse x.ActivityDate <= data.ToDate.Value)
+                                                                            (Not data.ToDate.HasValue OrElse x.ActivityDate < data.ToDate.Value)
 
             Return ResponseModel.Create(HttpStatusCode.OK, GetAvailableViewList(criteria).Where(Function(x) x.User.UserId = CurrentUserId))
 

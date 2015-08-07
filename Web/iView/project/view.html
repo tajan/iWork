@@ -5,7 +5,7 @@
 <controller iv-type="default" iv-name="ProjectController" iv-init="initProjectView();">
     <div class="row">
         <div class="col-lg-9">
-            <include iv-source="~/iview/project/_gantt.html" />
+            
         </div>
         <div class="col-lg-3">
 
@@ -62,7 +62,7 @@
                     </li>
                     <li ng-repeat="user in model.membersList">
                         <div class="pull-left mr">
-                            <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                            <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
                         </div>
                         <div>
                             <div>{{user.displayName}}</div>
@@ -88,7 +88,12 @@
 
         </div>
     </div>
-   
+    <div class="row">
+        <div class="col-sm-12">
+            <include iv-source="~/iview/project/_gantt.html" /> 
+        </div>
+        
+    </div>
     <div class="row">
         <div class="col-md-9 col-sm-12">
             <include iv-source="~/iview/project/_userstories.html" />

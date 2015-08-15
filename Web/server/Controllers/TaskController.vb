@@ -17,7 +17,7 @@ Namespace Controllers
 
         Private Function GetAvailableQuery() As IQueryable(Of Task)
 
-            Dim out = (From p In Me.TaskRepository.GetAll.Include(Function(x) x.UserStory).Include(Function(x) x.Project).Include(Function(x) x.TaskMembers).Include("TaskMembers.User").Include(Function(x) x.Activities)
+            Dim out = (From p In Me.TaskRepository.GetAll.Include(Function(x) x.UserStory).Include(Function(x) x.Project).Include(Function(x) x.TaskMembers).Include("TaskMembers.User").Include(Function(x) x.Activities).Include(Function(x) x.TaskFiles)
                        Where
                        p.Project.ProjectMembers.Any(Function(x) x.UserId = CurrentUserId AndAlso x.MembershipType = 1) OrElse
                        p.TaskMembers.Any(Function(x) x.UserId = CurrentUserId) OrElse
@@ -198,6 +198,7 @@ Namespace Controllers
 #Region " Report "
 
         Public Function GetMyBoard(searchTerm As String) As SearchResponseModel
+
 
             Dim query = From p In GetAvailableQuery() Where p.Archived = False Order By p.Priority Descending, p.DueDate Descending
 

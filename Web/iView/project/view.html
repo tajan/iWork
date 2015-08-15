@@ -1,4 +1,4 @@
-﻿<h3>
+﻿<h3 ng-controller="ProjectController" ng-init="initProjectView();">
     {{model.codeName}} - {{model.title}}
     <nav iv-type="default" iv-icon="fa-pencil" iv-label="Edit" iv-state="app.projectupdate({id: model.projectId})"></nav>
 </h3>

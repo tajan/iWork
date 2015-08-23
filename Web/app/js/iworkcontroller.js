@@ -1,4 +1,4 @@
-﻿iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
+﻿ iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
     $scope.term = publicSearchDataService.term;
     $scope.search = function () {
         publicSearchDataService.term = $scope.term;
@@ -29,7 +29,8 @@ iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', 'color
 
     $scope.initProjectView = function () {
 
-        gantt.config.add_column = false;
+        gantt.config.add_column = false;
+
 
         if (projectId) {
 
@@ -55,14 +56,14 @@ iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', 'color
 
                     var startDate = moment(task.startDate).format('DD-MM-YYYY');
                     var endDate = moment(task.realEndDate || task.dueDate);
-                    var duration = parseInt(moment.duration(endDate.diff(startDate)).asDays() + 1) ;
+                    var duration = parseInt(moment.duration(endDate.diff(startDate)).asDays() + 1);
 
                     var ganttTask = { id: task.taskId, text: task.title, start_date: startDate, duration: duration, progress: task.progress / 100, status: task.status };
                     $scope.ganttTask.data.push(ganttTask);
                 });
-                   
 
-                
+
+
 
             });
 
@@ -166,7 +167,7 @@ iWork.controller('SprintController', ['$scope', 'dataFactory', '$state', functio
 
 }]);
 
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', function ($scope, dataFactory, $state, $timeout) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', function ($scope, dataFactory, $state, $timeout, $rootScope) {
 
     var now = moment().format('YYYY-MM-DD');
 
@@ -177,7 +178,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.taskStatuses = dataFactory.taskStatus.getAll();
     $scope.taskTypes = dataFactory.taskTypes.getAll();
     $scope.taskSupportTypes = dataFactory.taskTypes.getSupport();
-    
+
     $scope.model = {
         taskId: $state.params['id'],
         projectId: $state.params['projectId'],
@@ -204,7 +205,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
     };
 
-    $scope.initSupportModel= function () {
+    $scope.initSupportModel = function () {
 
         $scope.initModel();
         $scope.model.type = 2;
@@ -265,12 +266,24 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
     };
 
+
+    $scope.$on('update-task-board', function (event, args) {
+        $scope.reInitBoard();
+    });
+
+    $scope.reInitBoard = function () {
+        dataFactory.task.getMyBoard().success(function (response) {
+            $scope.tasks = response.data;
+            angular.forEach($scope.tasks, function (task) {
+                task.realEndDate = now;
+            });
+        });
+    };
+
     $scope.initBoard = function () {
 
         dataFactory.task.getMyBoard().success(function (response) {
-
             $scope.tasks = response.data;
-
             angular.forEach($scope.tasks, function (task) {
                 task.realEndDate = now;
             });
@@ -298,10 +311,10 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                 start: saveListSize,
                 update: savePortletOrder,
                 create: loadPortletOrder
-            })
+            });
             // optionally disables mouse selection
             //.disableSelection()
-            ;
+
 
             function savePortletOrder(event, ui) {
 
@@ -372,7 +385,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     };
 
     $scope.initViewForArchive = function () {
-        
+
         dataFactory.task.getForArchive().success(function (response) {
             $scope.tasks = response.data;
 
@@ -396,10 +409,10 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.submitform = function (actionName, $event) {
         dataFactory.task.postAction(actionName, $scope.model);
     };
-   
+
 }]);
 
-iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', function ($scope, dataFactory, $state) {
+iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$rootScope', function ($scope, dataFactory, $state, $rootScope) {
 
     $scope.showActivityPanel = false;
     $scope.showArchivePanel = false;
@@ -415,7 +428,7 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
     };
 
     $scope.initView = function (taskId) {
-        
+
         if (taskId) {
             $scope.taskId = taskId;
         };
@@ -437,11 +450,11 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
             fromDate: fromDate,
             toDate: toDate
         };
-    
+
     };
 
     $scope.search = function () {
-        
+
         $scope.searchResult = {
             totalMinutes: 0,
             totalCount: 0
@@ -460,7 +473,6 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
     };
 
     $scope.addActivity = function () {
-
         if ($scope.taskId) {
 
             $scope.activity.taskId = $scope.taskId;
@@ -472,19 +484,18 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', funct
                     $scope.activity.activityId = 0;
                 });
         };
-
     };
 
     $scope.addActivityInMyBoard = function (taskId) {
-
         if (taskId) {
             $scope.activity.taskId = taskId;
             dataFactory.activity.addActivity($scope.activity).
                 success(function (response, status, headers, config) {
                     $scope.showActivityPanel = false;
+                    //$state.reload();
+                    $rootScope.$broadcast('update-task-board');
                 });
         };
-
     };
 
 }]);

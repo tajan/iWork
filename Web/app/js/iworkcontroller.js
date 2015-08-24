@@ -369,10 +369,10 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
 
     };
 
-    $scope.upodatePortletOrder = function (taskIds, status) {
+    $scope.updatePortletOrder = function (taskIds, status) {
         var taskIds = [taskIds];
         dataFactory.task.updateStatuses({ status: status, taskIds: taskIds }).success(function () {
-            $scope.initBoard();
+            $scope.reInitBoard();
         });
     };
 

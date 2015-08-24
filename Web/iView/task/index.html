@@ -22,9 +22,9 @@
             <div class="row row-flush row-table ">
                 <div class="col-xs-10 col-sm-5">
                     <span class="pull-left circle circle-lg text-left visible-xs" ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.status]"></span>
-                    <div ui-sref="app.taskview({id: task.taskId})" class="text-alpha text-sm color-default text-bold">
+                    <a ui-sref="app.taskview({id: task.taskId})" class="text-alpha text-sm color-default text-bold">
                         {{task.title}}
-                    </div>
+                    </a>
                     <div class="hidden-xs">
                         <div class="pull-left">
                             <small>

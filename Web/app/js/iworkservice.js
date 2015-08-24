@@ -223,7 +223,23 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
 }]);
 
 
-iWork.directive('smartInputDirection', function () {
+iWork.directive('searchNotifier', function (publicSearchDataService) {
+    return {
+        restrict: "EA",
+        link: function ($scope, element, attrs) {
+            log('searchNotifier :')
+            log(publicSearchDataService.term)
+            if (publicSearchDataService.term && publicSearchDataService.term.length > 0) {
+                element.show();
+            } else {
+                element.hide();
+            }
+        }
+    }
+});
+
+
+iWork.directive('smartInputDirection', function ( ) {
     return {
         restrict: "EA",
         link: function ($scope, element, attrs) {

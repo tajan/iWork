@@ -621,7 +621,6 @@ App.directive('searchOpen', ['navSearch', function (navSearch) {
     return {
         restrict: 'A',
         controller: ["$scope", "$element", function ($scope, $element) {
-
             $(inputSelector)
               .on('click', function (e) { e.stopPropagation(); })
               .on('keyup', function (e) {
@@ -963,7 +962,6 @@ App.service('navSearch', function () {
             $(navbarFormSelector)
               .removeClass('open')      // Close control
               .find('input[type="text"]').blur() // remove focus
-              .val('')                    // Empty input
             ;
         }
     };

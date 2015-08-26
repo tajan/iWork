@@ -1,4 +1,4 @@
-﻿ iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
+﻿iWork.controller('publicSearchController', ['$rootScope', '$scope', '$state', 'publicSearchDataService', function ($rootScope, $scope, $state, publicSearchDataService) {
     $scope.term = publicSearchDataService.term;
     $scope.search = function () {
         publicSearchDataService.term = $scope.term;
@@ -467,16 +467,12 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
                 $scope.searchResult.totalCount += 1;
                 $scope.searchResult.totalMinutes += activity.duration;
             });
-
         });
-
     };
 
     $scope.addActivity = function () {
         if ($scope.taskId) {
-
             $scope.activity.taskId = $scope.taskId;
-
             dataFactory.activity.addActivity($scope.activity).
                 success(function (response, status, headers, config) {
                     $scope.activities.splice(0, 0, response.data);
@@ -498,6 +494,34 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
         };
     };
 
+    // Update Activity 
+    //=====================================================================
+    $scope.editeState = {};
+
+    $scope.cancelOtherEdite = function () {
+        $.each($scope.editeState, function (key, item) {
+            $scope.editeState[key] = false;
+        });
+    };
+
+    $scope.goToEditeMode = function (activityItem) {
+        $scope.cancelOtherEdite();
+        $scope.updateActivityModel = activityItem;
+        $scope.editeState['editeMode' + activityItem.activityId] = true;
+    };
+
+    $scope.backToViewMode = function (activityItem) {
+        $scope.editeState['editeMode' + activityItem.activityId] = false;
+    };
+
+    $scope.updateActivity = function () {
+        dataFactory.activity.updateActivity($scope.updateActivityModel).
+            success(function (response, status, headers, config) {
+                $scope.backToViewMode($scope.updateActivityModel);
+            });
+    };
+    // End
+    //=====================================================================
 }]);
 
 iWork.controller('UserController', ['$rootScope', '$scope', 'dataFactory', '$state', 'authFactory', '$config', function ($rootScope, $scope, dataFactory, $state, authFactory, $config) {

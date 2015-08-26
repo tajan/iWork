@@ -215,6 +215,9 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
         },
         addActivity: function (activity) {
             return dataFactory.postWithoutRedirect('/activity/add', activity);
+        },
+        updateActivity: function (activity) {
+            return dataFactory.postWithoutRedirect('/activity/update', activity);
         }
     };
 

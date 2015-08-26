@@ -45,29 +45,65 @@
                             </div>
                         </div>
                         <div class="row list-group-item" ng-repeat="item in activities">
-                            <div class="col-sm-10">
+                            <div ng-hide="editeState.editeMode{{item.activityId}}" class="col-sm-10">
                                 <div class="pull-left mr">
                                     <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
                                 </div>
-                                <p class="mb-sm  text-primary">
-                                    {{item.description}}
-                                </p>
-                                <p class="text-sm">
-                                    <small>On {{item.activityDate | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
-                                </p>
+                                <div class="col-sm-6">
+                                    <p class="mb-sm  text-primary">
+                                        {{item.description}}
+                                    </p>
+                                    <p class="text-sm">
+                                        <small>On {{item.activityDate | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                                    </p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p>
+                                        <small class="pull-right">{{item.duration}} </small>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-sm-1">
-                                <small class="pull-right">{{item.duration}} </small>
+                            <div ng-show="editeState.editeMode{{item.activityId}}" class="col-sm-10">
+                                <div class="pull-left mr">
 
+                                    <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="updateActivityModel.description" ng-trim="false" />
+                                    <div class="hidden-lg h-spacer"></div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group" ng-controller="DateController">
+                                        <input placeholder="Date" type="text" name="createDate" datepicker-popup="{{format}}" ng-model="updateActivityModel.activityDateTime" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
+                                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
+                                               datepicker-mode="'day'" show-weeks="true" current-text="Today" />
+                                        <span class="input-group-btn">
+                                            <button type="button" ng-click="open($event)" class="btn btn-default">
+                                                <em class="fa fa-calendar"></em>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="hidden-lg h-spacer"></div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="updateActivityModel.duration" />
+                                    <div class="hidden-lg h-spacer"></div>
+                                </div>
                             </div>
-                            <div class="col-sm-1">
-                                <button id="add" name="update" class="btn btn-block btn-primary btn-lg" >
-                                    Edit
+                            <div class="col-sm-2" style="height:33px;overflow:hidden;">
+                                <button ng-hide="editeState.editeMode{{item.activityId}}" name="update" class="btn btn-default pull-right" ng-click="goToEditeMode(item)">
+                                    <i class="icon-pencil"></i>
                                 </button>
+                                <div ng-show="editeState.editeMode{{item.activityId}}" class="pull-right btn-group" role="group" aria-label="...">
+                                    <button name="update" class="btn btn-success " ng-click="updateActivity(item)">
+                                        Update
+                                    </button>
+                                    <button name="update" class="btn btn-danger " ng-click="backToViewMode(item)">
+                                        <i class="icon-close"></i>
+                                    </button>
+                                </div>
                             </div>
-
                         </div>
-
                     </scrollable>
                 </panel:content>
             </panel>

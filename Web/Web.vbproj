@@ -170,6 +170,7 @@
     <Content Include="app\js\iwork.js" />
     <Content Include="app\js\iworkauth.js" />
     <Content Include="app\js\iworkcontroller.js" />
+    <Content Include="app\js\iworkdirective.js" />
     <Content Include="app\js\iworkgeneralcontrollers.js" />
     <Content Include="app\js\iworkroute.js" />
     <Content Include="app\js\iworkservice.js" />

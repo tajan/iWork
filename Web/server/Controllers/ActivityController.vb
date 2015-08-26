@@ -75,6 +75,7 @@ Namespace Controllers
 
         End Function
 
+
         Public Function Remove(id As Integer) As ResponseModel
 
             Dim activity As Activity = (From p In GetAvailableQuery() Where p.ActivityId = id).SingleOrDefault

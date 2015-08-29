@@ -215,6 +215,7 @@
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
     <Content Include="iView\project\_gantt.html" />
+    <Content Include="iView\submenu.html" />
     <Content Include="iView\task\_activityactions.html" />
     <Content Include="iView\task\_archivepanel.html" />
     <Content Include="iView\task\_addactivitypanel.html" />
@@ -255,7 +256,6 @@
     <Content Include="iView\userstory\update.html" />
     <Content Include="iView\userstory\view.html" />
     <Content Include="iView\userstory\_formdata.html" />
-    <Content Include="iView\submenu.html" />
     <Content Include="index.html" />
     <Content Include="iView\contact\add.html" />
     <Content Include="iView\contact\edit.html" />

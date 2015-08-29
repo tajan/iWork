@@ -5,6 +5,7 @@ Imports iView.ViewEngine
 Imports System.Web.Http
 Imports Microsoft.Owin.Security.OAuth
 Imports Security
+Imports Newtonsoft.Json
 
 <Assembly: OwinStartup("iWorkStartup", GetType(Startup))> 
 Public Class Startup
@@ -31,6 +32,9 @@ Public Class Startup
         Dim jsonFormatter = config.Formatters.OfType(Of Net.Http.Formatting.JsonMediaTypeFormatter).First()
         jsonFormatter.SerializerSettings.ContractResolver = New Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver
         config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+
+        'Test Date UTC
+        jsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc
 
     End Sub
 

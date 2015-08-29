@@ -167,13 +167,20 @@
     <Content Include="app\img\logo.png" />
     <Content Include="app\js\app.js" />
     <Content Include="app\js\base.js" />
+    <Content Include="app\js\controllers\activity.ctrl.js" />
+    <Content Include="app\js\controllers\project.ctrl.js" />
+    <Content Include="app\js\controllers\publicsearch.ctrl.js" />
+    <Content Include="app\js\controllers\sprint.ctrl.js" />
+    <Content Include="app\js\controllers\task.ctrl.js" />
+    <Content Include="app\js\controllers\user.ctrl.js" />
+    <Content Include="app\js\controllers\userstory.ctrl.js" />
+    <Content Include="app\js\directives\searchnotifier.directive.js" />
+    <Content Include="app\js\directives\smartinputdirection.directive.js" />
     <Content Include="app\js\iwork.js" />
     <Content Include="app\js\iworkauth.js" />
-    <Content Include="app\js\iworkcontroller.js" />
-    <Content Include="app\js\iworkdirective.js" />
     <Content Include="app\js\iworkgeneralcontrollers.js" />
     <Content Include="app\js\iworkroute.js" />
-    <Content Include="app\js\iworkservice.js" />
+    <Content Include="app\js\services\data.service.js" />
     <Content Include="app\js\xml2json.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
@@ -743,6 +750,7 @@
     <Content Include="app\i18n\en.json" />
     <Content Include="app\i18n\es_AR.json" />
     <Content Include="iViewManifest.config" />
+    <Content Include="app\js\services\publicsearchdata.service.js" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

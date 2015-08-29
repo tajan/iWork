@@ -20,14 +20,51 @@
 <body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'layout-fs': app.useFullLayout, 'hidden-footer': app.hiddenFooter, 'layout-h': app.layout.horizontal, 'aside-float': app.layout.isFloat}">
     <div data-ui-view="" data-autoscroll="false" class="wrapper">
     </div>
+    <!-- Resource -->
     <script src="app/js/base.js"></script>
     <script src="app/js/app.js"></script>
+    <!-- iWork App -->
     <script src="app/js/iwork.js"></script>
-    <script src="app/js/iworkauth.js"></script>
-    <script src="app/js/iworkroute.js"></script>
-    <script src="app/js/iworkgeneralcontrollers.js"></script>
-    <script src="app/js/iworkservice.js"></script>
-    <script src="app/js/iworkdirective.js"></script>
-    <script src="app/js/iworkcontroller.js"></script>
+    <script src="app/js/iwork.auth.js"></script>
+    <script src="app/js/iwork.route.js"></script>
+    <script src="app/js/filter.js"></script>
+    <!-- Directives -->
+    <script src="app/js/directives/window-navigator.directive.js"></script>
+    <script src="app/js/directives/dhx-gantt.directive.js"></script>
+    <script src="app/js/directives/file-download-iconic-list.directive.js"></script>
+    <script src="app/js/directives/file-download-list.directive.js"></script>
+    <script src="app/js/directives/file-style.directive.js"></script>
+    <script src="app/js/directives/gantt-column-add.directive.js"></script>
+    <script src="app/js/directives/gantt-column.directive.js"></script>
+    <script src="app/js/directives/gantt-template.directive.js"></script>
+    <script src="app/js/directives/http-src.directive.js"></script>
+    <script src="app/js/directives/loading.directive.js"></script>
+    <script src="app/js/directives/multiple-file-uploader.directive.js"></script>
+    <script src="app/js/directives/panel-collapse.directive.js"></script>
+    <script src="app/js/directives/panel-tool.directive.js"></script>
+    <script src="app/js/directives/props-filter.directive.js"></script>
+    <script src="app/js/directives/score-radio-button-group.directive.js"></script>
+    <script src="app/js/directives/search-notifier.directive.js"></script>
+    <script src="app/js/directives/single-file-uploader.directive.js"></script>
+    <script src="app/js/directives/smart-input-direction.directive.js"></script>
+    <script src="app/js/directives/style-picker.directive.js"></script>
+    <script src="app/js/directives/toggle-fullscreen.directive.js"></script>
+    <!-- Services -->
+    <script src="app/js/services/data.service.js"></script>
+    <script src="app/js/services/publicsearchdata.service.js"></script>
+    <!-- Controllers -->
+    <script src="app/js/controllers/userstory.ctrl.js"></script>
+    <script src="app/js/controllers/activity.ctrl.js"></script>
+    <script src="app/js/controllers/calendar.ctrl.js"></script>
+    <script src="app/js/controllers/date.ctrl.js"></script>
+    <script src="app/js/controllers/datetime.ctrl.js"></script>
+    <script src="app/js/controllers/grid.ctrl.js"></script>
+    <script src="app/js/controllers/project.ctrl.js"></script>
+    <script src="app/js/controllers/public-search.ctrl.js"></script>
+    <script src="app/js/controllers/repeater.ctrl.js"></script>
+    <script src="app/js/controllers/sortable.ctrl.js"></script>
+    <script src="app/js/controllers/sprint.ctrl.js"></script>
+    <script src="app/js/controllers/task.ctrl.js"></script>
+    <script src="app/js/controllers/user.ctrl.js"></script>
 </body>
 </html>

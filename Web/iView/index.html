@@ -27,8 +27,13 @@
                             </button>
                             <include iv-source="~/iview/task/_menu.html" />
                         </div>
-                        <div class="label text text-sm color-default" title="{{ task.projectCodeName + '-' + task.projectTitle + ': ' + task.title }}">{{(task.projectCodeName + '-' + task.title) | truncate:true:25:' ...'}}</div>
+                        <div class="label text text-sm color-default" title="{{ task.projectCodeName + '-' + task.projectTitle + ': ' + task.title }}">
+                            {{task.projectCodeName }}
+                        </div>
                         <paneltool tool-collapse="tool-collapse" is-collapsed="true"></paneltool>
+                        <p class="no-margin text-sm">
+                            {{task.title}}
+                        </p>
                     </div>
                     <div class="bg-gray-lighter" style="width: 100%; height:1px; margin-top:0px; margin-bottom: 0px "></div>
                     <div collapse="panel{{task.taskId}}" class="panel-wrapper hidden">

@@ -14,6 +14,9 @@
     }
 }
 
+.no-margin{
+    margin:0px;
+}
 
 /*Loading*/
 .loading-spiner-holder {

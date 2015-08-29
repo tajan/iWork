@@ -34,7 +34,7 @@ Public Class Startup
         config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 
         'Test Date UTC
-        jsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc
+        jsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local
 
     End Sub
 

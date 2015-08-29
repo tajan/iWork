@@ -84,7 +84,7 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
     // Update Activity 
     //=====================================================================
     $scope.editeState = {};
-
+    $scope.updateActivityModel = {};
     $scope.cancelOtherEdite = function () {
         $.each($scope.editeState, function (key, item) {
             $scope.editeState[key] = false;

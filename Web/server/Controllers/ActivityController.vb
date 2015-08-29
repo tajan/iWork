@@ -95,7 +95,13 @@ Namespace Controllers
 
         Public Function Update(data As DtoActivity) As ResponseModel
 
-            Dim activity As Activity = (From p In Me.ActivityRepository.GetAll Where p.ActivityId = data.ActivityId).SingleOrDefault
+
+            Dim activity As Activity = (From p In Me.ActivityRepository.GetAll
+                                       Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User) On p.ActivityId Equals q.EntityId
+                                        Where q.EntityTypeId = EntityTypes.Activity AndAlso q.ActionTypeId = ActivityActions.Add _
+                                        AndAlso q.UserId = CurrentUserId
+                                        Where p.ActivityId = data.ActivityId
+                                        Select p).SingleOrDefault
 
             If activity Is Nothing Then
                 Return ResponseModel.Create(HttpStatusCode.NotFound)

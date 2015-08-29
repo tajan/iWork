@@ -90,7 +90,7 @@
                                     <div class="hidden-lg h-spacer"></div>
                                 </div>
                             </div>
-                            <div class="col-sm-2" style="height:33px;overflow:hidden;">
+                            <div class="col-sm-2" style="height:33px;overflow:hidden;" ng-if="app.user.email == item.user.email">
                                 <button ng-hide="editeState.editeMode{{item.activityId}}" name="update" class="btn btn-default pull-right" ng-click="goToEditeMode(item)">
                                     <i class="icon-pencil"></i>
                                 </button>

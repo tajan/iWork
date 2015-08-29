@@ -180,7 +180,6 @@
     <Content Include="app\js\controllers\task.ctrl.js" />
     <Content Include="app\js\controllers\user.ctrl.js" />
     <Content Include="app\js\controllers\userstory.ctrl.js" />
-    <Content Include="app\js\directives\date-to-iso.directive.js" />
     <Content Include="app\js\directives\dhx-gantt.directive.js" />
     <Content Include="app\js\directives\file-download-iconic-list.directive.js" />
     <Content Include="app\js\directives\file-download-list.directive.js" />
@@ -338,10 +337,6 @@
     <Content Include="vendor\angular-datatables\dist\angular-datatables.js" />
     <Content Include="vendor\angular-deckgrid\angular-deckgrid.js" />
     <Content Include="vendor\angular-file-upload\angular-file-upload.js" />
-    <Content Include="vendor\angular-hotkeys\hotkeys.css" />
-    <Content Include="vendor\angular-hotkeys\hotkeys.js" />
-    <Content Include="vendor\angular-hotkeys\hotkeys.min.css" />
-    <Content Include="vendor\angular-hotkeys\hotkeys.min.js" />
     <Content Include="vendor\angular-i18n\angular-locale_ar.js" />
     <Content Include="vendor\angular-i18n\angular-locale_de.js" />
     <Content Include="vendor\angular-i18n\angular-locale_en.js" />

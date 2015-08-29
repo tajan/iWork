@@ -24,10 +24,8 @@ Namespace Controllers
             End If
 
             Dim out = (From p In query
-                       Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User) On p.ActivityId Equals q.EntityId
-                       Where q.EntityTypeId = EntityTypes.Activity
                        Order By p.ActivityDate Descending
-                       Select New With {.ActionLog = q, .Activity = p, .User = q.User}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.ActionLog, x.User)).ToList
+                       Select New With {.ActionLog = p.ActionLog, .Activity = p, .User = p.ActionLog.User}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.ActionLog, x.User)).ToList
 
             Return out
 
@@ -95,7 +93,7 @@ Namespace Controllers
 
         Public Function Update(data As DtoActivity) As ResponseModel
 
-            Dim activity As Activity = (From p In GetAvailableQuery() Where p.ActivityId = data.ActivityId).SingleOrDefault
+            Dim activity As Activity = (From p In Me.ActivityRepository.GetAll Where p.ActivityId = data.ActivityId).SingleOrDefault
 
             If activity Is Nothing Then
                 Return ResponseModel.Create(HttpStatusCode.NotFound)

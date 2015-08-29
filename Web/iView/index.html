@@ -5,7 +5,7 @@
 </h3>
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
-        <div id="portlet{{status.id}}" ng-repeat="status in taskStatuses | orderBy:'viewOrder'" portlet="portlet" class="col-lg-3 br">
+        <div id="portlet{{status.id}}" ng-repeat="status in taskStatuses | orderBy:'viewOrder'" portlet="portlet" class="col-md-3 br">
             <div>{{status.title}}</div>
             <hr style="margin-bottom: 10px; margin-top: 3px">
             <div ng-repeat="task in tasks | filter: {status: status.id } | orderBy:'viewOrder'">

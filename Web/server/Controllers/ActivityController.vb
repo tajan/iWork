@@ -56,6 +56,12 @@ Namespace Controllers
                 ResponseModel.Create(HttpStatusCode.BadRequest)
             End If
 
+            'TODO : Check if there is any other way to get task Status
+            Dim Task = TaskRepository.GetById(data.TaskId)
+            If Task.Status = TaskStatuses.Pending Then
+                Return ResponseModel.Create(HttpStatusCode.NotAcceptable, Nothing, String.Format("Activity can not be add for the task that has Pending status"))
+            End If
+
             Dim activity As New Activity
             data.FillActivity(activity)
 

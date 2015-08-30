@@ -162,6 +162,7 @@ Public Class DtoActivity
     Public Property ActivityId As Integer
     Public Property Description As String
     Public Property TaskId As Integer
+    Public Property TaskStatus As Integer
     Public Property Duration As Integer
     Public Property ActivityDateTime As DateTime
     Public Property ActivityDate As Date
@@ -210,6 +211,7 @@ Public Class DtoActivity
             .ProjectCodeName = activity.Task.Project.CodeName
             .ProjectTitle = activity.Task.Project.Title
             .ProjectId = activity.Task.ProjectId
+            .TaskStatus = activity.Task.Status
         End With
 
         Return out

@@ -128,6 +128,10 @@ Namespace Controllers
                 Return ResponseModel.Create(HttpStatusCode.NotFound)
             End If
 
+            If data.Status = TaskStatuses.Pending AndAlso task.Activities.Count > 0 Then
+                Return ResponseModel.Create(HttpStatusCode.NotAcceptable, Nothing, String.Format("Task with Activity can not change to {0} Status", [Enum].GetName(GetType(TaskStatuses), TaskStatuses.Pending)))
+            End If
+
             For Each item In task.TaskMembers.ToList
                 Me.TaskMembersRepository.Remove(item.TaskMemberId)
             Next
@@ -156,13 +160,15 @@ Namespace Controllers
             For Each task In tasks
                 If task.Status <> data.Status Then
 
+                    If data.Status = TaskStatuses.Pending AndAlso task.Activities.Count > 0 Then
+                        Continue For
+                    End If
+
                     isThereAnyChange = True
                     task.Status = data.Status
                     Me.TaskRepository.Update(task)
                     Me.Logger.Log(task, TaskActions.StatusChanged)
 
-                Else
-                'Return ResponseModel.Create(HttpStatusCode.Forbidden, Nothing, String.Format("Task with Activity can not change to {0} Status", [Enum].GetName(GetType(TaskStatuses), TaskStatuses.Pending)))
                 End If
             Next
 

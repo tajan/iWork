@@ -121,6 +121,16 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
             $scope.sortableOptions = {
                 connectWith: Selector,
                 items: 'div.panel',
+                handle: '.portlet-handler',
+                opacity: 0.7,
+                placeholder: 'portlet box-placeholder',
+                cancel: '.portlet-cancel',
+                forcePlaceholderSize: true,
+                iframeFix: false,
+                tolerance: 'pointer',
+                helper: 'original',
+                revert: 200,
+                forceHelperSize: true,
                 receive: function (event, ui) {
                     var targetTask = null;
                     var taskId = parseInt(ui.item.attr('id').replace('panel', ''));

@@ -1,5 +1,5 @@
 ﻿
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', function ($scope, dataFactory, $state, $timeout, $rootScope) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', 'Notify', function ($scope, dataFactory, $state, $timeout, $rootScope, Notify) {
 
     var now = moment().format('YYYY-MM-DD');
 
@@ -149,6 +149,12 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
                     });
                     if (status == 1 && targetTask.activityCount > 0) {
                         $scope.updateTaskByStatus();
+
+                        Notify.alert(
+                            'You cant move this task to pending :(',
+                            { status: 'warning', pos: 'bottom-right' }
+                        );
+
                     } else {
                         dataFactory.task.updateStatuses({ status: status, taskIds: taskIds }).success(function () {
                             targetTask.status = status;

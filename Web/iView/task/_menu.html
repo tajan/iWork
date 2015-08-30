@@ -2,7 +2,7 @@
     <li>
         <a ui-sref="app.taskview({id: task.taskId})">View Detail</a>
     </li>
-    <li>
+    <li ng-if="status.id != 1">
         <a ui-sref="app.activity({taskId: task.taskId})">Add Activity</a>
     </li>
     <li class="divider"></li>

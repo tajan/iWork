@@ -11,16 +11,16 @@
                     <scrollable height="50" class="list-group">
                         <div class="row list-group-item bg-lighter">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
+                                <input ng-disabled="model.status == 1" type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
                                 <div class="hidden-lg h-spacer"></div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group" ng-controller="DateController">
                                     <input placeholder="Date" type="text" name="createDate" datepicker-popup="{{format}}" ng-model="activity.activityDateTime" is-open="opened" min-date="{{minDate}}" max-date="{{maxDate}}"
                                            datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" clear-text="Clear" class="form-control"
-                                           datepicker-mode="'day'" show-weeks="true" current-text="Today" />
+                                           datepicker-mode="'day'" show-weeks="true" current-text="Today" ng-disabled="model.status == 1" />
                                     <span class="input-group-btn">
-                                        <button type="button" ng-click="open($event)" class="btn btn-default">
+                                        <button type="button" ng-click="open($event)" class="btn btn-default" ng-disabled="model.status == 1">
                                             <em class="fa fa-calendar"></em>
                                         </button>
                                     </span>
@@ -28,17 +28,18 @@
                                 <div class="hidden-lg h-spacer"></div>
                             </div>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="activity.duration" />
+                                <input type="number" class="form-control" id="duration" name="duration" placeholder="Duration" ng-model="activity.duration" ng-disabled="model.status == 1" />
                                 <div class="hidden-lg h-spacer"></div>
                             </div>
                             <div class="col-sm-1 hidden-sm hidden-xs">
-                                <button id="add" name="add" class="btn btn-default btn-md pull-right" ng-click="addActivity()">
+                               
+                                <button id="add" name="add" class="btn btn-default btn-md pull-right" ng-click="addActivity()" ng-disabled="model.status == 1">
                                     <i class="fa fa-plus"></i>
                                 </button>
                                 <div class="hidden-lg h-spacer"></div>
                             </div>
                             <div class="col-sm-1 hidden-lg hidden-md">
-                                <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="addActivity()">
+                                <button id="add" name="add" class="btn btn-block btn-primary btn-lg" ng-click="addActivity()" ng-disabled="model.status == 1">
                                     Add
                                 </button>
                                 <div class="hidden-lg h-spacer"></div>

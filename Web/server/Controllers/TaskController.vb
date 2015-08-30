@@ -156,11 +156,16 @@ Namespace Controllers
             For Each task In tasks
                 If task.Status <> data.Status Then
 
-                    isThereAnyChange = True
-                    task.Status = data.Status
-                    Me.TaskRepository.Update(task)
-                    Me.Logger.Log(task, TaskActions.StatusChanged)
+                    If data.Status = TaskStatuses.Pending AndAlso task.Activities.Count = 0 Then
 
+                        isThereAnyChange = True
+                        task.Status = data.Status
+                        Me.TaskRepository.Update(task)
+                        Me.Logger.Log(task, TaskActions.StatusChanged)
+
+                    End If
+                Else
+                    Return ResponseModel.Create(HttpStatusCode.Forbidden, Nothing, String.Format("Task with Activity can not change to {0} Status", [Enum].GetName(GetType(TaskStatuses), TaskStatuses.Pending)))
                 End If
             Next
 

@@ -71,6 +71,7 @@ Namespace Controllers
             task.Archived = True
             task.Status = TaskStatuses.Done
             task.RealEndDate = data.DueDate
+            task.StartDate = data.DueDate.Date
             task.Description = String.Empty
 
 
@@ -177,7 +178,8 @@ Namespace Controllers
                 data.RealEndDate = Now.Date
             End If
 
-            Dim task = (From p In GetAvailableQuery() Where data.TaskId = p.TaskId AndAlso p.Archived = False AndAlso p.Status = TaskStatuses.Done).SingleOrDefault
+            Dim task = (From p In GetAvailableQuery() Where data.TaskId = p.TaskId AndAlso p.Archived = False AndAlso p.Status = TaskStatuses.Done _
+                        AndAlso p.Project.ProjectMembers.Any(Function(x) x.MembershipType = ProjectMembershipTypes.Manager AndAlso x.UserId = CurrentUserId)).SingleOrDefault
 
             If task Is Nothing Then
                 Return ResponseModel.Create(HttpStatusCode.NotFound)
@@ -200,7 +202,10 @@ Namespace Controllers
         Public Function GetMyBoard(searchTerm As String) As SearchResponseModel
 
 
-            Dim query = From p In GetAvailableQuery() Where p.Archived = False Order By p.Priority Descending, p.DueDate Descending
+            Dim query = (From p In GetAvailableQuery()
+                         Where p.Archived = False _
+                         AndAlso p.StartDate <= DateTime.Now
+                         Order By p.Priority Descending, p.DueDate Descending)
 
             Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
             Dim criteria = GetSearchCriteria(searchModel)
@@ -236,7 +241,9 @@ Namespace Controllers
 
         Public Function GetForArchive() As ResponseModel
 
-            Dim data = GetAvailableQuery.Where(Function(x) x.Archived = False AndAlso x.Status = TaskStatuses.Done).ToList
+            Dim data = GetAvailableQuery.Where(Function(x) x.Archived = False AndAlso x.Status = TaskStatuses.Done _
+                                               AndAlso x.Project.ProjectMembers.Any(Function(c) c.UserId = CurrentUserId _
+                                                                                    AndAlso c.MembershipType = ProjectMembershipTypes.Manager)).ToList
 
             Dim out = New DtoTasks(data)
             Return ResponseModel.Create(HttpStatusCode.OK, out)

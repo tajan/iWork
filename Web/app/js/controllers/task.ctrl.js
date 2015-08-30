@@ -49,6 +49,7 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
         if ($scope.model.taskId) {
 
             dataFactory.task.getById($scope.model.taskId).success(function (response) {
+                log(response.data);
                 $scope.model = response.data;
             });
         };

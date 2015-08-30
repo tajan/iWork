@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="734e45607c584f70a8323ed0a690fad1" Name="Diagram1" >
-        <EntityTypeShape EntityType="iWorkTestModel.ActionLog" Width="1.5" PointX="3" PointY="2.875" />
-        <EntityTypeShape EntityType="iWorkTestModel.ProjectFile" Width="1.5" PointX="3" PointY="10.125" />
-        <EntityTypeShape EntityType="iWorkTestModel.ProjectMember" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="iWorkTestModel.Project" Width="1.5" PointX="0.75" PointY="8.875" />
-        <EntityTypeShape EntityType="iWorkTestModel.ProjectWorkflow" Width="1.5" PointX="3" PointY="14" />
-        <EntityTypeShape EntityType="iWorkTestModel.Sprint" Width="1.5" PointX="3" PointY="16.75" />
-        <EntityTypeShape EntityType="iWorkTestModel.TaskMember" Width="1.5" PointX="9.75" PointY="8.375" />
-        <EntityTypeShape EntityType="iWorkTestModel.UserStory" Width="1.5" PointX="5.25" PointY="12.625" />
-        <EntityTypeShape EntityType="iWorkTestModel.UserStoryFile" Width="1.5" PointX="7.5" PointY="15.25" />
+      <Diagram DiagramId="734e45607c584f70a8323ed0a690fad1" Name="Diagram1" ZoomLevel="98" >
+        <EntityTypeShape EntityType="iWorkTestModel.ActionLog" Width="1.5" PointX="3" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.ProjectFile" Width="1.5" PointX="3" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.ProjectMember" Width="1.5" PointX="3" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.Project" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.ProjectWorkflow" Width="1.5" PointX="3" PointY="6.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.Sprint" Width="1.5" PointX="3" PointY="7.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.TaskMember" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.UserStory" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.UserStoryFile" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="false" />
         <AssociationConnector Association="iWorkTestModel.FK_ProjectFiles_Projects" />
         <AssociationConnector Association="iWorkTestModel.FK_ProjectMembers_Projects" />
         <AssociationConnector Association="iWorkTestModel.FK_ProjectWorkflows_Projects" />
@@ -21,18 +21,18 @@
         <AssociationConnector Association="iWorkTestModel.FK_UserStories_Projects" />
         <AssociationConnector Association="iWorkTestModel.FK_UserStories_Sprints" />
         <AssociationConnector Association="iWorkTestModel.FK_UserStoryFiles_UserStories" />
-        <EntityTypeShape EntityType="iWorkTestModel.Activity" Width="1.5" PointX="9.75" PointY="16.75" />
-        <EntityTypeShape EntityType="iWorkTestModel.File" Width="1.5" PointX="1.5" PointY="20.625" />
-        <EntityTypeShape EntityType="iWorkTestModel.User" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="iWorkTestModel.Activity" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.File" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="iWorkTestModel.User" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
         <AssociationConnector Association="iWorkTestModel.FK_ActionLogs_Users" />
         <AssociationConnector Association="iWorkTestModel.FK_ProjectFiles_Files" />
         <AssociationConnector Association="iWorkTestModel.FK_Users_Files" />
         <AssociationConnector Association="iWorkTestModel.FK_UserStoryFiles_Files" />
         <AssociationConnector Association="iWorkTestModel.FK_ProjectMembers_Users" />
         <AssociationConnector Association="iWorkTestModel.FK_TaskMembers_Users" />
-        <EntityTypeShape EntityType="iWorkTestModel.TaskFile" Width="1.5" PointX="9.75" PointY="11.375" />
+        <EntityTypeShape EntityType="iWorkTestModel.TaskFile" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="false" />
         <AssociationConnector Association="iWorkTestModel.FK_TaskFiles_Files" />
-        <EntityTypeShape EntityType="iWorkTestModel.Task" Width="1.5" PointX="7.5" PointY="9.125" />
+        <EntityTypeShape EntityType="iWorkTestModel.Task" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="false" />
         <AssociationConnector Association="iWorkTestModel.FK_Activities_Tasks" />
         <AssociationConnector Association="iWorkTestModel.FK_Tasks_Projects" />
         <AssociationConnector Association="iWorkTestModel.FK_TaskFiles_Tasks" />

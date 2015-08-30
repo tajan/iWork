@@ -119,6 +119,7 @@
           <Property Name="UserStoryId" Type="int" />
           <Property Name="ProjectId" Type="int" Nullable="false" />
           <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="DueDate" Type="datetime" Nullable="false" />
           <Property Name="EstimatedDuartion" Type="int" Nullable="false" />
           <Property Name="Priority" Type="tinyint" Nullable="false" />
@@ -958,6 +959,7 @@
           <Property Name="UserStoryId" Type="Int32" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EstimatedDuartion" Type="Int32" Nullable="false" />
           <Property Name="Priority" Type="Byte" Nullable="false" />
@@ -1214,6 +1216,7 @@
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="EstimatedDuartion" ColumnName="EstimatedDuartion" />
                 <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserStoryId" ColumnName="UserStoryId" />

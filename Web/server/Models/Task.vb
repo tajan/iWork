@@ -17,6 +17,7 @@ Partial Public Class Task
     Public Property UserStoryId As Nullable(Of Integer)
     Public Property ProjectId As Integer
     Public Property Status As Byte
+    Public Property StartDate As Date
     Public Property DueDate As Date
     Public Property EstimatedDuartion As Integer
     Public Property Priority As Byte

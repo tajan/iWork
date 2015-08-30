@@ -299,8 +299,8 @@ Public Class DtoTask
     Public Property FilesList As List(Of DtoFile)
     Public Property RealEndDate As Date?
     Public Property Type As TaskTypes = TaskTypes.Generic
-    Public Property StartDate As DateTime?
-
+    Public Property StartDate As DateTime
+    Public Property CreatorName As String
     Public Shared Function CreateInstance(task As Task) As DtoTask
 
         Dim out As New DtoTask
@@ -318,6 +318,7 @@ Public Class DtoTask
             .ActivityCount = task.Activities.Count
             .ActivityDuration = task.Activities.Sum(Function(x) x.Duration)
             .EstimatedDuration = task.EstimatedDuartion
+            .StartDate = task.StartDate
             .DueDate = task.DueDate
             .MembersCount = .Members.Count
             .Score = task.Score
@@ -337,6 +338,7 @@ Public Class DtoTask
             Else
                 .StartDate = firstActivity.ActivityDate
             End If
+
 
             If task.UserStory IsNot Nothing Then
                 .UserStoryId = task.UserStoryId
@@ -374,6 +376,7 @@ Public Class DtoTask
             .UserStoryId = UserStoryId
             .EstimatedDuartion = EstimatedDuration
             .DueDate = DueDate
+            .StartDate = StartDate.Date
             .Score = Score
             .Priority = Priority
             .RealEndDate = RealEndDate
@@ -454,7 +457,7 @@ Public Class DtoProject
 
         Dim currentUserId As Integer = Application.GetCurrentUserId
 
-        If Not Managers.Contains(currentUserId) Then
+        If Not Managers.Contains(currentUserId) AndAlso project.ProjectId = 0 Then
             Managers.Add(currentUserId)
         End If
 

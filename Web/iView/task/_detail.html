@@ -17,8 +17,14 @@
                 <view iv-type="dataitem" iv-label="User Stoery:">{{model.userStoryTitle}}</view>
             </view>
             <view iv-type="row">
+                <view iv-type="dataitem" iv-label="Start Date:">{{model.startDate | date:'yyyy/MM/dd'}}</view>
                 <view iv-type="dataitem" iv-label="Estimated Duration:">{{model.estimatedDuration}} minutes</view>
+                
+            </view>
+            <view iv-type="row">
                 <view iv-type="dataitem" iv-label="Due Date:">{{model.dueDate | date:'yyyy/MM/dd'}}</view>
+                <view iv-type="dataitem" iv-label="Creator Name:">{{model.CreatorName}}</view>
+                
             </view>
             <view iv-type="row">
                 <view iv-type="dataitem" iv-label="Title:">{{model.title}}</view>

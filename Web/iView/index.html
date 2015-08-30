@@ -11,7 +11,7 @@
             <div id="portlet{{status.id}}" ui-sortable="sortableOptions" ng-model="tasksByStatus[status.id]" portlet class="sortable-box">
 
                 <!-- Item list -->
-                <div ng-repeat="task in tasksByStatus[status.id]  | orderBy:'viewOrder'" id="panel{{task.taskId}}" class="panel panel-default" ng-class="">
+                <div ng-repeat="task in tasksByStatus[status.id]" id="panel{{task.taskId}}" class="panel panel-default" ng-class="">
                     <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 3px">
                         <div class="progress-bar-bg progress-bar-{{task.projectStyle}}"></div>
                         <div style="width:{{task.progress}}%;" role="progressbar" aria-valuenow="{{task.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{task.projectStyle}}">
@@ -34,6 +34,8 @@
                         </div>
                         <paneltool tool-collapse="tool-collapse" is-collapsed="true"></paneltool>
                         <p class="no-margin text-sm">
+                            <h4>{{task.taskId}}</h4>
+                            <h4>{{task.status}}</h4>
                             {{task.title}}
                         </p>
                     </div>

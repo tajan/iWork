@@ -189,10 +189,10 @@ Public Class DtoActivity
             .CreateDate = actionlog.ActionDate
             .ActivityDateTime = activity.ActivityDate
             .ActivityDate = activity.ActivityDate.Date
-            '.TaskTitle = activity.Task.Title
-            '.ProjectCodeName = activity.Task.Project.CodeName
-            '.ProjectTitle = activity.Task.Project.Title
-            '.ProjectId = activity.Task.ProjectId
+            .TaskTitle = activity.Task.Title
+            .ProjectCodeName = activity.Task.Project.CodeName
+            .ProjectTitle = activity.Task.Project.Title
+            .ProjectId = activity.Task.ProjectId
         End With
 
     End Sub

@@ -5,11 +5,13 @@
 </h3>
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
-        <div id="portlet{{status.id}}" ng-repeat="status in taskStatuses | orderBy:'viewOrder'" portlet="portlet" class="col-md-3 br">
+        <div ng-repeat="status in taskStatuses | orderBy:'viewOrder'" class="col-md-3 br">
             <div>{{status.title}}</div>
             <hr style="margin-bottom: 10px; margin-top: 3px">
-            <div ng-repeat="task in tasks | filter: {status: status.id } | orderBy:'viewOrder'">
-                <div id="panel{{task.taskId}}" class="panel panel-default">
+            <div id="portlet{{status.id}}" ui-sortable="sortableOptions" ng-model="tasksByStatus[status.id]" portlet class="sortable-box">
+
+                <!-- Item list -->
+                <div ng-repeat="task in tasksByStatus[status.id] " id="panel{{task.taskId}}" class="panel panel-default" ng-class="" >
                     <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 3px">
                         <div class="progress-bar-bg progress-bar-{{task.projectStyle}}"></div>
                         <div style="width:{{task.progress}}%;" role="progressbar" aria-valuenow="{{task.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{task.projectStyle}}">
@@ -74,13 +76,13 @@
                                 <column iv-type="default" iv-size="12">
                                     <div class="container-fluid">
                                         <div class="label label-default text text-normal text-gray-dark pull-right">
-                                            Started at {{task.startDate | date:'yyyy/MM/dd'}}  
+                                            Started at {{task.startDate | date:'yyyy/MM/dd'}}
                                         </div>
 
                                     </div>
                                     <div class="container-fluid">
                                         <div class="label label-default text text-normal text-gray-dark pull-right">
-                                          Due on {{task.dueDate | date:'yyyy/MM/dd'}}
+                                            Due on {{task.dueDate | date:'yyyy/MM/dd'}}
                                         </div>
                                         <div ng-switch="task.priority" class="label pull-left" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info'}[task.priority]">
                                             <span ng-switch-when="1">
@@ -108,6 +110,7 @@
                         <include iv-source="~/iview/task/_activityactions.html" />
                     </div>
                 </div>
+
             </div>
         </div>
     </row>

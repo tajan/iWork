@@ -38,168 +38,115 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     };
 
     $scope.initSupportModel = function () {
-
         $scope.initModel();
         $scope.model.type = 2;
-
     };
 
     $scope.initTaskView = function () {
-
         if ($scope.model.taskId) {
-
             dataFactory.task.getById($scope.model.taskId).success(function (response) {
-                log(response.data);
                 $scope.model = response.data;
             });
         };
-
     };
 
     $scope.initModel = function () {
-
         dataFactory.project.getAllMinimal().success(function (response) {
             $scope.projects = response.data;
         });
-
         if ($scope.model.taskId) {
-
             //edit task
             dataFactory.task.getById($scope.model.taskId).success(function (response) {
                 $scope.model = response.data;
-
                 //new task
                 dataFactory.user.getByProject($scope.model.projectId).success(function (response) {
                     $scope.members = response.data;
                 });
-
                 dataFactory.userStory.getAllMinimal($scope.model.projectId).success(function (response) {
                     $scope.userStories = response.data;
                 });
-
             });
-
         }
         else {
-
             if ($scope.model.projectId) {
-
                 //new task
                 dataFactory.user.getByProject($scope.model.projectId).success(function (response) {
                     $scope.members = response.data;
                 });
-
                 dataFactory.userStory.getAllMinimal($scope.model.projectId).success(function (response) {
                     $scope.userStories = response.data;
                 });
-
             };
-
         };
-
     };
-
 
     $scope.$on('update-task-board', function (event, args) {
         $scope.reInitBoard();
     });
 
     $scope.reInitBoard = function () {
-        dataFactory.task.getMyBoard().success(function (response) {
-            $scope.tasks = response.data;
-            angular.forEach($scope.tasks, function (task) {
-                task.realEndDate = now;
-            });
-        });
+        $scope.initBoard();
+    };
+
+    $scope.updateTaskByStatus = function () {
+        $scope.tasksByStatus = {
+            1: $.grep($scope.tasks, function (v) {
+                return v.status === 1;
+            }),
+            2: $.grep($scope.tasks, function (v) {
+                return v.status === 2;
+            }),
+            3: $.grep($scope.tasks, function (v) {
+                return v.status === 3;
+            }),
+            4: $.grep($scope.tasks, function (v) {
+                return v.status === 4;
+            })
+        }
     };
 
     $scope.initBoard = function () {
-
         dataFactory.task.getMyBoard().success(function (response) {
             $scope.tasks = response.data;
+            $scope.updateTaskByStatus();
             angular.forEach($scope.tasks, function (task) {
                 task.realEndDate = now;
             });
-
             initElement();
         });
-
         var initElement = function () {
             // Component is optional
             if (!$.fn.sortable) return;
             var Selector = '[portlet]';
-            $(Selector).sortable({
+            $scope.sortableOptions = {
                 connectWith: Selector,
                 items: 'div.panel',
-                handle: '.portlet-handler',
-                opacity: 0.7,
-                placeholder: 'portlet box-placeholder',
-                cancel: '.portlet-cancel',
-                forcePlaceholderSize: true,
-                iframeFix: false,
-                tolerance: 'pointer',
-                helper: 'original',
-                revert: 200,
-                forceHelperSize: true,
-                start: saveListSize,
-                update: savePortletOrder,
-                create: loadPortletOrder
-            });
-            // optionally disables mouse selection
-            //.disableSelection()
-
-
-            function savePortletOrder(event, ui) {
-
-                var self = event.target;
-                var portletId = self.id;
-                var status = parseInt(portletId.replace('portlet', ''));
-                var panelIds = $(self).sortable('toArray');
-                var taskIds = [];
-                angular.forEach(panelIds, function (panelId) {
-                    taskIds.push(parseInt(panelId.replace('panel', '')));
-                });
-                dataFactory.task.updateStatuses({ status: status, taskIds: taskIds });
-                //save portlet size to avoid jumps
-                //saveListSize.apply(self);
+                receive: function (event, ui) {
+                    var targetTask = null;
+                    var taskId = parseInt(ui.item.attr('id').replace('panel', ''));
+                    var self = event.target;
+                    var portletId = self.id;
+                    var status = parseInt(portletId.replace('portlet', ''));
+                    var panelIds = $(self).sortable('toArray');
+                    var taskIds = [taskId];
+                    angular.forEach(panelIds, function (panelId) {
+                        taskIds.push(parseInt(panelId.replace('panel', '')));
+                    });
+                    $.each($scope.tasks, function (index, task) {
+                        if (task.taskId == taskId) {
+                            targetTask = task;
+                        }
+                    });
+                    if (status == 1 && targetTask.activityCount > 0) {
+                        $scope.updateTaskByStatus();
+                    } else {
+                        dataFactory.task.updateStatuses({ status: status, taskIds: taskIds }).success(function () {
+                            targetTask.status = status;
+                        });
+                    }
+                }
             };
-
-            function loadPortletOrder(event) {
-
-                var self = event.target;
-                //var data = angular.fromJson($scope.$storage[storageKeyName]);
-
-                //if (data) {
-
-                //    var porletId = self.id,
-                //        panels = data[porletId];
-
-                //    if (panels) {
-                //        var portlet = $('#' + porletId);
-
-                //        $.each(panels, function (index, value) {
-                //            $('#' + value).appendTo(portlet);
-                //        });
-                //    }
-
-                //}
-
-                // save portlet size to avoid jumps
-                saveListSize.apply(self);
-            };
-
-            // Keeps a consistent size in all portlet lists
-            function saveListSize() {
-                //var $this = $(this);
-                //$this.css('min-height', $this.height());
-            };
-
-            function resetListSize() {
-                //  $(this).css('min-height', "");
-            };
-
         };
-
     };
 
     $scope.updatePortletOrder = function (taskIds, status) {
@@ -210,33 +157,25 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     };
 
     $scope.initView = function () {
-
         dataFactory.task.getAll().success(function (response) {
             $scope.tasks = response.data;
         });
-
     };
 
     $scope.initViewForArchive = function () {
-
         dataFactory.task.getForArchive().success(function (response) {
             $scope.tasks = response.data;
-
             angular.forEach($scope.tasks, function (task) {
                 task.realEndDate = now;
             });
-
         });
-
     };
 
     $scope.archive = function (taskId, realEndDate) {
-
         dataFactory.task.archive(taskId, realEndDate).success(function () {
             //$scope.initViewForArchive();
             $scope.initBoard();
         });
-
     };
 
     $scope.submitform = function (actionName, $event) {

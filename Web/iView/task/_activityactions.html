@@ -8,10 +8,10 @@
                     <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.filesList.length" ng-click="showFilePanel = !showFilePanel;" title="Files">
                         <em class="fa fa-file-text-o"></em>
                     </a>
-                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.activityCount"  ng-click="showDetailPanel = !showDetailPanel;" title="Detail">
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.activityCount" ng-click="showDetailPanel = !showDetailPanel;" title="Detail">
                         <em class="fa fa-info"></em>
                     </a>
-                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-click="showActivityPanel = !showActivityPanel; " title="Add Activity">
+                    <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.status!=1" ng-click="showActivityPanel = !showActivityPanel; " title="Add Activity">
                         <span>{{showActivityPanel ? '-': '+'}}</span>
                     </a>
                     <a href="#" class="btn btn-{{task.projectStyle}} btn-circle" ng-show="task.status==4" ng-click="showArchivePanel = !showArchivePanel;" title="Archive">

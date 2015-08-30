@@ -1,6 +1,6 @@
 ﻿
 
-iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', function ($window, $http, publicSearchDataService) {
+iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'Notify', function ($window, $http, publicSearchDataService, Notify) {
 
     var dataFactory = {
         baseUrl: '/api'
@@ -14,6 +14,10 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
                 $window.history.back();
             }).
         error(function (response, status, headers, config) {
+            Notify.alert(
+                response,
+                { status: 'danger', pos: 'bottom-right' }
+            );
         });
     };
 
@@ -24,6 +28,10 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
 
             }).
         error(function (response, status, headers, config) {
+            Notify.alert(
+                response,
+                  { status: 'danger', pos: 'bottom-right' }
+            );
         });
     };
 
@@ -36,7 +44,10 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
             success(function (response, status, headers, config) {
             }).
         error(function (response, status, headers, config) {
-            log(response)
+            Notify.alert(
+                response,
+                 { status: 'danger', pos: 'bottom-right' }
+            );
         });
     };
     dataFactory.getWithSearch = function (url) {
@@ -51,7 +62,10 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', fun
             success(function (response, status, headers, config) {
             }).
         error(function (response, status, headers, config) {
-            log(response)
+            Notify.alert(
+                response,
+                 { status: 'danger', pos: 'bottom-right' }
+            );
         });
     };
 

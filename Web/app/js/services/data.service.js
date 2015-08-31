@@ -8,12 +8,11 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'No
 
     //General post
     dataFactory.post = function (url, data, headers, config) {
-        var successMessage = url.split("/")[1] + " post successfully :)";
         var apiUrl = dataFactory.baseUrl + url;
         return $http.post(dataFactory.baseUrl + url, data).
             success(function (response, status, headers, config) {
                 Notify.alert(
-                    successMessage,
+                    response.message + " " + response.statusCode,
                     { status: 'success', pos: 'bottom-right' }
                 );
                 $window.history.back();
@@ -27,12 +26,11 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'No
     };
 
     dataFactory.postWithoutRedirect = function (url, data, headers, config) {
-        var successMessage = url.split("/")[1] + " post successfully :)";
         var apiUrl = dataFactory.baseUrl + url;
         return $http.post(dataFactory.baseUrl + url, data).
             success(function (response, status, headers, config) {
                 Notify.alert(
-                   successMessage,
+                    response.message + " " + response.statusCode,
                     { status: 'success', pos: 'bottom-right' }
                 );
             }).

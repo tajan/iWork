@@ -188,7 +188,7 @@ Public Class DtoActivity
             .User = DtoUser.CreateInstance(user)
             .CreateDate = actionlog.ActionDate
             .ActivityDateTime = activity.ActivityDate
-            .ActivityDate = activity.ActivityDate.Date
+            .ActivityDate = activity.ActivityDate
             .TaskTitle = activity.Task.Title
             .ProjectCodeName = activity.Task.Project.CodeName
             .ProjectTitle = activity.Task.Project.Title
@@ -206,7 +206,7 @@ Public Class DtoActivity
             .Description = activity.Description
             .Duration = activity.Duration
             .ActivityDateTime = activity.ActivityDate
-            .ActivityDate = activity.ActivityDate.Date
+            .ActivityDate = activity.ActivityDate
             .TaskTitle = activity.Task.Title
             .ProjectCodeName = activity.Task.Project.CodeName
             .ProjectTitle = activity.Task.Project.Title

@@ -33,7 +33,7 @@ Public Class Startup
         jsonFormatter.SerializerSettings.ContractResolver = New Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver
         config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 
-        'Test Date UTC
+        config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
         jsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local
 
     End Sub

@@ -202,7 +202,7 @@ Namespace Controllers
         Public Function Search(data As DtoActivitySearch) As ResponseModel
 
             If data.ToDate.HasValue Then
-                data.ToDate = data.ToDate.Value.AddDays(1)
+                data.ToDate = data.ToDate.Value.AddDays(1).Date
             End If
 
             Dim criteria As Expression(Of Func(Of Activity, Boolean)) = Function(x) (Not data.FromDate.HasValue OrElse x.ActivityDate >= data.FromDate.Value) AndAlso

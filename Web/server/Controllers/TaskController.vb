@@ -49,6 +49,32 @@ Namespace Controllers
 
         End Function
 
+        Private Function GetSearch(searchModel As SearchRequestModel) As List(Of Web.Task)
+
+
+
+            Dim q = (From p In Me.GetAvailableQuery)
+            If searchModel.SearchTerm IsNot Nothing Then
+
+
+                For Each term In searchModel.SearchTerm.Split(" ")
+                    q = (From p In q
+                          Where p.Title.Contains(term) OrElse
+                               p.Project.Description.Contains(term) OrElse
+                               p.TaskMembers.Any(Function(x) x.User.DisplayName.Contains(term) OrElse x.User.Email.Contains(term) OrElse x.User.FullName.Contains(term) OrElse x.User.UserName.Contains(term)) OrElse
+                               p.UserStory.Title.Contains(term) OrElse
+                               p.UserStory.Description.Contains(term) OrElse
+                               p.Project.Title.Contains(term) OrElse
+                               p.Project.Url.Contains(term) OrElse
+                               p.Project.CodeName.Contains(term) OrElse
+                               p.Project.Description.Contains(term))
+                Next
+            End If
+
+
+            Return (From p In q Select p).ToList
+        End Function
+
 #End Region
 
 #Region " CRUD "
@@ -216,13 +242,14 @@ Namespace Controllers
                          Order By p.Priority Descending, p.DueDate Descending)
 
             Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
-            Dim criteria = GetSearchCriteria(searchModel)
+            'Dim criteria = GetSearchCriteria(searchModel)
             Dim totalItems As Integer = 0
 
-            Dim data = Me.TaskRepository.Search(query, criteria, searchModel.SortFields,
-                                                searchModel.SortDirections, searchModel.PageSize,
-                                                searchModel.PageNumber, totalItems).ToList
+            'Dim data = Me.TaskRepository.Search(query, criteria, searchModel.SortFields,
+            '                                    searchModel.SortDirections, searchModel.PageSize,
+            '                                    searchModel.PageNumber, totalItems).ToList
 
+            Dim data = GetSearch(searchModel)
             Dim out = New DtoTasks(data)
 
             Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)

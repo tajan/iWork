@@ -690,6 +690,7 @@
     <Compile Include="server\Controllers\TaskController.vb" />
     <Compile Include="server\Controllers\ProjectController.vb" />
     <Compile Include="server\Controllers\SprintController.vb" />
+    <Compile Include="server\Helper\ReplaceVisitor.vb" />
     <Compile Include="server\Models\Task.vb">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>

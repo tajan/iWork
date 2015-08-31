@@ -114,7 +114,7 @@
                 <li data-datetime="{{item.activityDate | date:'yyyy/MM/dd'}}" class="timeline-separator"></li>
                 <li ng-repeat="activity in activities | filter: {activityDate: item.activityDate} | unique:'user.userId'">
                     <div class="timeline-badge primary">
-                        <img http-src="{{activity.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                        <img style="margin:2px;" http-src="{{activity.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
                     </div>
                     <div class="timeline-panel">
                         <div ng-class="timelineAlt ? 'right' : 'left'" class="popover">

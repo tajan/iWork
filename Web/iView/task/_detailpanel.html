@@ -1,21 +1,20 @@
 ﻿ <div ng-init="initView(task.taskId)">
-    <ul class="timeline-alt" ng-repeat="item in activities | unique:'activityDate' | orderBy:'activityDate': true">
-        <li data-datetime="{{item.activityDate | date:'yyyy/MM/dd'}}" class="timeline-separator"></li>
-        <li ng-repeat="activity in activities | filter: {activityDate: item.activityDate} | unique:'user.userId'">
-            <div class="timeline-badge primary">
-                <img http-src="{{activity.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
-            </div>
-            <div class="timeline-panel">
-                <div ng-class="timelineAlt ? 'right' : 'left'" class="popover">
-                    <h4 class="popover-title">{{activity.user.displayName}}</h4>
-                    <div class="arrow"></div>
-                    <div class="popover-content">
-                        <div ng-repeat="act in activities | filter: {activityDate: item.activityDate, user: activity.user }">
-                            <small>{{act.description}} ({{act.duration}}m)</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+     <ul class="list-group">
+         <li class="row list-group-item pr0 pl0" ng-repeat="item in activities">
+             <div class="col-sm-10">
+                 <div class="pull-left mr">
+                     <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb24 center-block" />
+                 </div>
+                 <p class="mb-sm text-sm">
+                     {{item.description}}
+                 </p>
+                 <p class="text-sm text-muted">
+                     <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                 </p>
+             </div>
+             <div class="col-sm-2">
+                 <small class="pull-right">{{item.duration}} m</small>
+             </div>
+         </li>
+     </ul>
 </div>

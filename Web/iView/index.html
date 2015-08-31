@@ -75,15 +75,6 @@
                             <row iv-type="default">
                                 <column iv-type="default" iv-size="12">
                                     <div class="container-fluid">
-                                        <div class="label label-default text text-normal text-gray-dark pull-right">
-                                            Started at {{task.startDate | date:'yyyy/MM/dd'}}
-                                        </div>
-
-                                    </div>
-                                    <div class="container-fluid">
-                                        <div class="label label-default text text-normal text-gray-dark pull-right">
-                                            Due on {{task.dueDate | date:'yyyy/MM/dd'}}
-                                        </div>
                                         <div ng-switch="task.priority" class="label pull-left" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info'}[task.priority]">
                                             <span ng-switch-when="1">
                                                 High
@@ -94,6 +85,12 @@
                                             <span ng-switch-when="3">
                                                 Low
                                             </span>
+                                        </div>
+                                        <div class="label label-default text text-normal text-gray-dark pull-right  ml-sm mb-sm">
+                                            Due on {{task.dueDate | date:'yyyy/MM/dd'}}
+                                        </div>
+                                        <div class="label label-default text text-normal text-gray-dark pull-right">
+                                            Started at {{task.startDate | date:'yyyy/MM/dd'}}
                                         </div>
                                     </div>
                                     <div class="container-fluid text-sm mt">

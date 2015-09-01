@@ -53,7 +53,9 @@ Namespace Controllers
 
 
 
-            Dim q = (From p In Me.GetAvailableQuery)
+            Dim q = (From p In Me.GetAvailableQuery
+                     Where Not p.Archived)
+
             If searchModel.SearchTerm IsNot Nothing Then
 
 
@@ -212,8 +214,8 @@ Namespace Controllers
                 data.RealEndDate = Now.Date
             End If
 
-            Dim task = (From p In GetAvailableQuery() Where data.TaskId = p.TaskId AndAlso p.Archived = False AndAlso p.Status = TaskStatuses.Done _
-                        AndAlso p.Project.ProjectMembers.Any(Function(x) x.MembershipType = ProjectMembershipTypes.Manager AndAlso x.UserId = CurrentUserId)).SingleOrDefault
+            Dim task = (From p In Me.TaskRepository.GetAll Where data.TaskId = p.TaskId AndAlso p.Archived = False AndAlso p.Status = TaskStatuses.Done _
+                        AndAlso p.Project.ProjectMembers.Any(Function(x) x.UserId = CurrentUserId AndAlso x.MembershipType = ProjectMembershipTypes.Manager)).SingleOrDefault
 
             If task Is Nothing Then
                 Return ResponseModel.Create(HttpStatusCode.NotFound)

@@ -1,3 +1,3 @@
-﻿iWork.factory('publicSearchDataService', function () {
-	return { term: '' };
+﻿iWork.factory('publicSearchDataService', function ($rootScope) {
+    return { term: $rootScope.$storage['search'] };
 });

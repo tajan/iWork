@@ -35,25 +35,24 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
 
         $scope.model = {
             fromDate: fromDate,
-            toDate: toDate
+            toDate: toDate,
         };
 
     };
 
     $scope.search = function () {
-
         $scope.searchResult = {
             totalMinutes: 0,
-            totalCount: 0
+            totalCount: 0,
+            totalHour: 0
         };
-
         dataFactory.activity.search($scope.model).success(function (response) {
             $scope.activities = response.data;
-
             angular.forEach($scope.activities, function (activity) {
                 $scope.searchResult.totalCount += 1;
                 $scope.searchResult.totalMinutes += activity.duration;
             });
+            $scope.searchResult.totalHour = $scope.searchResult.totalMinutes/60
         });
     };
 

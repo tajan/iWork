@@ -6,7 +6,7 @@
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
         <div ng-repeat="status in taskStatuses | orderBy:'viewOrder'" class="col-md-3 br">
-            <div>{{status.title}}</div>
+            <div class="text-muted text-sm" >{{status.title}}</div>
             <hr style="margin-bottom: 10px; margin-top: 3px">
             <div id="portlet{{status.id}}" ui-sortable="sortableOptions" ng-model="tasksByStatus[status.id]" portlet class="sortable-box">
 

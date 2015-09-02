@@ -6,7 +6,7 @@
     },
     {
         "text": "My Board",
-        "icon": "fa fa-desktop",
+        "icon": "icon-grid",
         "sref": "app.index"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "text": "Activities",
-        "icon": "fa fa-book",
+        "icon": "fa fa-flash",
         "sref": "app.activity"
     }
 ]

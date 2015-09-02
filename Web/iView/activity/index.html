@@ -14,49 +14,48 @@
             </button>
         </form:actionpanel>
     </form>
-    <row iv-type="default">
-        <div class="col-xs-12">
-            <panel iv-type="default">
-                <panel:header iv-type="default">
-                    <panel:header:title iv-type="default">
-                        Activities
-                    </panel:header:title>
-                </panel:header>
-                <panel:content iv-type="default">
-                    <scrollable height="50" class="list-group">
-                        <div class="row list-group-item" ng-repeat="item in activities">
-                            <div class="col-sm-1">
-                                <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb48 center-block" />
-                            </div>
-                            <div class="col-sm-10">
-                                <p class="mb-sm text-primary">
-                                    <a class="text-muted" ui-sref="app.projectview({id: item.projectId})">
-                                        {{item.projectCodeName}} - {{item.projectTitle}}
-                                    </a>
-                                </p>
-                                <p class="mb-sm text-primary">
-                                    <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                        {{item.taskTitle}}
-                                    </a>
-                                </p>
-                                <p class="mb-sm text">
-                                    {{item.description}}
-                                </p>
-                                <p class="text-sm">
-                                    <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
-                                </p>
-                            </div>
-                            <div class="col-sm-1">
-                                <small class="pull-right">{{item.duration}} m</small>
-                            </div>
-                        </div>
-                    </scrollable>
-                </panel:content>
-                <panel:footer iv-type="default">
-                    Total Count: {{searchResult.totalCount}}, Total Minutes: {{searchResult.totalMinutes}}, Total Hour: {{searchResult.totalHour  | number:1}}
-                </panel:footer>
-            </panel>
-        </div>
-
-    </row>
+    <panel iv-type="default">
+        <panel:header iv-type="default">
+            <panel:header:title iv-type="default">
+                Activities
+            </panel:header:title>
+        </panel:header>
+        <panel:content iv-type="default">
+            <div class="list-group">
+                <div class="row row-table list-group-item" ng-repeat="item in activities">
+                    <div class="col-sm-1">
+                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb48 center-block" />
+                    </div>
+                    <div class="col-sm-1">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted" ui-sref="app.projectview({id: item.projectId})">
+                                {{item.projectCodeName}} - {{item.projectTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="mb-sm text">
+                            {{item.description}}
+                        </p>
+                        <p class="text-sm">
+                            <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+                        <em class="fa fa-clock-o" tooltip="Duration"> {{item.duration}}</em>
+                    </div>
+                </div>
+            </div>
+        </panel:content>
+        <panel:footer iv-type="default">
+            Total Count: {{searchResult.totalCount}}, Total Minutes: {{searchResult.totalMinutes}}, Total Hour: {{searchResult.totalHour  | number:1}}
+        </panel:footer>
+    </panel>
 </controller>

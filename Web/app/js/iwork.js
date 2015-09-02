@@ -1,4 +1,4 @@
-﻿var iWork = angular.module('iWork', ['angle','ui.sortable']);
+﻿var iWork = angular.module('iWork', ['angle', 'ui.sortable', 'ui.select']);
 var log = function (i) {
     console.log(i)
 }

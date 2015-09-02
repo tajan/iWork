@@ -1,6 +1,6 @@
 ﻿
 
-iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'Notify', function ($window, $http, publicSearchDataService, Notify) {
+iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'filteringDataService', 'Notify', function ($window, $http, publicSearchDataService, filteringDataService, Notify) {
 
     var dataFactory = {
         baseUrl: '/api'
@@ -58,13 +58,11 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'No
         });
     };
     dataFactory.getWithSearch = function (url) {
-
         var apiUrl = dataFactory.baseUrl + url;
-
         var searchParams = {
-            searchTerm: publicSearchDataService.term
+            searchTerm: publicSearchDataService.term,
+            filteringParams: filteringDataService.params
         };
-
         return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
             success(function (response, status, headers, config) {
                

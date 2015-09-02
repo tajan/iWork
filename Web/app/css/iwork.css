@@ -107,3 +107,20 @@
     left: 0px;
     opacity: 0.3;
 }
+
+
+/*
+    Filtering
+*/
+.offsidebar .form-group .input-group,
+.offsidebar .form-group > .col-sm-4,
+.offsidebar .form-group > .col-sm-10,
+.offsidebar .form-group label{
+    width:100%;
+
+}
+
+.offsidebar fieldset{
+    margin-bottom:0px;
+    border-bottom:none;
+}

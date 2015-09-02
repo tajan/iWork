@@ -12,6 +12,7 @@
     <!-- Application styles-->
     <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
     <link rel="stylesheet" href="app/css/app-rtl.css" data-ng-if="app.layout.isRTL">
+    <link href="vendor/angular-ui-select/dist/select.css" rel="stylesheet" />
     <link rel="stylesheet" href="app/css/iwork.css">
     <!-- Themes-->
     <link rel="stylesheet" ng-href="{{app.layout.theme}}" data-ng-if="app.layout.theme">
@@ -27,6 +28,7 @@
 
     <!-- iWork Resource -->
     <script src="app/lib/ui-sortable-master/src/sortable.js"></script>
+    <script src="vendor/angular-ui-select/dist/select.js"></script>
     <!-- iWork App -->
     <script src="app/js/iwork.js"></script>
     <script src="app/js/iwork.auth.js"></script>
@@ -55,15 +57,18 @@
     <script src="app/js/directives/smart-input-direction.directive.js"></script>
     <script src="app/js/directives/style-picker.directive.js"></script>
     <script src="app/js/directives/toggle-fullscreen.directive.js"></script>
+    <script src="app/js/directives/filtering-notifire.directive.js"></script>
     <!-- Services -->
-    <script src="app/js/services/data.service.js"></script>
+    <script src="app/js/services/filtering.service.js"></script>
     <script src="app/js/services/publicsearchdata.service.js"></script>
+    <script src="app/js/services/data.service.js"></script>
     <!-- Controllers -->
     <script src="app/js/controllers/userstory.ctrl.js"></script>
     <script src="app/js/controllers/activity.ctrl.js"></script>
     <script src="app/js/controllers/calendar.ctrl.js"></script>
     <script src="app/js/controllers/date.ctrl.js"></script>
     <script src="app/js/controllers/datetime.ctrl.js"></script>
+    <script src="app/js/controllers/filtering.ctrl.js"></script>
     <script src="app/js/controllers/grid.ctrl.js"></script>
     <script src="app/js/controllers/project.ctrl.js"></script>
     <script src="app/js/controllers/public-search.ctrl.js"></script>

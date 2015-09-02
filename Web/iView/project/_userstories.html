@@ -1,9 +1,8 @@
-﻿<h3>
+﻿<h3 class="mt0">
     User Stories
     <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.userstoryadd({projectId: model.projectId})"></nav>
 </h3>
 <panel iv-type="default">
-
     <panel:content iv-type="default">
         <scrollable height="50" class="list-group">
             <a class="list-group-item">
@@ -20,7 +19,7 @@
             <div class="list-group-item" ng-repeat="userstory in userStories">
                 <div class="media-box">
                     <div class="media-box-body clearfix">
-                        <div class="row">
+                        <div class="row row-table">
                             <div class="col-xs-9">
                                 <div class="form-group">
                                     <strong class="media-box-heading" ng-class="{1:'text-danger', 2:'text-warning', 3:'text-info', 4:'text-success'}[userstory.status]">
@@ -33,7 +32,13 @@
                                     <file-download-list ng-repeat="file in userstory.filesList"></file-download-list>
                                 </div>
                             </div>
-                            <div class="col-xs-1">{{userstory.score}}</div>
+                            <div class="col-xs-1">
+                                <div class="ph" tooltip="Score">
+                                    <p class="m0 text-muted">
+                                        <em class="icon-diamond mr fa-lg"></em>{{userstory.score}}
+                                    </p>
+                                </div>
+                            </div>
                             <div class="col-xs-2">
                                 <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.taskadd({userStoryId: userstory.userStoryId, projectId: userstory.projectId})"></nav>
                                 <div ng-switch="userstory.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[userstory.status]">
@@ -58,6 +63,6 @@
         </scrollable>
     </panel:content>
     <panel:footer iv-type="default">
-        <small>Summary will be here!</small>
+        
     </panel:footer>
 </panel>

@@ -5,10 +5,10 @@
 <controller iv-type="default" iv-name="ProjectController" iv-init="initProjectView();">
     <div class="row">
         <div class="col-lg-9">
-            
+            <include iv-source="~/iview/project/_gantt.html" /> 
+            <include iv-source="~/iview/project/_userstories.html" />
         </div>
         <div class="col-lg-3">
-
             <!--Project detail panel Start-->
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -86,33 +86,9 @@
             </div>
             <!--Project Files panel End-->
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <include iv-source="~/iview/project/_gantt.html" /> 
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-md-9 col-sm-12">
-            <include iv-source="~/iview/project/_userstories.html" />
-        </div>
-        <div class="col-md-3 col-sm-12">
+            <!--Project Sprint panel Start-->
             <include iv-source="~/iview/project/_sprints.html" />
+            <!--Project Sprint panel End-->
         </div>
     </div>
-    <!--<div class="row">
-        <div class="col-xs-12">
-            <include iv-source="~/iview/project/_detail.html" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-9 col-sm-12">
-            <include iv-source="~/iview/project/_userstories.html" />
-        </div>
-        <div class="col-md-3 col-sm-12">
-            <include iv-source="~/iview/project/_sprints.html" />
-        </div>
-    </div>-->
 </controller>

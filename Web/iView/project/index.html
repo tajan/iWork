@@ -11,9 +11,7 @@
     </div>
 </h3>
 <controller iv-type="default" iv-name="ProjectController" iv-init="initProjectsView();">
-    <div class="row">
         <div ng-repeat="project in projects | filter:filterQuery">
             <include iv-source="~/iview/project/_projectwidget.html" />
         </div>
-    </div>
 </controller>

@@ -2,6 +2,16 @@
     Tasks
     <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.taskadd()"></nav>
     <nav iv-type="default" iv-icon="fa-archive" iv-label="Archive" iv-state="app.taskarchive()"></nav>
+    <div ng-controller="ClientFiltering" class="btn-group pull-right mr" ng-init="init({status : 'null'})">
+        <label class="btn btn-default btn-sm active " ng-disabled="true">
+            <i class="fa-filter fa"></i>
+        </label>
+        <label class="btn btn-default btn-sm active " ng-model="model.status" btn-radio="'null'">All</label>
+        <label class="btn btn-danger btn-sm active" ng-model="model.status" btn-radio="'1'">Pending</label>
+        <label class="btn btn-warning btn-sm" ng-model="model.status" btn-radio="'2'">In progress</label>
+        <label class="btn btn-info btn-sm" ng-model="model.status" btn-radio="'3'">Ready For Test</label>
+        <label class="btn btn-success btn-sm" ng-model="model.status" btn-radio="'4'">Done</label>
+    </div>
 </h3>
 <controller iv-type="default" iv-name="TaskController" iv-init="initView();">
     <a class="list-group-item  hidden-xs">
@@ -18,7 +28,7 @@
         </div>
     </a>
     <div class="list-group">
-        <div class="list-group-item" ng-repeat="task in tasks">
+        <div class="list-group-item" ng-repeat="task in tasks | filter:filterQuery">
             <div class="row row-flush row-table ">
                 <div class="col-xs-10 col-sm-5">
                     <span class="pull-left circle circle-lg text-left visible-xs" ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.status]"></span>

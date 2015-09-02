@@ -1,5 +1,6 @@
 ﻿
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', 'Notify', function ($scope, dataFactory, $state, $timeout, $rootScope, Notify) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', 'Notify', 'clientFilteringDataService',
+    function ($scope, dataFactory, $state, $timeout, $rootScope, Notify, clientFilteringDataService) {
 
     var now = moment().format('YYYY-MM-DD');
 
@@ -10,6 +11,11 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.taskStatuses = dataFactory.taskStatus.getAll();
     $scope.taskTypes = dataFactory.taskTypes.getAll();
     $scope.taskSupportTypes = dataFactory.taskTypes.getSupport();
+    $scope.filterQuery = clientFilteringDataService.params;
+
+    $rootScope.$on("clientFiltering", function (a, model) {
+        $scope.filterQuery = model;
+    });
 
     $scope.model = {
         taskId: $state.params['id'],

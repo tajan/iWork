@@ -169,6 +169,7 @@
     <Content Include="app\js\base.js" />
     <Content Include="app\js\controllers\activity.ctrl.js" />
     <Content Include="app\js\controllers\calendar.ctrl.js" />
+    <Content Include="app\js\controllers\client-filtering.ctrl.js" />
     <Content Include="app\js\controllers\date.ctrl.js" />
     <Content Include="app\js\controllers\datetime.ctrl.js" />
     <Content Include="app\js\controllers\filtering.ctrl.js" />

@@ -1,4 +1,5 @@
-﻿iWork.controller('ProjectController', ['$scope', 'dataFactory', '$state', 'colors', function ($scope, dataFactory, $state, colors) {
+﻿iWork.controller('ProjectController', ['$scope', '$rootScope', 'dataFactory', '$state', 'colors','clientFilteringDataService',
+    function ($scope, $rootScope, dataFactory, $state, colors, clientFilteringDataService) {
 
     var projectId = $state.params["id"];
 
@@ -9,23 +10,22 @@
     $scope.tasks = [];
     $scope.userStories = [];
     $scope.ganttTask = { data: [] };
+    $scope.filterQuery = clientFilteringDataService.params;
+
+    $rootScope.$on("clientFiltering", function (a, model) {
+        $scope.filterQuery = model;
+    });
 
     $scope.initProjectsView = function () {
-
         //Project data
         dataFactory.project.getAll().success(function (response) {
             $scope.projects = response.data;
         });
-
     };
 
     $scope.initProjectView = function () {
-
         gantt.config.add_column = false;
-
-
         if (projectId) {
-
             //Project data
             dataFactory.project.getById(projectId).success(function (response) {
                 $scope.model = response.data;
@@ -42,42 +42,30 @@
             });
 
             dataFactory.task.getByProject(projectId).success(function (response) {
-
                 $scope.tasks = response.data;
                 angular.forEach($scope.tasks, function (task) {
-
                     var startDate = moment(task.startDate).format('DD-MM-YYYY');
                     var endDate = moment(task.realEndDate || task.dueDate);
                     var duration = parseInt(moment.duration(endDate.diff(startDate)).asDays() + 1);
-
                     var ganttTask = { id: task.taskId, text: task.title, start_date: startDate, duration: duration, progress: task.progress / 100, status: task.status };
                     $scope.ganttTask.data.push(ganttTask);
                 });
-
-
-
-
             });
 
         };
     };
 
     $scope.initModel = function () {
-
         //Members data
         dataFactory.user.getAllMinimal().success(function (response) {
             $scope.members = response.data;
         });
-
         if (projectId) {
-
             //Project data
             dataFactory.project.getById(projectId).success(function (response) {
                 $scope.model = response.data;
             });
-
         };
-
     };
 
     $scope.submitform = function (actionName, $event) {

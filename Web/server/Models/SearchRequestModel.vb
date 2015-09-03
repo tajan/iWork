@@ -7,8 +7,7 @@
         Public Property SortFields() As New List(Of String)
         Public Property SortDirections() As New List(Of String)
         Public Property SearchTerm() As String = ""
-
-
+    
     End Class
 
     Public Class IdRequestModel

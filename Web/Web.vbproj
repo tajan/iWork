@@ -208,6 +208,7 @@
     <Content Include="app\js\iwork.auth.js" />
     <Content Include="app\js\iwork.route.js" />
     <Content Include="app\js\modules\notify.js" />
+    <Content Include="app\js\services\client-filtering.service.js" />
     <Content Include="app\js\services\data.service.js" />
     <Content Include="app\js\services\filtering.service.js" />
     <Content Include="app\lib\ui-sortable-master\src\sortable.js" />

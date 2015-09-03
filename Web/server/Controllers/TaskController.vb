@@ -234,7 +234,7 @@ Namespace Controllers
 #End Region
 
 #Region " Report "
-
+        <HttpGet>
         Public Function GetMyBoard(searchTerm As String) As SearchResponseModel
 
 
@@ -256,6 +256,11 @@ Namespace Controllers
 
             Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)
 
+        End Function
+
+        Public Function GetMyBoard() As SearchResponseModel
+
+            Return Me.GetMyBoard(String.Empty)
         End Function
 
         Public Function GetAll(searchTerm As String) As ResponseModel

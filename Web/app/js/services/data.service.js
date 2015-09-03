@@ -59,11 +59,17 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
     };
     dataFactory.getWithSearch = function (url) {
         var apiUrl = dataFactory.baseUrl + url;
-        var searchParams = {
+
+        if (!publicSearchDataService.term)
+        {
+            publicSearchDataService.term=""
+        }
+
+       var searchParams = {
             searchTerm: publicSearchDataService.term,
-            filteringParams: filteringDataService.params
+           //filteringParams: filteringDataService.params
         };
-        return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
+       return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
             success(function (response, status, headers, config) {
                
             }).

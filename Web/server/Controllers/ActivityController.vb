@@ -124,63 +124,6 @@ Namespace Controllers
 
         End Function
 
-        'Public Function Update(data As ActivitiesViewModel) As ResponseModel
-
-        '    If data Is Nothing OrElse data.Count = 0 Then
-        '        Return ResponseModel.Create(HttpStatusCode.BadRequest)
-        '    End If
-
-        '    Dim taskId = data(0).TaskId
-        '    Dim isAnythingChanged As Boolean = False
-        '    Dim activityIds = data.ToDictionary(Function(x) x.ActivityId)
-        '    Dim activitiesDic = (From p In GetAvailableQuery() Where activityIds.Keys.Contains(p.ActivityId)).ToDictionary(Function(x) x.ActivityId)
-
-        '    For Each activityViewModel In data
-
-        '        If activityViewModel.ActivityId = 0 Then
-
-        '            'insert
-        '            Dim activity As New Activity
-        '            activityViewModel.FillActivity(activity)
-        '            Me.ActivityRepository.Add(activity)
-        '            Me.ActivityRepository.Commit()
-        '            Me.Logger.Log(activity, ActivityActions.Add)
-
-        '        Else
-
-        '            Dim activityId = activityViewModel.ActivityId
-        '            If activitiesDic.ContainsKey(activityId) Then
-
-        '                'update
-        '                Dim activity = activitiesDic(activityId)
-
-        '                If activityViewModel.Description <> activity.Description OrElse activityViewModel.Duration <> activity.Duration Then
-
-        '                    isAnythingChanged = True
-        '                    activityViewModel.FillActivity(activity)
-        '                    Me.ActivityRepository.Update(activity)
-        '                    Me.Logger.Log(activity, ActivityActions.Update)
-
-        '                End If
-
-        '            End If
-
-        '        End If
-
-        '    Next
-
-        '    If isAnythingChanged Then
-        '        Me.ActivityRepository.Commit()
-        '    End If
-
-
-        '    Dim updatedActivities = (From p In GetAvailableQuery() Order By p.ActivityId Descending Where p.TaskId = taskId).ToList
-        '    Dim result = New ActivitiesViewModel(updatedActivities)
-
-        '    Return ResponseModel.Create(HttpStatusCode.OK, result)
-
-        'End Function
-
 #End Region
 
 #Region " Report "

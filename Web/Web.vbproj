@@ -229,6 +229,7 @@
     <Content Include="iView\filtering\_board.html" />
     <Content Include="iView\filtering\_default.html" />
     <Content Include="iView\filtering\_task.html" />
+    <Content Include="iView\help\index.html" />
     <Content Include="iView\project\_gantt.html" />
     <Content Include="iView\task\_activityactions.html" />
     <Content Include="iView\task\_archivepanel.html" />

@@ -30,6 +30,12 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         });
 
     $stateProvider
+        .state('app.help', {
+            url: '/help',
+            templateUrl: getViewUrl('help/index.html'),
+            title: 'Login',
+            access: 'public'
+        })
         .state('page.login', {
             url: '/login',
             templateUrl: getViewUrl('account/login.html'),

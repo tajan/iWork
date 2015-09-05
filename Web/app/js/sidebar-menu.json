@@ -23,5 +23,10 @@
         "text": "Activities",
         "icon": "fa fa-flash",
         "sref": "app.activity"
+    },
+    {
+        "text": "Help",
+        "icon": "fa fa-medkit",
+        "sref": "app.help"
     }
 ]

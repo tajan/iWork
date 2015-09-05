@@ -62,12 +62,12 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
 
         if (!publicSearchDataService.term)
         {
-            publicSearchDataService.term=""
+            publicSearchDataService.term = "";
         }
-
+        log(filteringDataService.params)
        var searchParams = {
             searchTerm: publicSearchDataService.term,
-           //filteringParams: filteringDataService.params
+            filteringParams: filteringDataService.params
         };
        return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
             success(function (response, status, headers, config) {

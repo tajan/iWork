@@ -26,6 +26,128 @@
                     <em class="fa fa-navicon"></em>
                 </a>
             </li>
+
+            <li dropdown="" class="dropdown dropdown-list open">
+                <a dropdown-toggle="" aria-haspopup="true" aria-expanded="true">
+                    <em class="icon-drop"></em>
+                </a>
+                <!-- START Dropdown menu-->
+                <ul class="dropdown-menu animated flipInX">
+                    <li>
+                        <div class="table-grid mb">
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-a.css" class="ng-untouched ng-valid ng-dirty">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-info"></span>
+                                            <span class="color bg-info-light"></span>
+                                        </span>
+                                        <span class="color bg-white"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-b.css" class="ng-untouched ng-valid ng-dirty">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-green"></span>
+                                            <span class="color bg-green-light"></span>
+                                        </span>
+                                        <span class="color bg-white"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-c.css" class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-purple"></span>
+                                            <span class="color bg-purple-light"></span>
+                                        </span>
+                                        <span class="color bg-white"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-d.css" class="ng-pristine ng-untouched ng-valid">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-danger"></span>
+                                            <span class="color bg-danger-light"></span>
+                                        </span>
+                                        <span class="color bg-white"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-grid mb">
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-e.css" class="ng-pristine ng-untouched ng-valid">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-info-dark"></span>
+                                            <span class="color bg-info"></span>
+                                        </span>
+                                        <span class="color bg-gray-dark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-f.css" class="ng-pristine ng-untouched ng-valid">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-green-dark"></span>
+                                            <span class="color bg-green"></span>
+                                        </span>
+                                        <span class="color bg-gray-dark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-g.css" class="ng-pristine ng-untouched ng-valid">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-purple-dark"></span>
+                                            <span class="color bg-purple"></span>
+                                        </span>
+                                        <span class="color bg-gray-dark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col mb">
+                                <div class="setting-color">
+                                    <label>
+                                        <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="app/css/theme-h.css" class="ng-pristine ng-untouched ng-valid">
+                                        <span class="icon-check"></span>
+                                        <span class="split">
+                                            <span class="color bg-danger-dark"></span>
+                                            <span class="color bg-danger"></span>
+                                        </span>
+                                        <span class="color bg-gray-dark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END list group-->
+                    </li>
+                </ul>
+                <!-- END Dropdown menu-->
+            </li>
+
             <!-- START User avatar toggle-->
             <li>
                 <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
@@ -50,7 +172,7 @@
         <ul class="nav navbar-nav navbar-right">
             <!-- Search icon-->
             <li>
-                <a search-open >
+                <a search-open>
                     <em class="icon-magnifier"></em>
                     <span search-notifier class="circle circle-default circle-lg text-left pull-right"></span>
                 </a>

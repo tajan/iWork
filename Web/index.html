@@ -11,6 +11,19 @@
     <link rel="stylesheet" href="app/css/bootstrap-rtl.css" data-ng-if="app.layout.isRTL">
     <!-- Application styles-->
     <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
+    <link rel="stylesheet" href="app/css/theme-g.css" data-ng-if="!app.layout.isRTL">
+
+
+    <link rel="stylesheet" href="app/css/theme-a.css" ng-disabled="theme.name === 'theme1'">
+    <link rel="stylesheet" href="app/css/theme-b.css" ng-disabled="theme.name === 'theme2'">
+    <link rel="stylesheet" href="app/css/theme-c.css" ng-disabled="theme.name === 'theme1'">
+    <link rel="stylesheet" href="app/css/theme-d.css" ng-disabled="theme.name === 'theme2'">
+    <link rel="stylesheet" href="app/css/theme-e.css" ng-disabled="theme.name === 'theme1'">
+    <link rel="stylesheet" href="app/css/theme-f.css" ng-disabled="theme.name === 'theme2'">
+    <link rel="stylesheet" href="app/css/theme-g.css" ng-disabled="theme.name === 'theme1'">
+    <link rel="stylesheet" href="app/css/theme-h.css" ng-disabled="theme.name === 'theme2'">
+
+
     <link rel="stylesheet" href="app/css/app-rtl.css" data-ng-if="app.layout.isRTL">
     <link href="vendor/angular-ui-select/dist/select.css" rel="stylesheet" />
     <link rel="stylesheet" href="app/css/iwork.css">

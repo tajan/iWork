@@ -64,7 +64,6 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
         {
             publicSearchDataService.term = "";
         }
-        log(filteringDataService.params)
        var searchParams = {
             searchTerm: publicSearchDataService.term,
             filteringParams: filteringDataService.params

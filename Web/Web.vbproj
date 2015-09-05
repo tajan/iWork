@@ -187,6 +187,7 @@
     <Content Include="app\js\directives\file-download-list.directive.js" />
     <Content Include="app\js\directives\file-style.directive.js" />
     <Content Include="app\js\directives\filtering-notifire.directive.js" />
+    <Content Include="app\js\directives\focus-me.directive.js" />
     <Content Include="app\js\directives\gantt-column-add.directive.js" />
     <Content Include="app\js\directives\gantt-column.directive.js" />
     <Content Include="app\js\directives\gantt-template.directive.js" />

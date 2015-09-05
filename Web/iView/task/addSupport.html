@@ -1,6 +1,6 @@
 ﻿<controller iv-type="default" iv-name="TaskController" iv-init="initSupportModel();">
-    <form iv-type="default" iv-name="form" iv-title="Add Support Task">
-        <field:text iv-type="multiline" iv-name="title" iv-label="Title" />
+    <form iv-type="default" iv-name="form" iv-title="Add Support Task" >
+        <field:text iv-type="multiline" iv-name="title" iv-label="Title" iv-focus="true" />
         <field:date iv-type="default" iv-name="dueDate" iv-label="Date" iv-max-date="now" iv-default-date="now" />
         <field:text iv-type="default" iv-name="estimatedDuration" iv-label="Duration (minutes)" />
         <field:singleselection iv-type="default" iv-name="projectId" iv-label="Project" iv-list-name="projects" iv-placeholder="Select Project ..." iv-id="projectId" iv-title="title" iv-description="description" iv-on-change="onProjectChange()" />

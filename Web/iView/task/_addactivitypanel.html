@@ -1,6 +1,6 @@
 ﻿<row iv-type="default">
     <div class="col-sm-12">
-        <input type="text" smart-input-direction class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
+        <input type="text" focus-me="true" smart-input-direction class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="activity.description" ng-trim="false" />
         <div class="h-spacer"></div>
     </div>
 </row>
@@ -9,6 +9,7 @@
         <div class="input-group" ng-controller="DateController">
 
             <input 
+                   
                    placeholder="Date"
                    type="text"
                    name="createDate"

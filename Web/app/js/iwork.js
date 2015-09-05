@@ -21,13 +21,17 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($
         description: 'Open search',
         callback: function (event) {
             event.preventDefault();
-            $('[search-open]').trigger('click')
+            $timeout(function () {
+                $('[search-open]').trigger('click');
+            }, 100);
         }
     }).add({
         combo: 'f',
         description: 'Go to fullscreen mode',
         callback: function (event) {
-            $('[toggle-fullscreen]').trigger('click')
+            $timeout(function () {
+                $('[toggle-fullscreen]').trigger('click');
+            }, 100);
         }
     }).add({
         combo: 'ctrl+right',
@@ -48,14 +52,18 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($
         description: 'Next Page',
         callback: function (event) {
             event.preventDefault();
-            $('[ui-sref*=add]').first().trigger('click')
+            $timeout(function () {
+                $('[ui-sref*=add]').first().trigger('click');
+            }, 100);
         }
     }).add({
         combo: 'alt+n',
         description: 'Next Page',
         callback: function (event) {
             event.preventDefault();
-            $($('[ui-sref*=add]')[1]).trigger('click')
+            $timeout(function () {
+                $($('[ui-sref*=add]')[1]).trigger('click');
+            }, 100);
         }
     }).add({
         combo: 'r',
@@ -68,7 +76,9 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($
         description: 'Next Page',
         callback: function (event) {
             event.preventDefault();
-            $('[toggle-state=offsidebar-open]').trigger('click');
+            $timeout(function () {
+                $('[toggle-state=offsidebar-open]').trigger('click');
+            }, 100);
         }
     }).add({
         combo: 'c',

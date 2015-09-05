@@ -14,7 +14,7 @@ iWork.constant("$config", {
 });
 
 
-iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($rootScope, hotkeys, $window, $state, $timeout) {
+iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', 'Notify', function ($rootScope, hotkeys, $window, $state, $timeout, Notify) {
 
     hotkeys.bindTo($rootScope).add({
         combo: 'ctrl+f',
@@ -122,7 +122,16 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($
             }, 100);
 
         }
-    })
+    }).add({
+        combo: ["ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح", "ج", "چ", "گ", "ک", "م", "ن", "ت", "ا", "ل", "ب", "ی", "س", "ش", "و", "ئ", "د", "ذ", "ر", "ز", "ط", "ظ"],
+        description: 'Expand All',
+        callback: function (event) {
+            Notify.alert(
+                  "Keyboard is persian! hotkeys dosent work on this layout",
+                  { status: 'warning', pos: 'bottom-right' }
+              );
+        }
+    });
 
 
 

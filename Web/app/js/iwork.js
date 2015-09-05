@@ -103,8 +103,6 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($
         description: 'Expand All',
         callback: function (event) {
             event.preventDefault();
-
-            log('ctrl + shift + f')
             $timeout(function () {
                 if ($('[ng-controller=ClientFiltering]').find("label.active").is(":last-child")) {
                     $('[ng-controller=ClientFiltering]').find("label:nth-child(2)").trigger('click')

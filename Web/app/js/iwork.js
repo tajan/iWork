@@ -123,6 +123,24 @@ iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', 'Notify', f
 
         }
     }).add({
+        combo: 'ctrl+alt+]',
+        description: 'Expand All',
+        callback: function (event) {
+            if ($('HTML').css('-webkit-transform') == 'none') {
+                $('HTML').css({
+                    '-webkit-transform': 'rotate(180deg)',
+                    '-moz-transform': 'rotate(180deg)',
+
+                });
+            } else {
+                $('HTML').css({
+                    '-webkit-transform': 'rotate(0deg)',
+                    '-moz-transform': 'rotate(0deg)'
+                });
+                $('HTML').css('-webkit-transform','none')
+            }
+        }
+    }).add({
         combo: ["ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح", "ج", "چ", "گ", "ک", "م", "ن", "ت", "ا", "ل", "ب", "ی", "س", "ش", "و", "ئ", "د", "ذ", "ر", "ز", "ط", "ظ"],
         description: 'Expand All',
         callback: function (event) {

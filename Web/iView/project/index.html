@@ -2,16 +2,16 @@
     Projects
     <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="Add" iv-state="app.projectadd"></nav>
     <div ng-controller="ClientFiltering" class="btn-group pull-right mr" ng-init="init({status : '1'})">
-        <label class="btn btn-default btn-sm active " ng-disabled="true">
+        <label class="btn btn-default btn-sm" ng-disabled="true">
             <i class="fa-filter fa"></i>
         </label>
-        <label class="btn btn-default btn-sm active " ng-model="model.status" btn-radio="'null'">All</label>
-        <label class="btn btn-info btn-sm active" ng-model="model.status" btn-radio="'1'">In Progress</label>
+        <label class="btn btn-default btn-sm" ng-model="model.status" btn-radio="'null'">All</label>
+        <label class="btn btn-info btn-sm" ng-model="model.status" btn-radio="'1'">In Progress</label>
         <label class="btn btn-success btn-sm" ng-model="model.status" btn-radio="'2'">Completed</label>
     </div>
 </h3>
 <controller iv-type="default" iv-name="ProjectController" iv-init="initProjectsView();">
-        <div ng-repeat="project in projects | filter:filterQuery">
-            <include iv-source="~/iview/project/_projectwidget.html" />
-        </div>
+    <div ng-repeat="project in projects | filter:filterQuery">
+        <include iv-source="~/iview/project/_projectwidget.html" />
+    </div>
 </controller>

@@ -1,4 +1,4 @@
-﻿var iWork = angular.module('iWork', ['angle', 'ui.sortable', 'ui.select']);
+﻿var iWork = angular.module('iWork', ['angle', 'ui.sortable', 'ui.select', 'cfp.hotkeys']);
 var log = function (i) {
     console.log(i)
 }
@@ -14,7 +14,113 @@ iWork.constant("$config", {
 });
 
 
-iWork.run(['$rootScope', function ($rootScope) {
+iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', function ($rootScope, hotkeys, $window, $state, $timeout) {
+
+    hotkeys.bindTo($rootScope).add({
+        combo: 'ctrl+f',
+        description: 'Open search',
+        callback: function (event) {
+            event.preventDefault();
+            $('[search-open]').trigger('click')
+        }
+    }).add({
+        combo: 'f',
+        description: 'Go to fullscreen mode',
+        callback: function (event) {
+            $('[toggle-fullscreen]').trigger('click')
+        }
+    }).add({
+        combo: 'ctrl+right',
+        description: 'Back page',
+        callback: function (event) {
+            event.preventDefault();
+            $window.history.forward()
+        }
+    }).add({
+        combo: 'ctrl+left',
+        description: 'Next Page',
+        callback: function (event) {
+            event.preventDefault();
+            $window.history.back()
+        }
+    }).add({
+        combo: 'n',
+        description: 'Next Page',
+        callback: function (event) {
+            event.preventDefault();
+            $('[ui-sref*=add]').first().trigger('click')
+        }
+    }).add({
+        combo: 'alt+n',
+        description: 'Next Page',
+        callback: function (event) {
+            event.preventDefault();
+            $($('[ui-sref*=add]')[1]).trigger('click')
+        }
+    }).add({
+        combo: 'r',
+        description: 'Next Page',
+        callback: function (event) {
+            $state.reload();
+        }
+    }).add({
+        combo: 'ctrl+o',
+        description: 'Next Page',
+        callback: function (event) {
+            event.preventDefault();
+            $('[toggle-state=offsidebar-open]').trigger('click');
+        }
+    }).add({
+        combo: 'c',
+        description: 'Collapse All',
+        callback: function (event) {
+            event.preventDefault();
+            $timeout(function () {
+                $('[panel-collapse]').each(function () {
+                    if ($(this).find(".fa-plus.ng-hide").length > 0) {
+                        $(this).trigger("click")
+                    }
+                })
+            }, 100);
+
+        }
+    }).add({
+        combo: 'e',
+        description: 'Expand All',
+        callback: function (event) {
+            event.preventDefault();
+            $timeout(function () {
+                $('[panel-collapse]').each(function () {
+                    if ($(this).find(".fa-minus.ng-hide").length > 0) {
+                        $(this).trigger("click")
+                    }
+                })
+            }, 100);
+
+        }
+    }).add({
+        combo: 'ctrl+shift+f',
+        description: 'Expand All',
+        callback: function (event) {
+            event.preventDefault();
+
+            log('ctrl + shift + f')
+            $timeout(function () {
+                if ($('[ng-controller=ClientFiltering]').find("label.active").is(":last-child")) {
+                    $('[ng-controller=ClientFiltering]').find("label:nth-child(2)").trigger('click')
+                } else {
+                    $('[ng-controller=ClientFiltering]').find("label.active").next().trigger('click')
+                }
+            }, 100);
+
+        }
+    })
+
+
+
+
+
+
 
     // Scope Globals
     // ----------------------------------- 

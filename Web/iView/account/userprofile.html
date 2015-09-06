@@ -1,13 +1,106 @@
-<div class="unwrap" ng-controller="UserController" ng-init="initModel()">
+<div class="unwrap" ng-controller="UserController" ng-init="initView()">
     <div style="background-image: url(app/img/profile-bg.jpg)" class="bg-cover">
         <div class="p-xl text-center text-white">
-            <img http-src="{{app.user.picture.guid}}" alt="Image" class="img-thumbnail img-circle thumb128" />
-            <h3 class="m0">{{ app.user.displayName }}</h3>
-            <p>{{ app.user.email }}</p>
-            <p>{{ app.user.description }}</p>
+            <img ng-if="user.picture.guid" http-src="{{user.picture.guid}}" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <h3 class="m0">{{user.displayName }}</h3>
+            <p>{{ user.email }}</p>
+            <p>{{ user.description }}</p>
+            <div class="row m0 p0" ng-if="user.userId == app.user.userId">
+                <div class="col-mx-12 m0 p0">
+                    <button type="button" ui-sref="app.profileupdate" class="btn btn-default pull-right">
+                        <em class="fa fa-pencil"></em>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    <button type="button" ui-sref="app.profileupdate" class="btn btn-default pull-right">
-        Update Profile
-    </button>
+    <div class="text-center bg-gray p-lg mb-xl">
+        <div class="row row-table">
+            <div class="col-xs-3 br">
+                <h4 class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-rocket mr fa-lg"></em>00
+                    </p>
+                </h4>
+            </div>
+            <div class="col-xs-3 br">
+                <div class="ph" tooltip="Activity Count">
+                    <h4 class="m0 text-muted">
+                        <em class="fa fa-tasks mr fa-lg"></em>00
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <h4 class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-flash mr fa-lg"></em>00
+                    </p>
+                </h4>
+            </div>
+            <div class="col-xs-3">
+                <h4 class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-diamond mr fa-lg"></em>00
+                    </p>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-9">
+
+            <div class="row mb-lg">
+                <div class="col-sm-3 col-xs-6 text-center">
+                    <p>Current Project</p>
+                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="60" data-speed="30" data-line-color="{{colorByName('info')}}" data-remaining-line-color="#edf2f6" data-line-width="2"></canvas>
+                </div>
+                <div class="col-sm-3 col-xs-6 text-center">
+                    <p>Current Progress</p>
+                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="30" data-speed="30" data-line-color="{{colorByName('pink')}}" data-remaining-line-color="#edf2f6" data-line-width="2"></canvas>
+                </div>
+                <div class="col-sm-3 col-xs-6 text-center">
+                    <p>Space Usage</p>
+                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="50" data-speed="30" data-line-color="{{colorByName('purple')}}" data-remaining-line-color="#edf2f6" data-line-width="2"></canvas>
+                </div>
+                <div class="col-sm-3 col-xs-6 text-center">
+                    <p>Interactions</p>
+                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="75" data-speed="30" data-line-color="{{colorByName('warning')}}" data-remaining-line-color="#edf2f6" data-line-width="2"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3 class="mt0">{{user.displayName }}</h3>
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled ph-xl">
+                        <li>
+                            <em class="icon-envelope-open fa-fw mr-lg"></em>{{user.email}}
+                        </li>
+                        <li>
+                            <em class="icon-envelope-open fa-fw mr-lg"></em>{{user.secondaryEmail}}
+                        </li>
+                        <li>
+                            <em class="fa fa-phone fa-fw mr-lg"></em>{{user.phone}}
+                        </li>
+                        <li>
+                            <em class="fa fa-home fa-fw mr-lg"></em>{{user.home}}
+                        </li>
+                        <li>
+                            <em class="fa fa-mobile fa-fw mr-lg"></em>{{user.mobile}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
 </div>
+
+

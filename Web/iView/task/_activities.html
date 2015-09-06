@@ -48,7 +48,9 @@
                         <div class="row list-group-item" ng-repeat="item in activities">
                             <div ng-hide="editeState.editeMode{{item.activityId}}" class="col-sm-10">
                                 <div class="pull-left mr">
-                                    <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                    <a ui-sref="app.userprofileview({id: item.user.userId})">
+                                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                    </a>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="mb-sm  text-primary">
@@ -66,8 +68,9 @@
                             </div>
                             <div ng-show="editeState.editeMode{{item.activityId}}" class="col-sm-10">
                                 <div class="pull-left mr">
-
-                                    <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                    <a ui-sref="app.userprofileview({id: item.user.userId})">
+                                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                                    </a>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="description" name="description" placeholder="Write your activity..." ng-model="updateActivityModel.description" ng-trim="false" />
@@ -114,7 +117,9 @@
                 <li data-datetime="{{item.activityDate | date:'yyyy/MM/dd'}}" class="timeline-separator"></li>
                 <li ng-repeat="activity in activities | filter: {activityDate: item.activityDate} | unique:'user.userId'">
                     <div class="timeline-badge primary">
-                        <img style="margin:2px;" http-src="{{activity.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                        <a ui-sref="app.userprofileview({id: item.user.userId})">
+                            <img style="margin:2px;" http-src="{{activity.user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                        </a>
                     </div>
                     <div class="timeline-panel">
                         <div ng-class="timelineAlt ? 'right' : 'left'" class="popover">

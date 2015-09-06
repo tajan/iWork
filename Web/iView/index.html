@@ -96,10 +96,10 @@
                                     <div class="container-fluid text-sm mt">
                                         {{(task.title == task.description || 5 > task.description.length) ? task.title : (task.title + ': ' + task.description) }}
                                     </div>
-                                    <div class="container-fluid mt">
-                                        <div class="timeline-badge primary pull-left mr" ng-repeat="user in task.membersList">
-                                            <img http-src="{{user.picture.guid}}" alt="user.displayName" class="media-box-object img-circle thumb32 center-block" title="{{user.displayName}}" />
-                                        </div>
+                                    <a class="container-fluid mt">
+                                        <a class="timeline-badge primary pull-left mr" ng-repeat="user in task.membersList" ui-sref="app.userprofileview({id: user.userId})">
+                                            <img http-src="{{user.picture.guid}}" alt="user.displayName" class="media-box-object img-circle thumb32 center-block" title="{{user.displayName}}  {{user.email}}" />
+                                        </a>
                                     </div>
                                 </column>
                             </row>

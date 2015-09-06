@@ -62,7 +62,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.userprofileview', {
             url: '/UserProfileView/:id',
             title: "User Profile",
-            templateUrl: getViewUrl('account/userprofileview.html')
+            templateUrl: getViewUrl('account/userprofile.html')
         })
         .state('app.profileupdate', {
             url: '/UserProfile/update',

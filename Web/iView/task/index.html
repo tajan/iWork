@@ -27,13 +27,11 @@
             </div>
         </div>
     </a>
-
     <div ng-if="(tasks | filter:filterQuery).length == 0 ">
         <div class="well dirrtl text-center">
             <strong>No result to show.</strong><span> Remove filtering or improve your search term.</span>
         </div>
     </div>
-
     <div class="list-group">
         <div class="list-group-item" ng-repeat="task in tasks | filter:filterQuery">
             <div class="row row-flush row-table ">
@@ -65,7 +63,8 @@
                 <div class="col-xs-12 col-sm-2 hidden-xs">
                     <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in task.membersList">
                         <a class="text-muted text-dark" ui-sref="app.userprofileview({id: user.userId})">
-                            {{user.displayName}}
+                            <span ng-show="user.displayName.length > 0 ">{{user.displayName}}</span>
+                            <span ng-show="user.displayName.length <= 0 ">{{user.email}}</span>
                         </a>
                     </div>
                 </div>

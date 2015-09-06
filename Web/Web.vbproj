@@ -182,6 +182,7 @@
     <Content Include="app\js\controllers\task.ctrl.js" />
     <Content Include="app\js\controllers\user.ctrl.js" />
     <Content Include="app\js\controllers\userstory.ctrl.js" />
+    <Content Include="app\js\directives\all.default.js" />
     <Content Include="app\js\directives\dhx-gantt.directive.js" />
     <Content Include="app\js\directives\file-download-iconic-list.directive.js" />
     <Content Include="app\js\directives\file-download-list.directive.js" />
@@ -223,7 +224,6 @@
     <Content Include="iView\account\recover.html" />
     <Content Include="iView\account\register.html" />
     <Content Include="iView\account\profileupdate.html" />
-    <Content Include="iView\account\userprofileview.html" />
     <Content Include="iView\account\userprofile.html" />
     <Content Include="iView\activity\index.html" />
     <Content Include="iView\filtering\_board.html" />
@@ -651,6 +651,7 @@
     <Content Include="vendor\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="vendor\skycons\skycons.js" />
     <Content Include="vendor\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="vendor\sparklines\jquery.sparkline.min.js" />
     <Content Include="vendor\spinkit\css\spinkit.css" />
     <Content Include="vendor\textAngular\dist\textAngular-rangy.min.js" />
     <Content Include="vendor\textAngular\dist\textAngular-sanitize.js" />

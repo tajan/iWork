@@ -10,26 +10,17 @@
     $scope.login = function () {
 
         if ($scope.loginForm.$valid) {
-
             $scope.model.username = $scope.model.email;
-
             dataFactory.user.login($scope.model).then(function (response) {
-
                 //setting authentication token in local storage to send for each request using request interception
                 authFactory.setAuthenticationData(response.data);
-
                 //setting logged in user in root scope
                 dataFactory.user.getCurrent().success(function (response) {
-
                     authFactory.setUser(response.data);
-
                     //redirecting to default page (after login)
                     $state.transitionTo($config.DEFAULT_STATE);
 
                 });
-
-
-
             }, function (response) {
 
                 $scope.message = 'Invalid username or password!';
@@ -90,14 +81,20 @@
         dataFactory.user.postAction(actionName, $scope.model);
     };
 
+
+    $scope.color ='red'
+
     $scope.initModel = function () {
         $scope.model = $rootScope.app.user;
     };
-
     $scope.initView = function () {
         if ($scope.userId) {
-            $scope.user = dataFactory.user.getById($scope.userId);
-        };
+           dataFactory.user.getById($scope.userId).success(function (response) {
+               $scope.user = response.data;
+            });
+        } else {
+            $scope.user = $rootScope.app.user;
+        }
     };
 
 }]);

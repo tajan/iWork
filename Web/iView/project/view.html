@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-9">
             <include iv-source="~/iview/project/_userstories.html" />
-            <include iv-source="~/iview/project/_gantt.html" /> 
+            <include iv-source="~/iview/project/_gantt.html" />
         </div>
         <div class="col-lg-3">
             <!--Project detail panel Start-->
@@ -42,7 +42,6 @@
                 </div>
             </div>
             <!--Project detail panel End-->
-
             <!--Project Members panel Start-->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -51,29 +50,32 @@
                 </div>
                 <ul class="list-unstyled ph-lg">
                     <li ng-repeat="user in model.managersList">
-                        <div class="pull-left mr">
-                            <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
-                        </div>
-                        <div>
-                            <div>{{user.displayName}}</div>
-                            <div class="text-muted">{{user.email}}</div>
-                        </div>
+                        <a ui-sref="app.userprofileview({id: user.userId})">
+                            <div class="pull-left mr">
+                                <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                            </div>
+                            <div>
+                                <div>{{user.displayName}}</div>
+                                <div class="text-muted">{{user.email}}</div>
+                            </div>
+                        </a>
                         <hr />
                     </li>
                     <li ng-repeat="user in model.membersList">
-                        <div class="pull-left mr">
-                            <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
-                        </div>
-                        <div>
-                            <div>{{user.displayName}}</div>
-                            <div class="text-muted">{{user.email}}</div>
-                        </div>
+                        <a ui-sref="app.userprofileview({id: user.userId})">
+                            <div class="pull-left mr">
+                                <img http-src="{{user.picture.guid}}" alt="Image" class="media-box-object img-circle thumb32 center-block" />
+                            </div>
+                            <div>
+                                <div>{{user.displayName}}</div>
+                                <div class="text-muted">{{user.email}}</div>
+                            </div>
+                        </a>
                         <hr />
                     </li>
                 </ul>
             </div>
             <!--Project Members panel End-->
-
             <!--Project Files panel Start-->
             <div class="panel panel-default" ng-show="model.filesList.length">
                 <div class="panel-heading">
@@ -85,7 +87,6 @@
                 </div>
             </div>
             <!--Project Files panel End-->
-
             <!--Project Sprint panel Start-->
             <include iv-source="~/iview/project/_sprints.html" />
             <!--Project Sprint panel End-->

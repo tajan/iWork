@@ -133,8 +133,11 @@
                         </div>
                     </td>
                     <td class="wd-xs hidden-xs hidden-sm">
-                        <button tooltip="Edit project" class="btn pull-right btn-default" ui-sref="app.projectupdate({id: project.projectId})">
-                            <i class="fa-pencil fa"></i>
+                        <button ng-disabled="true" tooltip="Delete project" type="button" class="btn btn-sm btn-default  pull-right">
+                            <em class="fa fa-trash"></em>
+                        </button>
+                        <button type="button" tooltip="Edit project" class="btn btn-sm btn-default pull-right mr-sm" ui-sref="app.projectupdate({id: project.projectId})">
+                            <em class="fa fa-pencil"></em>
                         </button>
                     </td>
                     <!--<td class="wd-sm">

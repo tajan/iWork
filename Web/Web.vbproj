@@ -217,6 +217,11 @@
     <Content Include="app\lib\angular-hotkeys\hotkeys.js" />
     <Content Include="app\lib\angular-hotkeys\hotkeys.min.css" />
     <Content Include="app\lib\angular-hotkeys\hotkeys.min.js" />
+    <Content Include="app\lib\highcharts-ng-master\highcharts-ng.js" />
+    <Content Include="app\lib\highcharts-ng-master\highcharts-ng.min.js" />
+    <Content Include="app\lib\highchart\highcharts-more.js" />
+    <Content Include="app\lib\highchart\highcharts.js" />
+    <Content Include="app\lib\highchart\modules\exporting.js" />
     <Content Include="app\lib\ui-sortable-master\src\sortable.js" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />

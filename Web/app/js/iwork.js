@@ -1,4 +1,4 @@
-﻿var iWork = angular.module('iWork', ['angle', 'ui.sortable', 'ui.select', 'cfp.hotkeys']);
+﻿var iWork = angular.module('iWork', ['angle', 'ui.sortable', 'ui.select', 'cfp.hotkeys', 'highcharts-ng']);
 var log = function (i) {
     console.log(i)
 }

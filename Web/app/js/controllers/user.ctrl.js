@@ -82,19 +82,45 @@
     };
 
 
-    $scope.color ='red'
+    $scope.color = 'red'
 
     $scope.initModel = function () {
         $scope.model = $rootScope.app.user;
     };
     $scope.initView = function () {
         if ($scope.userId) {
-           dataFactory.user.getById($scope.userId).success(function (response) {
-               $scope.user = response.data;
+            dataFactory.user.getById($scope.userId).success(function (response) {
+                $scope.user = response.data;
             });
         } else {
             $scope.user = $rootScope.app.user;
         }
     };
 
+
+
+
+    $scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'areaspline'
+            },
+            plotOptions: {
+                series: {
+                    stacking: ''
+                }
+            }
+        },
+        series: [
+      { name: "first", data: [1, 1, 1] }
+        ],
+        title: {
+            text: 'Sample Highchart'
+        },
+        credits: {
+            enabled: true
+        },
+        loading: false,
+        size: {}
+    }
 }]);

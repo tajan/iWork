@@ -296,6 +296,9 @@ App
                                                        'vendor/html.sortable/dist/html.sortable.angular.js']
         },
         {
+            name: 'uiSortable', files: ['vendor/ui-sortable-master/src/sortable.js']
+        },
+        {
             name: 'xeditable', files: ['vendor/angular-xeditable/dist/js/xeditable.js',
                                                        'vendor/angular-xeditable/dist/css/xeditable.css']
         },

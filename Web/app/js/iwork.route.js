@@ -17,7 +17,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.index', {
             url: '/index',
             templateUrl: getViewUrl('index.html'),
-            resolve: helper.resolveFor('jquery-ui', 'jquery-ui-widgets'),
+            resolve: helper.resolveFor('jquery-ui', 'jquery-ui-widgets', 'uiSortable'),
             title: 'Default Page'
         })
         .state('page', {
@@ -82,7 +82,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
             url: '/project/add',
             templateUrl: getViewUrl('project/add.html'),
             title: 'Add Project',
-            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle','htmlSortable')
+            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle')
         })
         .state('app.projectview', {
             url: '/project/view/:id',
@@ -94,7 +94,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
             url: '/project/update/:id',
             templateUrl: getViewUrl('project/update.html'),
             title: 'Update Project',
-            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle', 'htmlSortable')
+            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle')
         });
 
     $stateProvider
@@ -140,7 +140,7 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.taskadd', {
             url: '/task/add/:projectId/:userStoryId',
             templateUrl: getViewUrl('task/add.html'),
-            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle', 'htmlSortable'),
+            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle'),
             title: 'Add Tasks'
         })
         .state('app.taskview', {
@@ -156,13 +156,13 @@ iWork.config(['$config', '$stateProvider', '$locationProvider', '$urlRouterProvi
         .state('app.taskupdate', {
             url: '/task/update/:id',
             templateUrl: getViewUrl('task/update.html'),
-            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle', 'htmlSortable'),
+            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle'),
             title: 'Update Tasks'
         })
         .state('app.taskaddsupport', {
             url: '/task/addsupport/:projectId/:userStoryId',
             templateUrl: getViewUrl('task/addsupport.html'),
-            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle', 'htmlSortable'),
+            resolve: helper.resolveFor('ui.select', 'angularFileUpload', 'filestyle'),
             title: 'Add Support Task'
         });
 

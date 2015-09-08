@@ -222,7 +222,6 @@
     <Content Include="app\lib\highchart\highcharts-more.js" />
     <Content Include="app\lib\highchart\highcharts.js" />
     <Content Include="app\lib\highchart\modules\exporting.js" />
-    <Content Include="app\lib\ui-sortable-master\src\sortable.js" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
     <Content Include="iView\account\login.html" />
@@ -675,6 +674,7 @@
     <Content Include="vendor\textAngular\src\textAngular.js" />
     <Content Include="vendor\textAngular\src\textAngularSetup.js" />
     <Content Include="vendor\textAngular\src\validators.js" />
+    <Content Include="vendor\ui-sortable-master\src\sortable.js" />
     <Content Include="vendor\weather-icons\css\weather-icons.min.css" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.svg" />
     <Content Include="vendor\whirl\dist\whirl.css" />

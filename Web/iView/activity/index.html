@@ -227,7 +227,7 @@
          ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy:'activityDateTime':false">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
-                {{items[0].activityDateTime}}
+                {{items[0].activityDateTime | moment:'YYYY/MM/DD'}}
                 <div class="pull-right text-center text-muted">
                     <div class="ph" tooltip="Activity Count">
                         <p class="m0 text-muted">

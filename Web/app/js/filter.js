@@ -33,3 +33,9 @@ iWork.filter('duration', function () {
         return moment.duration(item, key).format();
     };
 });
+
+iWork.filter('moment', function () {
+    return function(dateString, format) {
+        return moment(dateString).format(format);
+    };
+});

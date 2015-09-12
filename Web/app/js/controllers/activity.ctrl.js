@@ -28,7 +28,9 @@ iWork.controller('ActivityController', function ($scope, dataFactory, $state, $r
                 $scope.searchResult.totalCount += 1;
                 $scope.searchResult.totalMinutes += activity.duration;
             });
-            $scope.initChart();
+            if ($scope.viewOption.showChart == true) {
+                $scope.initChart();
+            }
         });
     };
     // End

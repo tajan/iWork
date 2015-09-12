@@ -13,12 +13,14 @@ iWork.controller('FilteringController', ['$rootScope', '$scope', 'dataFactory', 
             filtering: false,
             taskId: null,
             projectId: null,
-            userStoryId:null,
+            userStoryId: null,
             status: 1,
             priority: 2,
             dueDate: moment().format('YYYY-MM-DD'),
             estimatedDuration: 5,
-            type: 1
+            type: 1,
+            fromDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+            toDate: moment().format('YYYY-MM-DD')
         };
         $scope.model = $scope.defaultModel;
         // Check Cache filtering
@@ -32,13 +34,12 @@ iWork.controller('FilteringController', ['$rootScope', '$scope', 'dataFactory', 
         function (event, toState, toParams, fromState, fromParams) {
             if ($state.$current.title != toState.title) {
                 $scope.changeState(toState.title)
-            } 
+            }
         });
         $scope.changeState = function (newState) {
             if (newState == 'Tasks') {
                 $scope.url = '/iview/filtering/_task.html';
-            }
-            else if (newState == 'Default Page') {
+            } else if (newState == 'Default Page') {
                 $scope.url = '/iview/filtering/_board.html';
             } else if (newState == 'Activities') {
                 $scope.url = '/iview/filtering/_activity.html';
@@ -46,7 +47,7 @@ iWork.controller('FilteringController', ['$rootScope', '$scope', 'dataFactory', 
                 $scope.url = '/iview/filtering/_default.html';
             }
         };
-        $scope.changeState($state.$current.title,false);
+        $scope.changeState($state.$current.title, false);
         $scope.filter = function () {
             $scope.model.filtering = true;
             filteringDataService.params = $scope.model;

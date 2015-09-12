@@ -219,7 +219,8 @@
         </panel:footer>
     </div>
     <!--Group By Day-->
-    <div ng-if="viewOption.group == 'daily'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy: 'activityDateTime':true">
+    <div ng-if="viewOption.group == 'daily'  && viewOption.showChart == false" class="panel  panel-default"
+         ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy:'activityDateTime':false">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
                 {{items[0].activityDateTime}}

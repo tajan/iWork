@@ -1,42 +1,51 @@
 ﻿<h3>
     Activities
+    <include iv-source="~/iview/activity/_viewOptions.html" />
 </h3>
-<controller iv-type="default" iv-name="ActivityController" iv-init="initSearch();">
-    <form iv-type="default" iv-name="form" iv-title="Search">
-        <field:date iv-type="default" iv-name="fromDate" iv-label="From Date" iv-max-date="now" iv-default-date="now" />
-        <field:date iv-type="default" iv-name="toDate" iv-label="To Date" iv-max-date="now" iv-default-date="now" />
-        <form:actionpanel iv-type="default">
-            <button id="search" name="search" class="btn btn-primary btn-labeled mr btn-lg" ng-click="search()">
-                <span class=" btn-label">
-                    <i class="fa fa-check"></i>
-                </span>
-                Search
-            </button>
-        </form:actionpanel>
-    </form>
-    <panel iv-type="default">
+<controller iv-type="default" iv-name="ActivityController" iv-init="search();">
+
+    <!-- Chart & Group By Project-->
+    <div ng-if="viewOption.showChart == true" class="panel  panel-default">
+        <div class="panel-footer p0">
+            <highchart id="chart1" config="chartConfig" class="span9"></highchart>
+        </div>
+    </div>
+
+
+
+    <!--Group By Project-->
+    <div ng-if="viewOption.group == 'project' && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'projectId'">
         <panel:header iv-type="default">
-            <panel:header:title iv-type="default">
-                Activities
-            </panel:header:title>
-        </panel:header>
-        <panel:content iv-type="default">
-            <div class="list-group">
-                <div class="row row-table list-group-item" ng-repeat="item in activities">
-                    <div class="col-sm-1">
-                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb48 center-block" />
-                    </div>
-                    <div class="col-sm-1">
-                        <p class="mb-sm text-primary">
-                            <a class="text-muted" ui-sref="app.projectview({id: item.projectId})">
-                                {{item.projectCodeName}} - {{item.projectTitle}}
-                            </a>
+            <div class="panel-heading portlet-handler">
+                <a ui-sref="app.projectview({id: items[0].projectId})">
+                    {{items[0].projectCodeName}} - {{items[0].projectTitle}}
+                </a>
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Count">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
                         </p>
                     </div>
-                    <div class="col-sm-2">
+                </div>
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Duration">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </panel:header>
+        <div class="panel-footer">
+            <div class="list-group">
+                <div class="row row-table list-group-item" ng-repeat="item in items">
+                    <div class="col-sm-1">
+                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                    </div>
+                    <div class="col-sm-3">
                         <p class="mb-sm text-primary">
                             <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                {{item.taskTitle}}
+                                {{item.taskTitle}}{{item.taskTitle}}
                             </a>
                         </p>
                     </div>
@@ -53,9 +62,225 @@
                     </div>
                 </div>
             </div>
-        </panel:content>
+        </div>
         <panel:footer iv-type="default">
-            Total Count: {{searchResult.totalCount}}, Total Minutes: {{searchResult.totalMinutes}}, Total Hour: {{searchResult.totalHour  | number:1}}
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                    </p>
+                </div>
+            </div>
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Duration">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                    </p>
+                </div>
+            </div>
         </panel:footer>
-    </panel>
+    </div>
+    <!--Group By User-->
+    <div ng-if="viewOption.group == 'user'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'userId'">
+        <div class="panel-heading portlet-handler">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a class="timeline-badge primary pull-left" ui-sref="app.userprofileview({id: items[0].user})">
+                        <img http-src="{{items[0].user.picture.guid}}" alt="user.displayName" class="img-circle thumb32 center-block pull-left" title="{{items[0].user.displayName}}  {{items[0].user.email}}" />
+
+                        <span class="pull-left mt-sm ml-sm">
+                            {{items[0].user.displayName}}  {{items[0].user.email}}
+                        </span>
+                    </a>
+                    <div class="pull-right text-center text-muted">
+                        <div class="ph" tooltip="Activity Count">
+                            <p class="m0 text-muted">
+                                <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pull-right text-center text-muted">
+                        <div class="ph" tooltip="Activity Duration">
+                            <p class="m0 text-muted">
+                                <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="list-group">
+                <div class="row row-table list-group-item" ng-repeat="item in items">
+                    <div class="col-sm-1">
+                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}{{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="mb-sm text">
+                            {{item.description}}
+                        </p>
+                        <p class="text-sm">
+                            <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+                        <em class="fa fa-clock-o" tooltip="Duration"> {{item.duration}}</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <panel:footer iv-type="default">
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                    </p>
+                </div>
+            </div>
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Duration">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                    </p>
+                </div>
+            </div>
+        </panel:footer>
+    </div>
+    <!--Group By Tasktype-->
+    <div ng-if="viewOption.group == 'taskType'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'taskStatus'">
+        <panel:header iv-type="default">
+            <div class="panel-heading portlet-handler">
+                {{items[0].taskStatus}}
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Count">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                        </p>
+                    </div>
+                </div>
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Duration">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </panel:header>
+        <div class="panel-footer">
+            <div class="list-group">
+                <div class="row row-table list-group-item" ng-repeat="item in items">
+                    <div class="col-sm-1">
+                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}{{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="mb-sm text">
+                            {{item.description}}
+                        </p>
+                        <p class="text-sm">
+                            <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+                        <em class="fa fa-clock-o" tooltip="Duration"> {{item.duration}}</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <panel:footer iv-type="default">
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                    </p>
+                </div>
+            </div>
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Duration">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                    </p>
+                </div>
+            </div>
+        </panel:footer>
+    </div>
+    <!--Group By Day-->
+    <div ng-if="viewOption.group == 'daily'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy: 'activityDateTime':true">
+        <panel:header iv-type="default">
+            <div class="panel-heading portlet-handler">
+                {{items[0].activityDateTime}}
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Count">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                        </p>
+                    </div>
+                </div>
+                <div class="pull-right text-center text-muted">
+                    <div class="ph" tooltip="Activity Duration">
+                        <p class="m0 text-muted">
+                            <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </panel:header>
+        <div class="panel-footer">
+            <div class="list-group">
+                <div class="row row-table list-group-item" ng-repeat="item in items">
+                    <div class="col-sm-1">
+                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}{{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="mb-sm text">
+                            {{item.description}}
+                        </p>
+                        <p class="text-sm">
+                            <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+                        <em class="fa fa-clock-o" tooltip="Duration"> {{item.duration}}</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <panel:footer iv-type="default">
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Count">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                    </p>
+                </div>
+            </div>
+            <div class="pull-right text-center text-muted">
+                <div class="ph" tooltip="Activity Duration">
+                    <p class="m0 text-muted">
+                        <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                    </p>
+                </div>
+            </div>
+        </panel:footer>
+    </div>
 </controller>

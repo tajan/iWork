@@ -1,0 +1,37 @@
+﻿<div ng-controller="ViewOptionsController" class="mb-sm pull-right mr-sm" ng-init="setDefault({group:'daily',showChart:true})">
+    <div class="pull-right">
+        <select name="group" class="form-control pull-right" ng-model="model.group" value="" value="group">
+            <option value="daily">
+                Daily
+            </option>
+            <option value="user">
+                User
+            </option>
+            <option value="project">
+                Project
+            </option>
+            <!--<option value="taskType">
+                Task Type
+            </option>-->
+        </select>
+    </div>
+    <div class="pull-right mr-sm">
+        <input bs-switch
+               ng-model="model.showChart"
+               type="checkbox"
+               switch-active="{{ isActive }}"
+               switch-readonly="{{ isReadonly }}"
+               switch-size="{{ size }}"
+               switch-animate="{{ animate }}"
+               switch-label="{{ label }}"
+               switch-icon="{{ icon }}"
+               switch-on-text="Chart"
+               switch-off-text="List"
+               switch-on-color="{{ on }}"
+               switch-off-color="{{ off }}"
+               switch-label-width="{{ labelWidth }}"
+               switch-handle-width="{{ handleWidth }}"
+               switch-inverse="{{ inverse }}">
+    </div>
+
+</div>

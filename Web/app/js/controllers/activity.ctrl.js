@@ -1,45 +1,21 @@
 ﻿
-iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$rootScope', function ($scope, dataFactory, $state, $rootScope) {
-
+iWork.controller('ActivityController', function ($scope, dataFactory, $state, $rootScope, viewOptionService, $filter) {
     $scope.showActivityPanel = false;
     $scope.showArchivePanel = false;
     $scope.showDetailPanel = false;
     $scope.showFilePanel = false;
-
     $scope.taskId = $state.params["id"];
     $scope.activities = [];
-
     $scope.activity = {
         duration: 15,
         activityDateTime: moment().format('YYYY-MM-DD')
     };
-
-    $scope.initView = function (taskId) {
-
-        if (taskId) {
-            $scope.taskId = taskId;
-        };
-
-        if ($scope.taskId) {
-
-            dataFactory.activity.getByTask($scope.taskId).success(function (response) {
-                $scope.activities = response.data;
-            });
-        };
-    };
-
-    $scope.initSearch = function () {
-
-        var fromDate = moment().subtract(7, 'day').format('YYYY-MM-DD');
-        var toDate = moment().format('YYYY-MM-DD');
-
-        $scope.model = {
-            fromDate: fromDate,
-            toDate: toDate,
-        };
-
-    };
-
+    // View Options
+    //=====================================================================
+    // log(viewOptionService.params)
+    $scope.viewOption = viewOptionService.params;
+    // Activity Search
+    //=====================================================================
     $scope.search = function () {
         $scope.searchResult = {
             totalMinutes: 0,
@@ -52,10 +28,11 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
                 $scope.searchResult.totalCount += 1;
                 $scope.searchResult.totalMinutes += activity.duration;
             });
-            $scope.searchResult.totalHour = $scope.searchResult.totalMinutes/60
+            $scope.initChart();
         });
     };
-
+    // End
+    //=====================================================================
     $scope.addActivity = function () {
         if ($scope.taskId) {
             $scope.activity.taskId = $scope.taskId;
@@ -67,7 +44,6 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
                 });
         };
     };
-
     $scope.addActivityInMyBoard = function (taskId) {
         if (taskId) {
             $scope.activity.taskId = taskId;
@@ -79,7 +55,6 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
                 });
         };
     };
-
     // Update Activity 
     //=====================================================================
     $scope.editeState = {};
@@ -89,17 +64,14 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
             $scope.editeState[key] = false;
         });
     };
-
     $scope.goToEditeMode = function (activityItem) {
         $scope.cancelOtherEdite();
         $scope.updateActivityModel = activityItem;
         $scope.editeState['editeMode' + activityItem.activityId] = true;
     };
-
     $scope.backToViewMode = function (activityItem) {
         $scope.editeState['editeMode' + activityItem.activityId] = false;
     };
-
     $scope.updateActivity = function () {
         dataFactory.activity.updateActivity($scope.updateActivityModel).
             success(function (response, status, headers, config) {
@@ -108,4 +80,71 @@ iWork.controller('ActivityController', ['$scope', 'dataFactory', '$state', '$roo
     };
     // End
     //=====================================================================
-}]);
+
+    $scope.initChart = function () {
+        $scope.$watch('viewOption', function () {
+            $scope.bootstrapChart();
+        }, true);
+        $scope.bootstrapChart = function () {
+            if ($scope.viewOption.group == 'project') {
+                var groupKey = 'projectId';
+            } else if ($scope.viewOption.group == 'user') {
+                var groupKey = 'userId';
+            } else if ($scope.viewOption.group == 'daily') {
+                var groupKey = 'activityDateTime';
+            }
+            var preData = $filter('groupBy')($scope.activities, groupKey);
+            var data = $filter('toArray')(preData);
+            var dataLabelsEnabled = true;
+            $scope.chartData = [];
+            $.each(data, function (index, arr) {
+                if ($scope.viewOption.group == 'project') {
+                    var titleKey = arr[0]['projectTitle'];
+                    chartTitleText = "By Projects";
+                } else if ($scope.viewOption.group == 'user') {
+                    var titleKey = arr[0]['user']['displayName'];
+                    chartTitleText = "By User";
+                } else if ($scope.viewOption.group == 'daily') {
+                    var titleKey = new moment(arr[0]['activityDateTime']).format("YYYY/MM/DD");
+                    chartTitleText = "Daily";
+                    dataLabelsEnabled = false;
+                }
+                var o = {
+                    name: titleKey,
+                    value: $filter('sumFilter')(arr, 'duration'),
+                    dataLabels: "dataLabels"
+                }
+                $scope.chartData.push(o);
+            });
+            $scope.chartConfig = {
+                options: {
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.key + '</b> : ' + moment.duration(this.point.value, "minutes").format();
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    }
+                },
+                colorAxis: {
+                    minColor: '#FFFFFF',
+                    maxColor: Highcharts.getOptions().colors[0]
+                },
+                series: [{
+                    type: "treemap",
+                    layoutAlgorithm: 'squarified',
+                    data: $scope.chartData,
+                    dataLabels: {
+                        enabled: dataLabelsEnabled
+                    }
+                }],
+
+                title: {
+                    text: chartTitleText
+                }
+            }
+        }
+        $scope.bootstrapChart();
+    }
+});

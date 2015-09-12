@@ -1,3 +1,4 @@
+/// <reference path="../lib/moment-duration/moment-duration-format.js" />
 
 /*!
  * 
@@ -96,7 +97,7 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
           abstract: true,
           templateUrl: helper.basepath('app.html'),
           controller: 'AppController',
-          resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'slimscroll', 'classyloader', 'toaster', 'whirl', 'loaders.css', 'spinkit','moment')
+          resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'slimscroll', 'classyloader', 'toaster', 'whirl', 'loaders.css', 'spinkit','moment','moment-duration')
       })
       .state('app.singleview', {
           url: '/singleview',
@@ -242,6 +243,7 @@ App
                                  'vendor/jquery-ui/ui/sortable.js',
                                  'vendor/jqueryui-touch-punch/jquery.ui.touch-punch.min.js'],
           'moment': ['vendor/moment/min/moment-with-locales.min.js'],
+          'moment-duration': ['app/lib/moment-duration/moment-duration-format.js'],
           'inputmask': ['vendor/jquery.inputmask/dist/jquery.inputmask.bundle.min.js'],
           'flatdoc': ['vendor/flatdoc/flatdoc.js'],
           'codemirror': ['vendor/codemirror/lib/codemirror.js',

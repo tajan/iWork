@@ -17,3 +17,19 @@
         return value + (tail || ' …');
     };
 });
+
+iWork.filter('sumFilter', function () {
+    return function (groups, key) {
+        var taxTotals = 0;
+        $.each(groups,function(index,item){
+            taxTotals += item[key];
+        });
+        return taxTotals;
+    };
+});
+
+iWork.filter('duration', function () {
+    return function (item, key) {
+        return moment.duration(item, key).format();
+    };
+});

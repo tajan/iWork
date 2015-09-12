@@ -9,6 +9,8 @@
     <!-- Bootstrap styles-->
     <link rel="stylesheet" href="app/css/bootstrap.css" data-ng-if="!app.layout.isRTL">
     <link rel="stylesheet" href="app/css/bootstrap-rtl.css" data-ng-if="app.layout.isRTL">
+
+    <link href="app/lib/bootstrap-switch-master/dist/css/bootstrap-switch.min.css" rel="stylesheet" />
     <!-- Application styles-->
     <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
     <link rel="stylesheet" href="app/css/theme-g.css" data-ng-if="!app.layout.isRTL">
@@ -27,15 +29,17 @@
     <!-- Resource -->
     <script src="app/js/base.js"></script>
     <script src="app/js/app.js"></script>
-
-
     <!-- iWork Resource -->
-
     <script src="app/lib/highchart/highcharts.js"></script>
     <script src="app/lib/highcharts-ng-master/highcharts-ng.min.js"></script>
-
+    <script src="app/lib/highchart/treemap.js"></script>
     <script src="app/lib/angular-hotkeys/hotkeys.min.js"></script>
     <script src="vendor/angular-ui-select/dist/select.js"></script>
+    <script src="app/lib/angular-filter-master/angular-filter.js"></script>
+
+    <script src="app/lib/angular-bootstrap-switch-develop/angular-bootstrap-switch.min.js"></script>
+    <script src="app/lib/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
+
     <!-- iWork App -->
     <script src="app/js/iwork.js"></script>
     <script src="app/js/iwork.auth.js"></script>
@@ -72,6 +76,7 @@
     <script src="app/js/services/publicsearchdata.service.js"></script>
     <script src="app/js/services/data.service.js"></script>
     <script src="app/js/services/client-filtering.service.js"></script>
+    <script src="app/js/services/view-option.service.js"></script>
     <!-- Controllers -->
     <script src="app/js/controllers/client-filtering.ctrl.js"></script>
     <script src="app/js/controllers/userstory.ctrl.js"></script>
@@ -88,5 +93,6 @@
     <script src="app/js/controllers/sprint.ctrl.js"></script>
     <script src="app/js/controllers/task.ctrl.js"></script>
     <script src="app/js/controllers/user.ctrl.js"></script>
+    <script src="app/js/controllers/view-option.ctrl.js"></script>
 </body>
 </html>

@@ -42,11 +42,30 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
         });
     };
 
+    dataFactory.postWithoutRedirectWithFiltering = function (url, data, headers, config) {
+        var apiUrl = dataFactory.baseUrl + url;
+        var data = $.extend(data, filteringDataService.params);
+        return $http.post(dataFactory.baseUrl + url, data).
+            success(function (response, status, headers, config) {
+                Notify.alert(
+                    response.message + " " + response.statusCode,
+                    { status: 'success', pos: 'bottom-right' }
+                );
+            }).
+        error(function (response, status, headers, config) {
+            Notify.alert(
+                response,
+                  { status: 'danger', pos: 'bottom-right' }
+            );
+        });
+    };
+
+
+
+
     //General get
     dataFactory.get = function (url) {
-
         var apiUrl = dataFactory.baseUrl + url;
-
         return $http.get(dataFactory.baseUrl + url).
             success(function (response, status, headers, config) {
             }).
@@ -59,7 +78,6 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
     };
     dataFactory.getWithSearch = function (url) {
         var apiUrl = dataFactory.baseUrl + url;
-
         if (!publicSearchDataService.term)
         {
             publicSearchDataService.term = "";
@@ -231,7 +249,7 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
             return dataFactory.get('/activity/getByTask/' + taskId);
         },
         search: function (activity) {
-            return dataFactory.postWithoutRedirect('/activity/search', activity);
+            return dataFactory.postWithoutRedirectWithFiltering('/activity/search', activity);
         },
         postAction: function (actionName, activity) {
             return dataFactory.post('/activity/' + actionName, activity);

@@ -40,6 +40,8 @@ iWork.controller('FilteringController', ['$rootScope', '$scope', 'dataFactory', 
             }
             else if (newState == 'Default Page') {
                 $scope.url = '/iview/filtering/_board.html';
+            } else if (newState == 'Activities') {
+                $scope.url = '/iview/filtering/_activity.html';
             } else {
                 $scope.url = '/iview/filtering/_default.html';
             }

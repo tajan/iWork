@@ -1,4 +1,4 @@
-﻿var iWork = angular.module('iWork', ['angle','ui.select', 'cfp.hotkeys', 'highcharts-ng']);
+﻿var iWork = angular.module('iWork', ['angle', 'ui.select', 'cfp.hotkeys', 'highcharts-ng', 'angular.filter', 'frapontillo.bootstrap-switch']);
 var log = function (i) {
     console.log(i)
 }
@@ -15,7 +15,7 @@ iWork.constant("$config", {
 
 
 iWork.run(['$rootScope', 'hotkeys', '$window', '$state', '$timeout', 'Notify', function ($rootScope, hotkeys, $window, $state, $timeout, Notify) {
-
+    $rootScope.imageCache = {};
     hotkeys.bindTo($rootScope).add({
         combo: 'ctrl+f',
         description: 'Open search',

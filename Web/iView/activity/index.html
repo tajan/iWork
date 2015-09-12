@@ -87,9 +87,8 @@
         <div class="panel-heading portlet-handler">
             <div class="row">
                 <div class="col-xs-12">
-                    <a class="timeline-badge primary pull-left" ui-sref="app.userprofileview({id: items[0].user})">
+                    <a class="timeline-badge primary pull-left" ui-sref="app.userprofileview({id: items[0].user.userId})">
                         <img http-src="{{items[0].user.picture.guid}}" alt="user.displayName" class="img-circle thumb32 center-block pull-left" title="{{items[0].user.displayName}}  {{items[0].user.email}}" />
-
                         <span class="pull-left mt-sm ml-sm">
                             {{items[0].user.displayName}}  {{items[0].user.email}}
                         </span>

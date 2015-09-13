@@ -145,6 +145,5 @@ iWork.controller('ActivityController', function ($scope, dataFactory, $state, $r
                 }
             }
         }
-        $scope.bootstrapChart();
     }
 });

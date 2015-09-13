@@ -39,7 +39,8 @@
                 <div class="row row-table list-group-item" ng-repeat="item in items">
                     <div class="col-sm-1">
                         <a ui-sref="app.userprofileview({id: item.user.userId})" class="pull-left">
-                            <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 " />
+                            <!--<img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />-->
+                            <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
                     <div class="col-sm-3">
@@ -113,7 +114,10 @@
             <div class="list-group">
                 <div class="row row-table list-group-item" ng-repeat="item in items">
                     <div class="col-sm-1">
-                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                        <a ui-sref="app.userprofileview({id: item.user.userId})" class="pull-left">
+                            <!--<img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />-->
+                            <span>{{item.user.displayName}}</span>
+                        </a>
                     </div>
                     <div class="col-sm-3">
                         <p class="mb-sm text-primary">
@@ -180,7 +184,8 @@
                 <div class="row row-table list-group-item" ng-repeat="item in items">
                     <div class="col-sm-1">
                         <a ui-sref="app.userprofileview({id: item.user.userId})" class="pull-left">
-                            <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                            <!--<img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />-->
+                            <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
                     <div class="col-sm-3">
@@ -248,7 +253,10 @@
             <div class="list-group">
                 <div class="row row-table list-group-item" ng-repeat="item in items">
                     <div class="col-sm-1">
-                        <img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />
+                        <a ui-sref="app.userprofileview({id: item.user.userId})" class="pull-left">
+                            <!--<img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />-->
+                            <span>{{item.user.displayName}}</span>
+                        </a>
                     </div>
                     <div class="col-sm-3">
                         <p class="mb-sm text-primary">

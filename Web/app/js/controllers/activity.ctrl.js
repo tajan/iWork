@@ -10,10 +10,15 @@ iWork.controller('ActivityController', function ($scope, dataFactory, $state, $r
         duration: 15,
         activityDateTime: moment().format('YYYY-MM-DD')
     };
+
+
+    $scope.dateOrder = function (item) {
+        return moment(item[0].activityDateTime).unix();
+    };
     // View Options
     //=====================================================================
-    // log(viewOptionService.params)
     $scope.viewOption = viewOptionService.params;
+
     // Activity Search
     //=====================================================================
     $scope.search = function () {

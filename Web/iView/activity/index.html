@@ -11,8 +11,6 @@
         </div>
     </div>
 
-
-
     <!--Group By Project-->
     <div ng-if="viewOption.group == 'project' && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'projectId'">
         <panel:header iv-type="default">
@@ -82,6 +80,7 @@
             </div>
         </panel:footer>
     </div>
+
     <!--Group By User-->
     <div ng-if="viewOption.group == 'user'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'userId'">
         <div class="panel-heading portlet-handler">
@@ -154,6 +153,7 @@
             </div>
         </panel:footer>
     </div>
+
     <!--Group By Tasktype-->
     <div ng-if="viewOption.group == 'taskType'  && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'taskStatus'">
         <panel:header iv-type="default">
@@ -221,9 +221,10 @@
             </div>
         </panel:footer>
     </div>
+
     <!--Group By Day-->
     <div ng-if="viewOption.group == 'daily'  && viewOption.showChart == false" class="panel  panel-default"
-         ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy:'activityDateTime':false">
+         ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy:dateOrder:true">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
                 {{items[0].activityDateTime | moment:'YYYY/MM/DD'}}

@@ -6,7 +6,14 @@
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">
         <div ng-repeat="status in taskStatuses | orderBy:'viewOrder'" class="col-md-3 br">
-            <div class="text-muted text-sm" >{{status.title}}</div>
+            <div class=" text-sm">
+                <span class="text-muted">
+                    {{status.title}}
+                </span>
+                <span class="label label-default">
+                    {{tasksByStatus[status.id].length}}
+                </span>
+            </div>
             <hr style="margin-bottom: 10px; margin-top: 3px">
             <div id="portlet{{status.id}}" ui-sortable="sortableOptions" ng-model="tasksByStatus[status.id]" portlet class="sortable-box">
 
@@ -100,15 +107,15 @@
                                         <a class="timeline-badge primary pull-left mr" ng-repeat="user in task.membersList" ui-sref="app.userprofileview({id: user.userId})">
                                             <img http-src="{{user.picture.guid}}" alt="user.displayName" class="media-box-object img-circle thumb32 center-block" title="{{user.displayName}}  {{user.email}}" />
                                         </a>
-                                    </div>
-                                </column>
-                            </row>
                         </div>
-                        <include iv-source="~/iview/task/_activityactions.html" />
-                    </div>
-                </div>
+                        </column>
+    </row>
+    </div>
+    <include iv-source="~/iview/task/_activityactions.html" />
+    </div>
+    </div>
 
-            </div>
-        </div>
+    </div>
+    </div>
     </row>
 </controller>

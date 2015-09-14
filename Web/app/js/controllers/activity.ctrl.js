@@ -18,7 +18,18 @@ iWork.controller('ActivityController', function ($scope, dataFactory, $state, $r
     // View Options
     //=====================================================================
     $scope.viewOption = viewOptionService.params;
-
+    // Activity initView
+    //=====================================================================
+    $scope.initView = function (taskId) {
+        if (taskId) {
+            $scope.taskId = taskId;
+        };
+        if ($scope.taskId) {
+            dataFactory.activity.getByTask($scope.taskId).success(function (response) {
+                $scope.activities = response.data;
+            });
+        };
+    };
     // Activity Search
     //=====================================================================
     $scope.search = function () {

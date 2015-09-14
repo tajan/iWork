@@ -1,6 +1,6 @@
 ﻿<div ng-controller="ViewOptionsController" class="mb-sm pull-right mr-sm" ng-init="setDefault({group:'daily',showChart:false    })">
     <div class="pull-right">
-        <select name="group" class="form-control pull-right" ng-model="model.group" value="" value="group">
+        <select name="group" class="form-control pull-right input-sm" ng-model="model.group" value="" value="group">
             <option value="daily">
                 Daily
             </option>
@@ -17,11 +17,12 @@
     </div>
     <div class="pull-right mr-sm">
         <input bs-switch
+
                ng-model="model.showChart"
                type="checkbox"
                switch-active="{{ isActive }}"
                switch-readonly="{{ isReadonly }}"
-               switch-size="{{ size }}"
+               switch-size="small"
                switch-animate="{{ animate }}"
                switch-label="{{ label }}"
                switch-icon="{{ icon }}"

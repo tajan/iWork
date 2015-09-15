@@ -229,7 +229,7 @@
 
     <!--Group By Day-->
     <div ng-if="viewOption.group == 'daily'  && viewOption.showChart == false" class="panel  panel-default"
-         ng-repeat="items in activities |  groupBy: 'activityDateTime'  |  toArray:true | orderBy:dateOrder:true">
+         ng-repeat="items in activities |  groupBy: 'actDate'  |  toArray:true | orderBy:dateOrder:true">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
                 {{items[0].activityDateTime | moment:'YYYY/MM/DD'}}

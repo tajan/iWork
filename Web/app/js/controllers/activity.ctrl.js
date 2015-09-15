@@ -43,6 +43,7 @@ iWork.controller('ActivityController', function ($scope, dataFactory, $state, $r
             angular.forEach($scope.activities, function (activity) {
                 $scope.searchResult.totalCount += 1;
                 $scope.searchResult.totalMinutes += activity.duration;
+                activity.actDate = activity.activityDateTime.slice(0, 10);
             });
             $scope.initChart();
         });

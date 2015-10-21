@@ -15,7 +15,9 @@
     <div ng-if="viewOption.group == 'project' && viewOption.showChart == false" class="panel  panel-default" ng-repeat="items in activities |  groupBy: 'projectId'">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
+                <em class="fa fa-rocket mr fa-lg"></em>
                 <a ui-sref="app.projectview({id: items[0].projectId})">
+                   
                     {{items[0].projectCodeName}} - {{items[0].projectTitle}}
                 </a>
                 <div class="pull-right text-center text-muted">
@@ -26,7 +28,7 @@
                     </div>
                 </div>
                 <div class="pull-right text-center text-muted">
-                    <div class="ph" tooltip="Activity Duration">
+                    <div class="ph" tooltip="Activity Duration {{items | sumFilter:'duration'}}m">
                         <p class="m0 text-muted">
                             <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
                         </p>
@@ -43,14 +45,21 @@
                             <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-1">
                         <p class="mb-sm text-primary">
-                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                {{item.taskTitle}}{{item.taskTitle}}
+                            <a class="text-muted pull-left" tooltip="Project Title" ui-sref="app.projectview({id: item.projectId})">
+                                {{item.projectTitle}}
                             </a>
                         </p>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-md-2">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted  pull-left" tooltip="Task Title" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-8">
                         <p class="mb-sm text">
                             {{item.description}}
                         </p>
@@ -101,7 +110,7 @@
                         </div>
                     </div>
                     <div class="pull-right text-center text-muted">
-                        <div class="ph" tooltip="Activity Duration">
+                        <div class="ph" tooltip="Activity Duration {{items | sumFilter:'duration'}}m">
                             <p class="m0 text-muted">
                                 <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
                             </p>
@@ -119,14 +128,22 @@
                             <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-1">
                         <p class="mb-sm text-primary">
-                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                {{item.taskTitle}}{{item.taskTitle}}
+                            <a class="text-muted pull-left" tooltip="Project Title" ui-sref="app.projectview({id: item.projectId})">
+                                {{item.projectTitle}}
                             </a>
                         </p>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-md-2">
+                        <p class="mb-sm text-primary">
+
+                            <a class="text-muted  pull-left" tooltip="Task Title" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-8">
                         <p class="mb-sm text">
                             {{item.description}}
                         </p>
@@ -171,7 +188,7 @@
                     </div>
                 </div>
                 <div class="pull-right text-center text-muted">
-                    <div class="ph" tooltip="Activity Duration">
+                    <div class="ph" tooltip="Activity Duration {{items | sumFilter:'duration'}}m">
                         <p class="m0 text-muted">
                             <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
                         </p>
@@ -188,14 +205,22 @@
                             <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-1">
                         <p class="mb-sm text-primary">
-                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                {{item.taskTitle}}{{item.taskTitle}}
+                            <a class="text-muted pull-left" tooltip="Project Title" ui-sref="app.projectview({id: item.projectId})">
+                                {{item.projectTitle}}
                             </a>
                         </p>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-md-2">
+                        <p class="mb-sm text-primary">
+
+                            <a class="text-muted  pull-left" tooltip="Task Title" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-sm-8">
                         <p class="mb-sm text">
                             {{item.description}}
                         </p>
@@ -232,40 +257,48 @@
          ng-repeat="items in activities |  groupBy: 'actDate'  |  toArray:true | orderBy:dateOrder:true">
         <panel:header iv-type="default">
             <div class="panel-heading portlet-handler">
-                {{items[0].activityDateTime | moment:'YYYY/MM/DD'}}
-                <div class="pull-right text-center text-muted">
-                    <div class="ph" tooltip="Activity Count">
-                        <p class="m0 text-muted">
-                            <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
-                        </p>
+                <em class="fa fa-calendar mr fa-lg"></em>
+                        {{items[0].activityDateTime | moment:'YYYY/MM/DD'}}
+                    <div class="pull-right text-center text-muted">
+                        <div class="ph" tooltip="Activity Count">
+                            <p class="m0 text-muted">
+                                <em class="fa fa-flash mr fa-lg"></em>{{items.length}}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="pull-right text-center text-muted">
-                    <div class="ph" tooltip="Activity Duration">
-                        <p class="m0 text-muted">
-                            <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
-                        </p>
+                    <div class="pull-right text-center text-muted">
+                        <div class="ph" tooltip="Activity Duration {{items | sumFilter:'duration'}}m">
+                            <p class="m0 text-muted">
+                                <em class="fa fa-clock-o mr fa-lg"></em>{{items | sumFilter:'duration' | duration:'minutes'}}
+                            </p>
+                        </div>
                     </div>
-                </div>
             </div>
         </panel:header>
         <div class="panel-footer">
             <div class="list-group">
                 <div class="row row-table list-group-item" ng-repeat="item in items">
-                    <div class="col-sm-1">
+                    <div class="col-md-1">
                         <a ui-sref="app.userprofileview({id: item.user.userId})" class="pull-left">
                             <!--<img http-src="{{item.user.picture.guid}}" alt="Image" class="media-box-object img-thumbnail img-circle thumb32 pull-left" />-->
                             <span>{{item.user.displayName}}</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-1">
                         <p class="mb-sm text-primary">
-                            <a class="text-muted" ui-sref="app.taskview({id: item.taskId})">
-                                {{item.taskTitle}}{{item.taskTitle}}
+                            <a class="text-muted text-sm pull-left" tooltip="Project Title" ui-sref="app.projectview({id: item.projectId})">
+                                {{item.projectTitle}}
                             </a>
                         </p>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-md-2">
+                        <p class="mb-sm text-primary">
+                            <a class="text-muted text-sm pull-left" tooltip="Task Title" ui-sref="app.taskview({id: item.taskId})">
+                                {{item.taskTitle}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-8 ">
                         <p class="mb-sm text">
                             {{item.description}}
                         </p>
@@ -273,7 +306,7 @@
                             <small>On {{item.activityDateTime | date:'yyyy/MM/dd'}} By {{item.user.email}} </small>
                         </p>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-md-1">
                         <em class="fa fa-clock-o" tooltip="Duration"> {{item.duration}}</em>
                     </div>
                 </div>

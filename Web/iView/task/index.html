@@ -110,13 +110,13 @@
                     </div>
                 </div>
                 <div class="col-xs-1 text-right">
-                    <button ng-disabled="true" tooltip="Task Details" type="button" class="btn btn-sm btn-default pull-right">
+                    <button ng-disabled="true" tooltip="Delete Task" type="button" class="btn btn-sm btn-default pull-right">
                         <em class="fa fa-trash"></em>
                     </button>
                     <button type="button" tooltip="Edit Task" class="btn btn-sm btn-default pull-right mr-sm" ui-sref="app.taskupdate({id: task.taskId})">
                         <em class="fa fa-pencil"></em>
                     </button>
-                    <a ui-sref="app.taskview({id: task.taskId})" tooltip="Delete Task" class="btn btn-sm btn-default pull-right mr-sm">
+                    <a ui-sref="app.taskview({id: task.taskId})" tooltip="Task Details" class="btn btn-sm btn-default pull-right mr-sm">
                         <em class="icon-info"></em>
                     </a>
                 </div>

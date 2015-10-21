@@ -6,54 +6,97 @@
     </panel:header>
     <panel:content iv-type="default">
         <scrollable height="50" class="list-group">
-            <div ng-repeat="item in tasks">
-                <div class="row list-group-item">
-                    <div class="col-sm-12">
-                        <div class="mb-sm mr text-primary">
-                            <a ui-sref="app.taskview({id: item.taskId})">
-                                {{item.title}}
-                            </a>
+             <div class="list-group">
+        <div class="list-group-item" ng-repeat="task in tasks | filter:filterQuery">
+            <div class="row row-flush row-table ">
+                <div class="col-xs-10 col-sm-5">
+                    <span class="pull-left circle circle-lg text-left visible-xs" ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.status]"></span>
+                    <a ui-sref="app.taskview({id: task.taskId})" class="text-alpha text-sm color-default text-bold">
+                        {{task.title}}
+                    </a>
+                    <div class="hidden-xs">
+                        <div class="pull-left">
+                            <small>
+                                <a class="text-muted" ui-sref="app.projectview({id: task.projectId})">
+                                    <span class="circle circle-md text-left " ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.projectStyle]"></span>
+                                    {{task.projectTitle}}
+                                </a>
+                            </small>
                         </div>
-                        <div ng-switch="item.status" class="label pull-right" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[item.status]">
-                            <span ng-switch-when="1">
-                                Pending
-                            </span>
-                            <span ng-switch-when="2">
-                                In Progress
-                            </span>
-                            <span ng-switch-when="3">
-                                Ready For Test
-                            </span>
-                            <span ng-switch-when="4">
-                                Done
-                            </span>
+                        <span class="text-muted pull-left ml-sm mr-sm">/</span>
+                        <div class="pull-left">
+                            <small>
+                                <a class="text-muted" ui-sref="app.userstoryview({id: task.userStoryId})">
+                                    <span class=" circle circle-md text-left " ng-class="{1:'circle-danger', 2:'circle-warning', 3:'circle-info', 4:'circle-success'}[task.status]"></span>
+                                    {{task.userStoryTitle}}
+                                </a>
+                            </small>
                         </div>
-                        <p class="text-sm">
-                            Estimated:{{item.estimatedDuration}} minutes
-                        </p>
-                        <p class="text-sm">
-                            Activity:{{item.activityDuration}} minutes
-                        </p>
-                        <p class="text-sm">
-                            Activity:{{item.activityCount}}
-                        </p>
-                        <p class="text-sm">
-                            Due Date:{{item.dueDate | date:'yyyy/MM/dd'}}
-                        </p>
-                        <p class="text-sm">
-                            Description:  {{item.description}}
-                        </p>
-                        <p class="text-sm">
-                            <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in item.membersList">{{user.displayName}} <{{user.email}}></div>
-                        </p>
                     </div>
                 </div>
-                <div class="progress progress-xs" style="height:4px; margin-top:0px; margin-bottom: 0px">
-                    <div class="progress-bar-bg progress-bar-{{item.projectStyle}}"></div>
-                    <div style="width:{{item.progress}}%;" role="progressbar" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-{{item.projectStyle}}">
+                <div class="col-xs-12 col-sm-2 hidden-xs">
+                    <div style="margin: 0px 3px 3px 0px;" class="btn btn-default btn-xs" ng-repeat="user in task.membersList">
+                        <a class="text-muted text-dark" ui-sref="app.userprofileview({id: user.userId})">
+                            <span ng-show="user.displayName.length > 0 ">{{user.displayName}}</span>
+                            <span ng-show="user.displayName.length <= 0 ">{{user.email}}</span>
+                        </a>
                     </div>
+                </div>
+                <div class="col-sm-1 hidden-xs">
+                    <div ng-switch="task.status" class="label" ng-class="{1:'label-danger', 2:'label-warning', 3:'label-info', 4:'label-success'}[task.status]">
+                        <span ng-switch-when="1">
+                            Pending
+                        </span>
+                        <span ng-switch-when="2">
+                            In Progress
+                        </span>
+                        <span ng-switch-when="3">
+                            Ready For Test
+                        </span>
+                        <span ng-switch-when="4">
+                            Done
+                        </span>
+                    </div>
+                </div>
+                <div class=" col-sm-3 hidden-xs">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center text-muted">
+                            <div class="ph" tooltip="Score">
+                                <p class="m0 text-muted">
+                                    <em class="icon-diamond mr fa-lg"></em>{{task.score}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 text-center text-muted">
+                            <div class="ph" tooltip="Activity Count">
+                                <p class="m0 text-muted">
+                                    <em class="fa fa-flash mr fa-lg"></em>{{task.activityCount}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 text-center text-muted">
+                            <div class="ph" tooltip="Activity Duration">
+                                <p class="m0 text-muted">
+                                    <em class="fa fa-clock-o mr fa-lg"></em>{{task.activityDuration}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 text-right">
+                    <button ng-disabled="true" tooltip="Delete Task" type="button" class="btn btn-sm btn-default pull-right">
+                        <em class="fa fa-trash"></em>
+                    </button>
+                    <button type="button" tooltip="Edit Task" class="btn btn-sm btn-default pull-right mr-sm" ui-sref="app.taskupdate({id: task.taskId})">
+                        <em class="fa fa-pencil"></em>
+                    </button>
+                    <a ui-sref="app.taskview({id: task.taskId})" tooltip="Task Details" class="btn btn-sm btn-default pull-right mr-sm">
+                        <em class="icon-info"></em>
+                    </a>
                 </div>
             </div>
+        </div>
+    </div>
         </scrollable>
     </panel:content>
 </panel>

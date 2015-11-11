@@ -34,7 +34,8 @@ Public Module StartupConfiguration
           .TokenEndpointPath = New PathString(TOKEN_SERVICE_URL),
           .Provider = New ApplicationOAuthProvider(PublicClientId),
           .AuthorizeEndpointPath = New PathString(REGISTER_SERVICE_URL),
-          .AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(100),
+          .AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(4800),
+          .AuthorizationCodeExpireTimeSpan = TimeSpan.FromMinutes(4800),
           .AllowInsecureHttp = True
         }
 

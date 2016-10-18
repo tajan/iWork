@@ -857,13 +857,6 @@
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="vendor\weather-icons\font\WeatherIcons-Regular.otf" />
-    <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

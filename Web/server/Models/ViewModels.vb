@@ -178,7 +178,7 @@ Public Class DtoActivity
 
     End Sub
 
-    Public Sub New(activity As Activity, actionlog As ActionLog, user As User)
+    Public Sub New(activity As Activity, task As Task, project As Project, actionlog As ActionLog, user As User)
 
         With Me
             .ActivityId = activity.ActivityId
@@ -189,10 +189,10 @@ Public Class DtoActivity
             .CreateDate = actionlog.ActionDate
             .ActivityDateTime = activity.ActivityDate
             .ActivityDate = activity.ActivityDate
-            .TaskTitle = activity.Task.Title
-            .ProjectCodeName = activity.Task.Project.CodeName
-            .ProjectTitle = activity.Task.Project.Title
-            .ProjectId = activity.Task.ProjectId
+            .TaskTitle = task.Title
+            .ProjectCodeName = project.CodeName
+            .ProjectTitle = project.Title
+            .ProjectId = task.ProjectId
         End With
 
     End Sub

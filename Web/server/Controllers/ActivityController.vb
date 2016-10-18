@@ -17,7 +17,7 @@ Namespace Controllers
 
         Private Function GetAvailableViewList(Optional criteria As Expression(Of Func(Of Activity, Boolean)) = Nothing) As List(Of DtoActivity)
 
-            Dim query = From p In Me.ActivityRepository.GetAll
+            Dim query = From p In Me.ActivityRepository.GetAll.Include(Function(x) x.Task)
 
             If criteria IsNot Nothing Then
                 query = query.Where(criteria)
@@ -25,9 +25,9 @@ Namespace Controllers
 
             Dim out = (From p In query
                        Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User) On p.ActivityId Equals q.EntityId
-                        Where q.EntityTypeId = EntityTypes.Activity AndAlso q.ActionTypeId = ActivityActions.Add
+                       Where q.EntityTypeId = EntityTypes.Activity AndAlso q.ActionTypeId = ActivityActions.Add
                        Order By p.ActivityDate Descending
-                       Select New With {.ActionLog = q, .Activity = p, .User = q.User}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.ActionLog, x.User)).ToList
+                       Select New With {.ActionLog = q, .Activity = p, .User = q.User, .Task = p.Task, .Project = p.Task.Project}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.Task, x.Project, x.ActionLog, x.User)).ToList
 
             Return out
 

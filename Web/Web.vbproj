@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -692,9 +693,6 @@
     <Content Include="vendor\weather-icons\css\weather-icons.min.css" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.svg" />
     <Content Include="vendor\whirl\dist\whirl.css" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -859,6 +857,7 @@
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="vendor\weather-icons\font\WeatherIcons-Regular.otf" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

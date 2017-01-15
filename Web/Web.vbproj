@@ -382,6 +382,7 @@
     <Content Include="vendor\angular-i18n\angular-locale_zh.js" />
     <Content Include="vendor\angular-jqcloud\angular-jqcloud.js" />
     <Content Include="vendor\angular-rickshaw\rickshaw.js" />
+    <Content Include="vendor\angular-toggle-switch\angular-toggle-switch.min.js" />
     <Content Include="vendor\angular-ui-codemirror\ui-codemirror.js" />
     <Content Include="vendor\angular-ui-grid\ui-grid.css" />
     <Content Include="vendor\angular-ui-grid\ui-grid.js" />

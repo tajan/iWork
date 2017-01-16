@@ -212,6 +212,7 @@
     <Content Include="app\js\iwork.auth.js" />
     <Content Include="app\js\iwork.route.js" />
     <Content Include="app\js\modules\notify.js" />
+    <Content Include="app\js\services\boardFilter.service.js" />
     <Content Include="app\js\services\client-filtering.service.js" />
     <Content Include="app\js\services\data.service.js" />
     <Content Include="app\js\services\filtering.service.js" />
@@ -382,7 +383,6 @@
     <Content Include="vendor\angular-i18n\angular-locale_zh.js" />
     <Content Include="vendor\angular-jqcloud\angular-jqcloud.js" />
     <Content Include="vendor\angular-rickshaw\rickshaw.js" />
-    <Content Include="vendor\angular-toggle-switch\angular-toggle-switch.min.js" />
     <Content Include="vendor\angular-ui-codemirror\ui-codemirror.js" />
     <Content Include="vendor\angular-ui-grid\ui-grid.css" />
     <Content Include="vendor\angular-ui-grid\ui-grid.js" />
@@ -810,6 +810,7 @@
     <Content Include="app\i18n\es_AR.json" />
     <Content Include="iViewManifest.config" />
     <Content Include="app\js\services\publicsearchdata.service.js" />
+    <Content Include="app\js\controllers\boardFilter.ctrl.js" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -858,6 +859,13 @@
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="vendor\weather-icons\font\WeatherIcons-Regular.otf" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

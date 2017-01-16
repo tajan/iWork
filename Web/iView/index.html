@@ -2,6 +2,15 @@
     My Board
     <include iv-source="~/iview/task/_addtaskmenu.html" />
     <nav iv-type="default" iv-icon="fa-plus-circle" iv-label="User Story" iv-state="app.userstoryadd"></nav>
+    <!---->
+    <div ng-controller="boardFilterController" ng-init="init({boardScopeValue : '1'})"   class="btn-group pull-right mr" >
+        <!--<label class="btn btn-default btn-sm" ng-disabled="true">
+            <i class="fa-filter fa text-muted"></i>
+        </label>-->
+        <label   class="btn btn-success btn-sm" ng-model="model.boardScopeValue" btn-radio="'1'">All</label>
+        <label class="btn btn-info btn-sm" ng-model="model.boardScopeValue"   btn-radio="'2'">My Dashboard</label>
+        
+    </div>
 </h3>
 <controller iv-type="default" iv-name="TaskController" iv-init="initBoard();">
     <row iv-type="default">

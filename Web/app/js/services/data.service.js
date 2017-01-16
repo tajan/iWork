@@ -1,6 +1,6 @@
 ﻿
 
-iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'filteringDataService', 'Notify', function ($window, $http, publicSearchDataService, filteringDataService, Notify) {
+iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'filteringDataService', 'boardFilterService', 'Notify', function ($window, $http, publicSearchDataService, filteringDataService, boardFilterService, Notify) {
 
     var dataFactory = {
         baseUrl: '/api'
@@ -82,9 +82,14 @@ iWork.factory('dataFactory', ['$window', '$http', 'publicSearchDataService', 'fi
         {
             publicSearchDataService.term = "";
         }
+        if (!boardFilterService.boardScope) {
+            boardFilterService.boardScope = 1;
+        }
+
        var searchParams = {
             searchTerm: publicSearchDataService.term,
-            filteringParams: filteringDataService.params
+            filteringParams: filteringDataService.params,
+            boardScope: boardFilterService.boardScope 
         };
        return $http.get(dataFactory.baseUrl + url, { params: searchParams }).
             success(function (response, status, headers, config) {

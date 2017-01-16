@@ -59,3 +59,11 @@ Public Enum UserActions
     Remove = 3
 
 End Enum
+
+Public Enum BoardType
+
+    All = 1
+    Mine = 2
+
+
+End Enum

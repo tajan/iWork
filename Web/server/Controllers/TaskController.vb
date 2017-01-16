@@ -236,12 +236,20 @@ Namespace Controllers
 #Region " Report "
         <HttpGet>
         Public Function GetMyBoard(searchTerm As String) As SearchResponseModel
+            Return GetMyBoard(searchTerm, BoardType.All)
+        End Function
 
+        <HttpGet>
+        Public Function GetMyBoard(searchTerm As String, boardScope As Integer) As SearchResponseModel
 
             Dim query = (From p In GetAvailableQuery()
                          Where p.Archived = False _
                          AndAlso p.StartDate <= DateTime.Now
                          Order By p.Priority Descending, p.DueDate Descending)
+
+            If boardScope = BoardType.Mine Then
+                query = (From p In query Where p.TaskMembers.Any(Function(x) x.UserId = CurrentUserId))
+            End If
 
             Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
             'Dim criteria = GetSearchCriteria(searchModel)
@@ -257,6 +265,7 @@ Namespace Controllers
             Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)
 
         End Function
+
 
         Public Function GetMyBoard() As SearchResponseModel
 

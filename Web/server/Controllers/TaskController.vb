@@ -242,20 +242,8 @@ Namespace Controllers
         <HttpGet>
         Public Function GetMyBoard(searchTerm As String, boardScope As Integer) As SearchResponseModel
 
-            'Dim query = (From p In GetAvailableQuery()
-            '             Where p.Archived = False _
-            '             AndAlso p.StartDate <= DateTime.Now
-            '             Order By p.Priority Descending, p.DueDate Descending)
-
-
-
             Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
-            'Dim criteria = GetSearchCriteria(searchModel)
             Dim totalItems As Integer = 0
-
-            'Dim data = Me.TaskRepository.Search(query, criteria, searchModel.SortFields,
-            '                                    searchModel.SortDirections, searchModel.PageSize,
-            '                                    searchModel.PageNumber, totalItems).ToList
 
             Dim data = GetSearch(searchModel)
             If boardScope = BoardType.Mine Then

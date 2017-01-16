@@ -49,7 +49,7 @@ Namespace Controllers
 
         End Function
 
-        Private Function GetSearch(searchModel As SearchRequestModel) As List(Of Web.Task)
+        Private Function GetSearch(searchModel As SearchRequestModel) As IQueryable(Of Web.Task)
 
 
 
@@ -61,7 +61,7 @@ Namespace Controllers
 
                 For Each term In searchModel.SearchTerm.Split(" ")
                     q = (From p In q
-                          Where p.Title.Contains(term) OrElse
+                         Where p.Title.Contains(term) OrElse
                                p.Project.Description.Contains(term) OrElse
                                p.TaskMembers.Any(Function(x) x.User.DisplayName.Contains(term) OrElse x.User.Email.Contains(term) OrElse x.User.FullName.Contains(term) OrElse x.User.UserName.Contains(term)) OrElse
                                p.UserStory.Title.Contains(term) OrElse
@@ -74,7 +74,7 @@ Namespace Controllers
             End If
 
 
-            Return (From p In q Select p).ToList
+            Return (From p In q Select p)
         End Function
 
 #End Region
@@ -242,14 +242,12 @@ Namespace Controllers
         <HttpGet>
         Public Function GetMyBoard(searchTerm As String, boardScope As Integer) As SearchResponseModel
 
-            Dim query = (From p In GetAvailableQuery()
-                         Where p.Archived = False _
-                         AndAlso p.StartDate <= DateTime.Now
-                         Order By p.Priority Descending, p.DueDate Descending)
+            'Dim query = (From p In GetAvailableQuery()
+            '             Where p.Archived = False _
+            '             AndAlso p.StartDate <= DateTime.Now
+            '             Order By p.Priority Descending, p.DueDate Descending)
 
-            If boardScope = BoardType.Mine Then
-                query = (From p In query Where p.TaskMembers.Any(Function(x) x.UserId = CurrentUserId))
-            End If
+
 
             Dim searchModel As New SearchRequestModel With {.SearchTerm = searchTerm}
             'Dim criteria = GetSearchCriteria(searchModel)
@@ -260,7 +258,11 @@ Namespace Controllers
             '                                    searchModel.PageNumber, totalItems).ToList
 
             Dim data = GetSearch(searchModel)
-            Dim out = New DtoTasks(data)
+            If boardScope = BoardType.Mine Then
+                data = (From p In data Where p.TaskMembers.Any(Function(x) x.UserId = CurrentUserId))
+            End If
+
+            Dim out = New DtoTasks(data.ToList)
 
             Return SearchResponseModel.Create(HttpStatusCode.OK, totalItems, out)
 

@@ -13,11 +13,12 @@ iWork.controller('boardFilterController', ['$rootScope', '$scope', '$state', 'bo
         $scope.$storage['boardScope'] = boardScope;
         boardFilterService.boardScope = boardScope;
         // Loop happens here
-        //$state.reload();
+        $rootScope.$broadcast('boardScopeFiltering');
     };
 
     // watch for model in iWork\Web\iView\index.html
-    $scope.$watch('model', function () {
+    $scope.$watch('model', function(newVal, oldVal) {
+        if (newVal === oldVal) return; 
         $scope.boardScopeFilter();
     }, true);
 }]);

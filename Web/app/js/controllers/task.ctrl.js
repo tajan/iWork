@@ -1,6 +1,6 @@
 ﻿
-iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', 'Notify', 'clientFilteringDataService',
-    function ($scope, dataFactory, $state, $timeout, $rootScope, Notify, clientFilteringDataService) {
+iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout', '$rootScope', 'Notify', 'clientFilteringDataService','boardFilterService',
+    function ($scope, dataFactory, $state, $timeout, $rootScope, Notify, clientFilteringDataService, boardFilterService) {
 
     var now = moment().format('YYYY-MM-DD');
 
@@ -12,9 +12,13 @@ iWork.controller('TaskController', ['$scope', 'dataFactory', '$state', '$timeout
     $scope.taskTypes = dataFactory.taskTypes.getAll();
     $scope.taskSupportTypes = dataFactory.taskTypes.getSupport();
     $scope.filterQuery = clientFilteringDataService.params;
-
+    $scope.boardScope = boardFilterService.boardScope;
     $rootScope.$on("clientFiltering", function (a, model) {
         $scope.filterQuery = model;
+    });
+
+    $rootScope.$on("boardScopeFiltering", function () {
+        $scope.reInitBoard();
     });
 
     $scope.model = {

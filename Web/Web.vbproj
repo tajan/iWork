@@ -816,6 +816,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\PublishProfiles\iwork.pubxml" />
+    <None Include="My Project\PublishProfiles\pouya.pubxml" />
     <None Include="My Project\PublishProfiles\tajan.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

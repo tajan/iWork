@@ -24,10 +24,10 @@ Namespace Controllers
             End If
 
             Dim out = (From p In query
-                       Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User) On p.ActivityId Equals q.EntityId
+                       Join q In Me.ActionLogRepository.GetAll.Include(Function(x) x.User).Include("User.File") On p.ActivityId Equals q.EntityId
                        Where q.EntityTypeId = EntityTypes.Activity AndAlso q.ActionTypeId = ActivityActions.Add
                        Order By p.ActivityDate Descending
-                       Select New With {.ActionLog = q, .Activity = p, .User = q.User, .Task = p.Task, .Project = p.Task.Project}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.Task, x.Project, x.ActionLog, x.User)).ToList
+                       Select New With {.ActionLog = q, .Activity = p, .User = q.User, .Task = p.Task, .Project = p.Task.Project, .UserFile = q.User.File}).ToList.Select(Function(x) New DtoActivity(x.Activity, x.Task, x.Project, x.ActionLog, x.User, x.UserFile)).ToList
 
             Return out
 
@@ -148,8 +148,12 @@ Namespace Controllers
                 data.ToDate = data.ToDate.Value.AddDays(1).Date
             End If
 
+
+
             If data.FromDate.HasValue Then
                 data.FromDate = data.FromDate.Value.Date
+            Else
+                data.FromDate = DateTime.Now.AddMonths(-1)
             End If
 
             Dim criteria As Expression(Of Func(Of Activity, Boolean)) = Function(x) (Not data.FromDate.HasValue OrElse x.ActivityDate >= data.FromDate.Value) AndAlso

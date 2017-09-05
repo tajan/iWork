@@ -37,6 +37,30 @@ Public Class DtoUser
     Public Property Picture As DtoFile
     Public Property PictureFileId As Integer?
 
+    Public Shared Function CreateInstance(user As User, file As File) As DtoUser
+
+        Dim out As New DtoUser
+
+        With out
+            .DisplayName = user.DisplayName
+            .Home = user.Home
+            .Mobile = user.Mobile
+            .Phone = user.PhoneNumber
+            .SecondaryEmail = user.SecondaryEmail
+            .Username = user.UserName
+            .Fullname = user.FullName
+            .Email = user.Email
+            .UserId = user.Id
+            If user.File IsNot Nothing Then
+                .Picture = DtoFile.CreateInstance(file, EntityTypes.User)
+                .PictureFileId = user.File.FileId
+            End If
+
+        End With
+
+        Return out
+
+    End Function
     Public Shared Function CreateInstance(user As User) As DtoUser
 
         Dim out As New DtoUser
@@ -61,7 +85,6 @@ Public Class DtoUser
         Return out
 
     End Function
-
     Public Sub FillUser(user As User)
 
         With user
@@ -178,14 +201,14 @@ Public Class DtoActivity
 
     End Sub
 
-    Public Sub New(activity As Activity, task As Task, project As Project, actionlog As ActionLog, user As User)
+    Public Sub New(activity As Activity, task As Task, project As Project, actionlog As ActionLog, user As User, file As File)
 
         With Me
             .ActivityId = activity.ActivityId
             .TaskId = activity.TaskId
             .Description = activity.Description
             .Duration = activity.Duration
-            .User = DtoUser.CreateInstance(user)
+            .User = DtoUser.CreateInstance(user, file)
             .CreateDate = actionlog.ActionDate
             .ActivityDateTime = activity.ActivityDate
             .ActivityDate = activity.ActivityDate
